@@ -1,25 +1,147 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>EditorEmber</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+            {{BASE_TAG}}
 
-    {{BASE_TAG}}
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,600' rel='stylesheet' type='text/css'>
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <link rel="stylesheet" href="assets/vendor.css">
-    <link rel="stylesheet" href="assets/editor-ember.css">
-  </head>
-  <body>
-    <script>
+        <link rel="stylesheet" href="editor/lib/jgraduate/css/jPicker.css">
+    <link rel="stylesheet" href="editor/lib/jgraduate/css/jgraduate.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        
+        <link rel="stylesheet" href="css/svg.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+     <script>
       window.EmberENV = {{EMBER_ENV}};
     </script>
     <script src="assets/vendor.js"></script>
-    <script src="assets/editor-ember.js"></script>
+    <script src="assets/editor-ember.js"></script>   
     <script>
       window.EditorEmber = require('editor-ember/app')['default'].create({{APP_CONFIG}});
     </script>
-  </body>
+    <script src="editor/lib/jquery.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+     <script src="editor/svgedit.js"></script>
+     <script src="editor/jquery-svg.js"></script>
+     <script src="editor/contextmenu/jquery.contextMenu.js"></script>
+     <script src="editor/browser.js"></script>
+     <script src="editor/svgtransformlist.js"></script>
+     <script src="editor/math.js"></script>
+     <script src="editor/units.js"></script>
+     <script src="editor/svgutils.js"></script>
+     <script src="editor/sanitize.js"></script>
+     <script src="editor/history.js"></script>
+     <script src="editor/coords.js"></script>
+     <script src="editor/recalculate.js"></script>
+     <script src="editor/select.js"></script>
+     <script src="editor/draw.js"></script>
+     <script src="editor/path.js"></script>
+     <script src="editor/svgcanvas.js"></script>
+     <script src="editor/svg-editor.js"></script>
+     <script src="editor/locale/locale.js"></script>
+     <script src="editor/contextmenu.js"></script>
+     <script src="editor/config.js"></script>
+
+     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+        $(".grid").click(function(e){
+          var $this = $(this);
+          var $switch = $this.find(".switch");
+          if($switch.attr("data-toggle")=="on"){
+            $switch.text("Off");
+            $switch.attr("data-toggle","off");
+            $("#wf").removeClass("wireframe");
+          }else{
+            $switch.text("On");
+            $switch.attr("data-toggle","on");
+            $("#wf").addClass("wireframe");
+          }
+          e.preventDefault();
+          
+        });
+        (function(){
+          $("body").width($(window).innerWidth());
+            var height = $(window).innerHeight();
+            var $aside = $("aside.left");
+            var $lis = $("aside.left > menu > ul > li");
+            var heightLi = $lis.first().height() * $lis.length;
+            $lis.find("ul").height(height-heightLi-$lis.first().height());
+            $lis.click(function(e){
+              $lis.find("ul").removeClass("open");
+              $(this).find("ul").addClass("open");
+            })
+          })();
+          $("#compass .needle").on("click",function(e){
+            e.preventDefault();
+            window.svgString =  svgCanvas.getSvgString();
+            
+            methodDraw.loadFromDataURI("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODYwIiBoZWlnaHQ9IjU0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiA8ZyB4PSItMjAwIiB5PSItMjAwIj4NCiAgPHRpdGxlPkxheWVyIDE8L3RpdGxlPg0KICA8bGluZSBpZD0ic3ZnXzIiIHkyPSI0ODIuMzMzMzMiIHgyPSI3OTYuOTM1MDciIHkxPSI0ODIuMzMzMzMiIHgxPSI1MS42NjY2NyIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2U9IiMwMDAwMDAiIGZpbGw9Im5vbmUiLz4NCiAgPGxpbmUgaWQ9InN2Z18xIiB5Mj0iNDgwLjEyMDQ2IiB4Mj0iNTQiIHkxPSI2NSIgeDE9IjU0IiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZT0iIzAwMDAwMCIgZmlsbD0ibm9uZSIvPg0KICA8bGluZSBpZD0ic3ZnXzMiIHkyPSI0ODAuMjg3NTEiIHgyPSI3OTQuNzI3MjgiIHkxPSI2NS4xNjcwNSIgeDE9Ijc5NC43MjcyOCIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2U9IiMwMDAwMDAiIGZpbGw9Im5vbmUiLz4NCiAgPGxpbmUgc3Ryb2tlPSIjMDAwMDAwIiBpZD0ic3ZnXzQiIHkyPSI2NC4wNjA2IiB4Mj0iNzk3LjM2MTQ5IiB5MT0iNjQuMDYwNiIgeDE9IjUxLjQyNjQxIiBzdHJva2Utd2lkdGg9IjUiIGZpbGw9Im5vbmUiLz4NCiA8L2c+DQo8L3N2Zz4=");
+            $(".showFloorPlan").show();
+          });
+          $(".showFloorPlan").on("click",function(e){
+            e.preventDefault();
+            
+            methodDraw.loadFromString(window.svgString);
+            $(".showFloorPlan").hide();
+          });
+          $("svg #svg_8 g").on('mouseover',function(){
+                 $(this).animate({ "fill-opacity": "0.7" }, 200);
+          });
+          $("svg #svg_8 g").on('mouseout',function(){
+                 $(this).animate({ "fill-opacity": "1" }, 200);
+          });
+          $(".toolbar .display").on("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            var $toolbar = $(this).closest(".toolbar");
+            if($toolbar.hasClass("active")){
+              $toolbar.animate({right: "-100px"});
+              $toolbar.removeClass("active"); 
+            }else{
+              $toolbar.animate({right: "0"});
+              $toolbar.addClass("active");  
+            }
+          });
+          $(".toolbar").on("click", function(e){
+            e.stopPropagation();
+          });
+
+          $("body").on("click", function(){
+            $(".toolbar menu > ul > li.active").removeClass("active");
+            var $toolbar = $(".toolbar");
+            if($toolbar.hasClass("active")){
+              $toolbar.animate({right: "-100px"});
+              $toolbar.removeClass("active"); 
+            }
+          });
+          $("#wrap aside.toolbar menu ul > li").on("click", function(e){
+            e.preventDefault();
+            $(this).closest("ul").find(".active").removeClass("active");
+            $(this).addClass("active");
+          })
+          
+          
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
+       
+    </body>
 </html>
