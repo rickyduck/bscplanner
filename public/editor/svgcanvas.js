@@ -1904,12 +1904,12 @@ var getMouseTarget = this.getMouseTarget = function(evt) {
 
 				var x2 = x;
 				var y2 = y;					
-
-				if (evt.shiftKey) {
+                //Removed as we're always snapping
+				//if (evt.shiftKey) {
 					xya = svgedit.math.snapToAngle(start_x, start_y, x2, y2);
 					x2 = xya.x;
 					y2 = xya.y;
-				}
+				//}
 				
 				shape.setAttributeNS(null, "x2", x2);
 				shape.setAttributeNS(null, "y2", y2);
@@ -2015,13 +2015,13 @@ var getMouseTarget = this.getMouseTarget = function(evt) {
 				x *= current_zoom;
 				y *= current_zoom;
 				
-				if (curConfig.gridSnapping) {
+				if (false && curConfig.gridSnapping) {
 					x = svgedit.utilities.snapToGrid(x);
 					y = svgedit.utilities.snapToGrid(y);
 					start_x = svgedit.utilities.snapToGrid(start_x);
 					start_y = svgedit.utilities.snapToGrid(start_y);
 				}
-				if (evt.shiftKey) {
+				if (true || evt.shiftKey) {
 					var path = svgedit.path.path;
 					var x1, y1;
 					if (path) {
@@ -3072,6 +3072,8 @@ pathActions = canvas.pathActions = function() {
 					svgedit.path.addPointGrip(index, mouse_x, mouse_y);
 				} else {
 					// determine if we clicked on an existing point
+					// we don't use this atm - comment for now
+					//return false;
 					var seglist = drawn_path.pathSegList;
 					var i = seglist.numberOfItems;
 					var FUZZ = 6/current_zoom;
@@ -3094,8 +3096,9 @@ pathActions = canvas.pathActions = function() {
 					svgedit.path.removePath_(id);
 					
 					var newpath = svgedit.utilities.getElem(id);
-					var newseg;
-					var s_seg;
+					var newseg, filler;
+					var s_seg, start_seg, old_seg;
+					var last_x, last_y;
 					var len = seglist.numberOfItems;
 					// if we clicked on an existing point, then we are done this path, commit it
 					// (i, i+1) are the x,y that were clicked on
@@ -3111,8 +3114,28 @@ pathActions = canvas.pathActions = function() {
 							
 
 							s_seg = stretchy.pathSegList.getItem(1);
-							if (s_seg.pathSegType === 4) {
-								newseg = drawn_path.createSVGPathSegLinetoAbs(abs_x, abs_y);
+							old_seg = seglist.getItem(len-1);
+                            start_seg = seglist.getItem(0);
+                            last_x = abs_x;
+                            last_y = abs_y;
+                            if(abs_y !== old_seg.y){
+                                
+                                last_y = start_seg.y;
+                                
+                            }
+                            if(abs_x < old_seg.x){
+                                filler = drawn_path.createSVGPathSegLinetoAbs(start_seg.x, old_seg.y);
+                                seglist.appendItem(filler);
+                                //last_x = start_seg.x;
+                            }
+                            if(abs_x > old_seg.x){
+                                filler = drawn_path.createSVGPathSegLinetoAbs(old_seg.x, start_seg.y);
+                                seglist.appendItem(filler);
+                            }
+                            console.log({'old_x': old_seg.x, 'old_y': old_seg.y, 'start_seg_x': start_seg.x, 'start_seg_y': start_seg.y});
+                           // svgedit.path.replacePathSeg(4, len-1, [last_x, last_y], drawn_path);
+							if (true || s_seg.pathSegType === 4) {
+								newseg = drawn_path.createSVGPathSegLinetoAbs(last_x, last_y);
 							} else {
 								newseg = drawn_path.createSVGPathSegCurvetoCubicAbs(
 									abs_x,
@@ -3124,7 +3147,10 @@ pathActions = canvas.pathActions = function() {
 								);
 							}
 							
+
+                           // oldSeg.SVGPathSegLinetoAbs(start_item.x, start_item.y);
 							var endseg = drawn_path.createSVGPathSegClosePath();
+							$(svgedit.utilities.getElem("pathpointgrip_container")).attr('display', 'none');
 							seglist.appendItem(newseg);
 							seglist.appendItem(endseg);
 						} else if (len < 3) {
@@ -3169,7 +3195,7 @@ pathActions = canvas.pathActions = function() {
 						var last = drawn_path.pathSegList.getItem(num -1);
 						var lastx = last.x, lasty = last.y;
 
-						if (evt.shiftKey) {
+						if (true || evt.shiftKey) {
 							var xya = svgedit.math.snapToAngle(lastx, lasty, x, y);
 							x = xya.x;
 							y = xya.y;
@@ -3177,7 +3203,8 @@ pathActions = canvas.pathActions = function() {
 						
 						// Use the segment defined by stretchy
 						s_seg = stretchy.pathSegList.getItem(1);
-						if (s_seg.pathSegType === 4) {
+						//EDIT FOR BSC
+						if (true || s_seg.pathSegType === 4) {
 							newseg = drawn_path.createSVGPathSegLinetoAbs(round(x), round(y));
 						} else {
 							newseg = drawn_path.createSVGPathSegCurvetoCubicAbs(
@@ -3206,7 +3233,9 @@ pathActions = canvas.pathActions = function() {
 				
 				return;
 			}
+			// Return false here for BSC. We don't need to select the polygon.
 			
+		    return false;
 			// TODO: Make sure current_path isn't null at this point
 			if (!svgedit.path.path) {return;}
 			
@@ -3258,11 +3287,12 @@ pathActions = canvas.pathActions = function() {
 		mouseMove: function(mouse_x, mouse_y) {
 			hasMoved = true;
 			if (current_mode === "path") {
+			    return false;
 				if (!drawn_path) {return;}
 				var seglist = drawn_path.pathSegList;
 				var index = seglist.numberOfItems - 1;
-
-				if (newPoint) {
+                //BSC
+				if (false || newPoint) {
 					// First point
 //					if (!index) {return;}
 
@@ -3312,22 +3342,22 @@ pathActions = canvas.pathActions = function() {
 							last_x = firstCtrl[0]/current_zoom;
 							last_y = firstCtrl[1]/current_zoom;
 						}
-						svgedit.path.replacePathSeg(6, index, [pt_x, pt_y, last_x, last_y, alt_x, alt_y], drawn_path);
+						//svgedit.path.replacePathSeg(6, index, [pt_x, pt_y, last_x, last_y, alt_x, alt_y], drawn_path);
 					}
 				} else {
-					var stretchy = svgedit.utilities.getElem("path_stretch_line");
-					if (stretchy) {
-						var prev = seglist.getItem(index);
-						if (prev.pathSegType === 6) {
-							var prev_x = prev.x + (prev.x - prev.x2);
-							var prev_y = prev.y + (prev.y - prev.y2);
-							svgedit.path.replacePathSeg(6, 1, [mouse_x, mouse_y, prev_x * current_zoom, prev_y * current_zoom, mouse_x, mouse_y], stretchy);							
-						} else if (firstCtrl) {
-							svgedit.path.replacePathSeg(6, 1, [mouse_x, mouse_y, firstCtrl[0], firstCtrl[1], mouse_x, mouse_y], stretchy);
-						} else {
-							svgedit.path.replacePathSeg(4, 1, [mouse_x, mouse_y], stretchy);
-						}
-					}
+					// var stretchy = svgedit.utilities.getElem("path_stretch_line");
+					// if (stretchy) {
+						// var prev = seglist.getItem(index);
+						// if (prev.pathSegType === 6) {
+							// var prev_x = prev.x + (prev.x - prev.x2);
+							// var prev_y = prev.y + (prev.y - prev.y2);
+							// svgedit.path.replacePathSeg(6, 1, [mouse_x, mouse_y, prev_x * current_zoom, prev_y * current_zoom, mouse_x, mouse_y], stretchy);							
+						// } else if (firstCtrl) {
+							// svgedit.path.replacePathSeg(6, 1, [mouse_x, mouse_y, firstCtrl[0], firstCtrl[1], mouse_x, mouse_y], stretchy);
+						// } else {
+							// svgedit.path.replacePathSeg(4, 1, [mouse_x, mouse_y], stretchy);
+						// }
+					// }
 				}
 				return;
 			}
@@ -3432,6 +3462,8 @@ pathActions = canvas.pathActions = function() {
 			subpath = false;
 		},
 		toSelectMode: function(elem) {
+		    //Return false for BSC.
+		    return false;
 			var selPath = (elem == svgedit.path.path.elem);
 			current_mode = "select";
 			svgedit.path.path.show(false);
@@ -3627,6 +3659,8 @@ pathActions = canvas.pathActions = function() {
 				// Close this path
 				
 				// Create a line going to the previous "M"
+				var oldSeg = svgedit.path.path.segs[index-1];
+				oldSeg.SVGPathSegMovetoAbs(start_item.x, start_item.y);
 				var newseg = elem.createSVGPathSegLinetoAbs(start_item.x, start_item.y);
 			
 				var closer = elem.createSVGPathSegClosePath();
@@ -3692,6 +3726,20 @@ pathActions = canvas.pathActions = function() {
 			i = index; // i is local here, so has no effect; what is the reason for this?
 			
 			svgedit.path.path.init().selectPt(0);
+		},
+		undoPath: function(){
+		    //if we are currently drawing a shape, remove the last item & grip
+		    if(drawn_path){
+    		    var segs = drawn_path.pathSegList;
+    		    
+    		    segs.removeItem(segs.length-1);
+    		    $(svgedit.utilities.getElem("pathpointgrip_container")).children().last().remove();
+            }else{
+                this.deletePathNode()
+                return;  
+            }
+            //otherwise, open the path and remove the last item.
+            
 		},
 		deletePathNode: function() {
 			if (!pathActions.canDeleteNodes) {return;}

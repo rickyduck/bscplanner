@@ -7,7 +7,7 @@ export default Ember.View.extend({
 		  canvas_expansion: 1, 
 		  dimensions: [1080,700], 
 		  initFill: {color: 'fff', opacity: 0},
-		  initStroke: {width: 1.5, color: '000', opacity: 1},
+		  initStroke: {width: 3, color: '000', opacity: 1},
 			initOpacity: 1,
 			imgPath: 'editor/images/',
 			extPath: 'editor/extensions/',
@@ -25,9 +25,6 @@ export default Ember.View.extend({
 			no_save_warning: true,
 			initFont: 'Helvetica, Arial, sans-serif'
 		};
-		this.get('controller').send("saveSvgEditor", window.svgEditor);
-	},
-	click: function(){
-		alert("ClicK");
+		this.get('controller').send("saveSvgEditor", window.createEditor(curConfig));
 	}
 });

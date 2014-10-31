@@ -23,12 +23,13 @@ TO-DOS
 1. JSDoc
 */
 
-(function() {
+(function($) {
 
 	if (window.svgEditor) {
 		return;
 	}
-	window.svgEditor = (function($) {
+	window.createEditor = function(config) {
+        var $ = window.jQuery;
 		var editor = {};
 		// EDITOR PROPERTIES: (defined below)
 		//		curPrefs, curConfig, canvas, storage, uiStrings
@@ -52,7 +53,7 @@ TO-DOS
 				// EDITOR OPTIONS (DIALOG)
 				lang: '', // Default to "en" if locale.js detection does not detect another language
 				iconsize: '', // Will default to 's' if the window height is smaller than the minimum height and 'm' otherwise
-				bkgd_color: '#FFF',
+				bkgd_color: 'none',
 				bkgd_url: '',
 				// DOCUMENT PROPERTIES (DIALOG)
 				img_save: 'embed',
@@ -98,55 +99,54 @@ TO-DOS
 				'ext-panning.js',
 				'ext-storage.js'
 			],
-			defaultConfig = {
-				// Todo: svgcanvas.js also sets and checks: show_outside_canvas, selectNew; add here?
-				// Change the following to preferences and add pref controls to the UI (e.g., initTool, wireframe, showlayers)?
-				canvasName: 'default',
-				canvas_expansion: 3,
-				initFill: {
-					color: 'FF0000', // solid red
-					opacity: 1
-				},
-				initStroke: {
-					width: 5,
-					color: '000000', // solid black
-					opacity: 1
-				},
-				initOpacity: 1,
-				colorPickerCSS: null,
-				initTool: 'select',
-				wireframe: false,
-				showlayers: false,
-				no_save_warning: false,
-				// PATH CONFIGURATION
-				// The following path configuration items are disallowed in the URL (as should any future path configurations)
-				imgPath: 'images/',
-				langPath: 'locale/',
-				extPath: 'extensions/',
-				jGraduatePath: 'jgraduate/images/',
-				// DOCUMENT PROPERTIES
-				// Change the following to a preference (already in the Document Properties dialog)?
-				dimensions: [640, 480],
-				// EDITOR OPTIONS
-				// Change the following to preferences (already in the Editor Options dialog)?
-				gridSnapping: false,
-				gridColor: '#000',
-				baseUnit: 'px',
-				snappingStep: 10,
-				showRulers: true,
-				// URL BEHAVIOR CONFIGURATION
-				preventAllURLConfig: false,
-				preventURLContentLoading: false,
-				// EXTENSION CONFIGURATION (see also preventAllURLConfig)
-				lockExtensions: false, // Disallowed in URL setting
-				noDefaultExtensions: false, // noDefaultExtensions can only be meaningfully used in config.js or in the URL
-				// EXTENSION-RELATED (GRID)
-				showGrid: false, // Set by ext-grid.js
-				// EXTENSION-RELATED (STORAGE)
-				noStorageOnLoad: false, // Some interaction with ext-storage.js; prevent even the loading of previously saved local storage
-				forceStorage: false, // Some interaction with ext-storage.js; strongly discouraged from modification as it bypasses user privacy by preventing them from choosing whether to keep local storage or not
-				emptyStorageOnDecline: false // Used by ext-storage.js; empty any prior storage if the user declines to store
-			},
+			defaultConfig = config,
+			// defaultConfig = {
+				// // Todo: svgcanvas.js also sets and checks: show_outside_canvas, selectNew; add here?
+				// // Change the following to preferences and add pref controls to the UI (e.g., initTool, wireframe, showlayers)?
+				// canvasName: 'default',
+				// canvas_expansion: 3,
+				// initFill: {
+					// opacity: 0
+				// },
+				// initStroke: {
+					// opacity: 0
+				// },
+// 				
+				// initOpacity: 1,
+				// colorPickerCSS: null,
+				// initTool: 'select',
+				// wireframe: false,
+				// showlayers: false,
+				// no_save_warning: false,
+				// // PATH CONFIGURATION
+				// // The following path configuration items are disallowed in the URL (as should any future path configurations)
+				// imgPath: 'editor/images/',
+				// langPath: 'editor/locale/',
+				// extPath: 'editor/extensions/',
+				// jGraduatePath: 'editor/jgraduate/images/',
+				// // DOCUMENT PROPERTIES
+				// // Change the following to a preference (already in the Document Properties dialog)?
+				// dimensions: [640, 480],
+				// // EDITOR OPTIONS
+				// // Change the following to preferences (already in the Editor Options dialog)?
+				// gridSnapping: false,
+				// gridColor: '#000',
+				// baseUnit: 'px',
+				// snappingStep: 10,
+				// showRulers: false,
+				// // URL BEHAVIOR CONFIGURATION
+				// preventAllURLConfig: false,
+				// preventURLContentLoading: false,
+				// // EXTENSION CONFIGURATION (see also preventAllURLConfig)
+				// lockExtensions: false, // Disallowed in URL setting
+				// noDefaultExtensions: false, // noDefaultExtensions can only be meaningfully used in config.js or in the URL
+				// // EXTENSION-RELATED (GRID)
+				// showGrid: false, // Set by ext-grid.js
+				// // EXTENSION-RELATED (STORAGE)
+				// noStorageOnLoad: false, // Some interaction with ext-storage.js; prevent even the loading of previously saved local storage
+				// forceStorage: false, // Some interaction with ext-storage.js; strongly discouraged from modification as it bypasses user privacy by preventing them from choosing whether to keep local storage or not
+				// emptyStorageOnDecline: false // Used by ext-storage.js; empty any prior storage if the user declines to store
+			// },
 			/**
 			* LOCALE
 			* @todo Can we remove now that we are always loading even English? (unless locale is set to null)
@@ -572,7 +572,7 @@ TO-DOS
 				});
 
 				// var lang = ('lang' in curPrefs) ? curPrefs.lang : null;
-				editor.putLocale(null, good_langs);
+				//editor.putLocale(null, good_langs);
 			};
 
 			// Load extensions
@@ -811,7 +811,7 @@ TO-DOS
 			// In the future we may want to add additional types of dialog boxes, since
 			// they should be easy to handle this way.
 			(function() {
-				$('#dialog_container').draggable({cancel: '#dialog_content, #dialog_buttons *', containment: 'window'});
+//				$('#dialog_container').draggable({cancel: '#dialog_content, #dialog_buttons *', containment: 'window'});
 				var box = $('#dialog_box'),
 					btn_holder = $('#dialog_buttons'),
 					dialog_content = $('#dialog_content'),
@@ -1481,6 +1481,7 @@ TO-DOS
 			// Updates the toolbar (colors, opacity, etc) based on the selected element
 			// This function also updates the opacity and id elements that are in the context panel
 			var updateToolbar = function() {
+			    return false;
 				var i, len;
 				if (selectedElement != null) {
 					switch (selectedElement.tagName) {
@@ -3812,7 +3813,7 @@ TO-DOS
 				// set language
 				var lang = $('#lang_select').val();
 				if (lang !== $.pref('lang')) {
-					editor.putLocale(lang, good_langs);
+					//editor.putLocale(lang, good_langs);
 				}
 
 				// set icon size
@@ -4836,7 +4837,7 @@ TO-DOS
 				}
 
 				// showSaveWarning is set to 'false' when the page is saved.
-				if (!curConfig.no_save_warning && editor.showSaveWarning) {
+				if (false && !curConfig.no_save_warning && editor.showSaveWarning) {
 					// Browser already asks question about closing the page
 					e.returnValue = uiStrings.notification.unsavedChanges; // Firefox needs this when beforeunload set by addEventListener (even though message is not used)
 					return uiStrings.notification.unsavedChanges;
@@ -5110,11 +5111,10 @@ TO-DOS
 				if (svgCanvas) {svgCanvas.addExtension.apply(this, args);}
 			});
 		};
-
+        editor.init();
 		return editor;
-	}(jQuery));
+	};
 
 	// Run init once DOM is loaded
-	$(svgEditor.init);
 
 }());

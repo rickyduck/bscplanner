@@ -709,12 +709,12 @@ svgedit.utilities.cleanupElement = function(element) {
 // round value to for snapping
 // NOTE: This function did not move to svgutils.js since it depends on curConfig.
 svgedit.utilities.snapToGrid = function(value) {
-	var stepSize = editorContext_.getSnappingStep();
-	var unit = editorContext_.getBaseUnit();
-	if (unit !== "px") {
-		stepSize *= svgedit.units.getTypeMap()[unit];
-	}
-	value = Math.round(value/stepSize)*stepSize;
+	// var stepSize = editorContext_.getSnappingStep();
+	// var unit = editorContext_.getBaseUnit();
+	// if (unit !== "px") {
+		// stepSize *= svgedit.units.getTypeMap()[unit];
+	// }
+	// value = Math.round(value/stepSize)*stepSize;
 	return value;
 };
 

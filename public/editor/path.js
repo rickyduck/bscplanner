@@ -143,35 +143,35 @@ svgedit.path.addPointGrip = function(index, x, y) {
 	var pointGrip = svgedit.utilities.getElem('pathpointgrip_'+index);
 	// create it
 	if (!pointGrip) {
-		pointGrip = document.createElementNS(NS.SVG, 'circle');
-		svgedit.utilities.assignAttributes(pointGrip, {
-			'id': 'pathpointgrip_' + index,
-			'display': 'none',
-			'r': 4,
-			'fill': '#0FF',
-			'stroke': '#00F',
-			'stroke-width': 2,
-			'cursor': 'move',
-			'style': 'pointer-events:all',
-			'xlink:title': uiStrings.pathNodeTooltip
-		});
-		pointGrip = pointGripContainer.appendChild(pointGrip);
+		pointGrip = document.createElementNS(NS.SVG, "rect");
+        svgedit.utilities.assignAttributes(pointGrip, {
+            'id': "pathpointgrip_" + index,
+            'display': "none",
+            'width': svgedit.browser.isTouch() ? 30 : 5,
+            'height': svgedit.browser.isTouch() ? 30 : 5,
+            'fill': "#ffffff",
+            'stroke': "#000000",
+            'shape-rendering': "crispEdges",
+            'stroke-width': 1,
+            'cursor': 'move',
+            'style': 'pointer-events:all',
+            'xlink:title': uiStrings.pathNodeTooltip
+        });
+        pointGrip = pointGripContainer.appendChild(pointGrip);
 
-		var grip = $('#pathpointgrip_'+index);
-		grip.dblclick(function() {
-			if (svgedit.path.path) {
-				svgedit.path.path.setSegType();
-			}
-		});
+        var grip = $('#pathpointgrip_'+index);
+        grip.dblclick(function() {
+            if(svgedit.path.path) svgedit.path.path.setSegType();
+        });
 	}
-	if (x && y) {
-		// set up the point grip element and display it
-		svgedit.utilities.assignAttributes(pointGrip, {
-			'cx': x,
-			'cy': y,
-			'display': 'inline'
-		});
-	}
+	if(x && y) {
+        // set up the point grip element and display it
+        svgedit.utilities.assignAttributes(pointGrip, {
+            'x': x-(svgedit.browser.isTouch() ? 15 : 2.5),
+            'y': y-(svgedit.browser.isTouch() ? 15 : 2.5),
+            'display': "inline"
+        });
+    }
 	return pointGrip;
 };
 
@@ -319,8 +319,8 @@ svgedit.path.getSegSelector = function(seg, update) {
 			'id': 'segline_' + index,
 			'display': 'none',
 			'fill': 'none',
-			'stroke': '#0FF',
-			'stroke-width': 2,
+			'stroke': '#000',
+			'stroke-width': 1,
 			'style':'pointer-events:none',
 			'd': 'M0,0 0,0'
 		});
@@ -663,11 +663,12 @@ svgedit.path.Path.prototype.addSeg = function(index) {
 	var newseg, new_x, new_y;
 	switch(seg.item.pathSegType) {
 	case 4:
+	case 6:
 		new_x = (seg.item.x + prev.item.x) / 2;
 		new_y = (seg.item.y + prev.item.y) / 2;
 		newseg = this.elem.createSVGPathSegLinetoAbs(new_x, new_y);
 		break;
-	case 6: //make it a curved segment to preserve the shape (WRS)
+	case 6000: //make it a curved segment to preserve the shape (WRS)
 		// http://en.wikipedia.org/wiki/De_Casteljau%27s_algorithm#Geometric_interpretation
 		var p0_x = (prev.item.x + seg.item.x1)/2;
 		var p1_x = (seg.item.x1 + seg.item.x2)/2;
