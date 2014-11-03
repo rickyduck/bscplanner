@@ -135,7 +135,33 @@ svgedit.path.getPointFromGrip = function(pt, path) {
 
 	return out;
 };
-
+svgedit.path.addMeasurement = function(index, x1, x2, y1, y2){
+    var x,y;
+    var measurementContainer = svgedit.path.getMeasurementContainer();
+    var measurementElem = svgedit.utilities.getElem('measurement_'+index);
+    if(!measurementElem){
+        measurementElem = document.createElementNS(NS.SVG, "text");
+        measurementElem.innerHTML = "20m";
+        y = y1 = ((y2 - y1)/2);
+        x = x1 + ((x2 - x1)/2);
+        if(x1 == x2){
+            x = x1;
+            
+        }
+        if(y1 == y2){
+            y = y1;
+            
+        }
+        svgedit.utilities.assignAttributes(measurementElem, {
+            'id': 'measurement_'+index,
+            'x': x,
+            'y': y          
+        });
+        measurementElem = measurementContainer.appendChild(measurementElem);
+        
+    }
+    return measurementElem;
+};
 svgedit.path.addPointGrip = function(index, x, y) {
 	// create the container of all the point grips
 	var pointGripContainer = svgedit.path.getGripContainer();
@@ -173,6 +199,16 @@ svgedit.path.addPointGrip = function(index, x, y) {
         });
     }
 	return pointGrip;
+};
+
+svgedit.path.getMeasurementContainer = function() {
+    var c = svgedit.utilities.getElem('measurement_container');
+    if (!c) {
+        var parent = svgedit.utilities.getElem('selectorParentGroup');
+        c = parent.appendChild(document.createElementNS(NS.SVG, 'g'));
+        c.id = 'measurement_container';
+    }
+    return c;
 };
 
 svgedit.path.getGripContainer = function() {

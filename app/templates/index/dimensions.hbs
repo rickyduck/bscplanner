@@ -1,0 +1,53 @@
+ <div id="wrap">
+    	<aside class="toolbar">
+			<button class="display"></button>
+		</aside>
+		<header>
+			<h1><a href="#">British Standard Cupboards by Plain English</a></h1>
+		</header>
+		<main>
+			
+			<section class="wrapper">
+				<h2>Create Your Kitchen Area</h2>
+				<section class="designer">
+					<form>
+						<fieldset>
+							<h6>Enter the longest and widest dimensions of your kitchen area</h6>
+							<div class="form-group">
+								<label>{{radio-button value='cm' checked=measurement}}cm</label>
+								<label>{{radio-button value='mm' checked=measurement}}mm</label>
+								<p>{{method}}</p>
+							</div>
+							<div class="form-group">
+								<label>
+									Length:
+									{{input type="number" value=width}}
+								</label>
+								<label>
+									Height:
+									{{input type="number" value=height}}
+								</label>
+							</div>
+							<button {{action "submitDimensions"}}>Submit</button>
+						</fieldset>
+						<img src="img/step1image2.png" alt="" />
+					</form>
+				</section>
+			</section>
+		</main>
+		</div>
+		<footer>
+			<nav>
+				<ul>
+					<li><a class="active" href="#">Dimensions <br> <span class="circle">1</span></a></li>
+					<li><a href="#">Design <br> <span class="circle">2</span></a></li>
+					<li><a href="#">Save <br> <span class="circle">3</span></a></li>
+					<li><a href="#">Order <br> <span class="circle">4</span></a></li>
+				</ul>
+				<ul class="right">
+					<li><a href="#">New</a></li>
+					<li><a href="#">Open</a></li>
+					<li><a href="#">Exit</a></li>
+				</ul>
+			</nav>
+		</footer>

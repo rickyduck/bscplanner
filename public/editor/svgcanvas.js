@@ -3070,6 +3070,7 @@ pathActions = canvas.pathActions = function() {
 					stretchy.setAttribute('d', ['M', mouse_x, mouse_y, mouse_x, mouse_y].join(' '));
 					index = subpath ? svgedit.path.path.segs.length : 0;
 					svgedit.path.addPointGrip(index, mouse_x, mouse_y);
+					
 				} else {
 					// determine if we clicked on an existing point
 					// we don't use this atm - comment for now
@@ -3226,6 +3227,14 @@ pathActions = canvas.pathActions = function() {
 						stretchy.setAttribute('d', ['M', x, y, x, y].join(' '));
 						index = num;
 						if (subpath) {index += svgedit.path.path.segs.length;}
+						svgedit.path.addMeasurement(
+						    index, 
+						    lastx,
+						    x,
+						    lasty,
+						    y
+						    
+						);
 						svgedit.path.addPointGrip(index, x, y);
 					}
 //					keep = true;
