@@ -10,9 +10,9 @@ Router.map(function() {
         this.route('shape', {path:'/choose-shape'});
         this.route('dimensions', {path:'/dimensions'});
     });
-		this.resource('step-one', {path: '/step-one'}, function(){
-		    this.route('draw', {path: 'draw-shape/:width/:height/:measurement'});
-		    this.route('rectangle', {path: 'draw-rectangle/:width/:height/:measurement'});
+		this.route('step-one', {path: '/step-one'}, function(){
+		    this.route('draw', {path: 'draw-shape'});
+		    this.route('rectangle', {path: 'draw-rectangle'});
 		    
 		});
 		this.resource('step-two', {path: '/step-two'}, function(){

@@ -34,6 +34,35 @@ export default Ember.Route.extend({
     actions: {
       chooseProduct: function(){
         alert("Choose product");
+      },
+      setupEditor: function(){
+          this.setupEditor();
       }
+    },
+    setupEditor : function() {
+        //do some checks to ensure the model is complete either from URL params or predefined data from the previous page
+        var that = this, editController = that.get("controllers.editor"), model = editController.get("model"), method = that.get("method"), width = that.get("width"), height = that.get("height"), measurement = that.get("measurement"), check = method || model.get("method") ? true : false;
+        check = check && (width || model.get("width")) ? true : false;
+        check = check && (height || model.get("height")) ? true : false;
+        check = check && (measurement || model.get("measurement")) ? true : false;
+        check = check && (width || model.get("width")) ? true : false;
+        //if no data error
+        if (!check) {
+            that.call("error", "Some data is missing!", "missingData");
+            return false;
+        }
+        //no model then
+        if(!model.get("width")){
+             var editor = that.store.createRecord('editor', {
+                id: "temp",
+                width: width, 
+                height: height, 
+                measurement: measurement,
+                method: method
+            });
+            //update controller
+            editorController.set("model", editor);
+            editorController.call("saveSvgEditor");
+        }
     }
 });

@@ -3,10 +3,10 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
     queryParams: ['method','width','height','measurement'],
     needs: ['editor'],
-    method: Ember.computed.alias("controllers.editor.method"),
-    width: Ember.computed.alias("controllers.editor.width"),
-    height: Ember.computed.alias("controllers.editor.height"),
-    measurement: Ember.computed.alias("controllers.editor.measurement"),
+    method: null,
+    width: null,
+    height: null,
+    measurement: null,
 	initialize: function(){
 		console.log(this);
 	},
