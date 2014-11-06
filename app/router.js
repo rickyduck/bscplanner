@@ -11,6 +11,7 @@ Router.map(function() {
         this.route('dimensions', {path:'/dimensions'});
     });
 		this.route('step-one', {path: '/step-one'}, function(){
+		    this.resource('step-one/error', { path: 'step-one/error/:error_url' }, function() { });
 		    this.route('draw', {path: 'draw-shape'});
 		    this.route('rectangle', {path: 'draw-rectangle'});
 		    
@@ -30,9 +31,11 @@ Router.map(function() {
  		//this.resource('svgs');
   		this.resource('editor', function(){});
   this.resource('sidebar', { path: 'sidebars/:sidebar_id' }, function() { });
-  this.resource('StepOne', { path: 'StepOnes/:StepOne_id' }, function() { });
-  this.route('StepOne/Draw');
-  this.route('StepOne/Rectangle');
+ 
+
+  this.resource('error', { path: 'error/:error_id' }, function() { 
+      
+  });
 });
 
 export default Router;

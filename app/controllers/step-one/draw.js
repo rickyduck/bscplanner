@@ -27,7 +27,7 @@ export default Ember.Controller.extend({
             editorController.send('clear');
         },
         nextStep: function(){
-            this.nextStep();
+            alert("YES");
         }
     },
     nextStep: function(){
