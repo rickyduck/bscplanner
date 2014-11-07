@@ -1877,6 +1877,8 @@ var getMouseTarget = this.getMouseTarget = function(evt) {
 				
 				break;
 			case "zoom":
+			    //Not sure where there is triggered yet
+			    //return false;
 				real_x *= current_zoom;
 				real_y *= current_zoom;
 				svgedit.utilities.assignAttributes(rubberBox, {
@@ -2466,7 +2468,7 @@ var getMouseTarget = this.getMouseTarget = function(evt) {
 //	$(window).mouseup(mouseUp);
 	
 	 //TODO(rafaelcastrocouto): User preference for shift key and zoom factor
-	$(container).bind("mousewheel DOMMouseScroll", function(e){
+	$(container).bind("mouse2221wheel DOMMous33eScroll", function(e){
 		//if (!e.shiftKey) {return;}
 		e.preventDefault();
 		var evt = e.originalEvent;
@@ -7707,6 +7709,7 @@ this.setBackground = function(color, url) {
 	var bg = svgedit.utilities.getElem('canvasBackground');
 	var border = $(bg).find('rect')[0];
 	var bg_img = svgedit.utilities.getElem('background_image');
+	border.setAttribute('stroke', 'none');
 	border.setAttribute('fill', color);
 	if (url) {
 		if (!bg_img) {
@@ -7716,7 +7719,8 @@ this.setBackground = function(color, url) {
 				'width': '100%',
 				'height': '100%',
 				'preserveAspectRatio': 'xMinYMin',
-				'style':'pointer-events:none'
+				'style':'pointer-events:none',
+				'stroke': 'none'
 			});
 		}
 		setHref(bg_img, url);

@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
             var editorController = that.get('controllers.editor');
             editorController.send('undoPath');
         },
-        deletePlan: function(){
+        deletePath: function(){
             var that = this;
             var editorController = that.get('controllers.editor');
             editorController.send('clear');

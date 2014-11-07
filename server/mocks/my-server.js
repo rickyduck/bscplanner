@@ -4,7 +4,7 @@ module.exports = function(app) {
     var magento = new MagentoAPI({
         host : 'britishstandard.strategiqmarketing.co.uk',
         port : 80,
-        path : '/api/soap/',
+        path : '/api/xmlrpc/',
         login : 'ember',
         pass : '3mb3r123'
     });
@@ -264,6 +264,7 @@ module.exports = function(app) {
             });
         });
     });
+    
     //Get SVG
     myServerRouter.get('/svgs/:id', function(req, res) {
         magento.login(function(err, sessId) {
@@ -285,7 +286,19 @@ module.exports = function(app) {
             });
         });
     });
-
+    //Errors
+    myServerRouter.get("/local/errors/:id", function(req, res) {
+        var data = {
+            "errors" : [{
+                "id"            : "missingData",
+                "name"          : "Missing data",
+                "title"         : "Some data was missing to complete the request.",
+                "message"       : "Please ensure the following data is filled in: ",
+                "http_status"   : 404
+            }]
+        };
+        res.send(data);
+    });
     //setup local server for offline testing
     myServerRouter.get('/local/svgs', function(req, res) {
         var data = {

@@ -511,8 +511,7 @@ body > main {min-height:700px;}
 	position:absolute;
 	/*top: 30px;
 	left: 50px;*/
-	bottom: 40px;
-	right: 175px;
+	right: 250px;
 	overflow: auto;
 	text-align: center;
 	-webkit-transition: -webkit-transform 500ms cubic-bezier(0.13,0.66,0.24,0.92);

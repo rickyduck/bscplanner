@@ -8,7 +8,7 @@ Ember.ObjectController.extend({
     config : {
         controller: null,
         canvas_expansion : 1,
-        dimensions : [1080, 700],
+        dimensions : ["100%", "100%"],
         initFill : {
             color : 'fff',
             opacity : 0
@@ -50,8 +50,8 @@ Ember.ObjectController.extend({
             this.setMode(mode);
             //alert("Editor");
         },
-        deletePlan : function() {
-            this.deletePlan();
+        clear : function() {
+            this.clear();
         },
         getSvg : function(type) {
             this.getSvg(type);
@@ -69,21 +69,9 @@ Ember.ObjectController.extend({
         }
         
     },
+    
     nextStep : function(type) {
-        var svgString = "", svgEditor = this.get("model.svgEditor"),  that = this;
-        switch (type) {
-        case "path":
-            //check to see if we're still in edit mode
-            if(svgEditor.canvas.current_mode == "path"){
-                //Tooltip holder? 
-                alert("Please complete the kitchen dimensions before continuing");
-            }else{
-                if(true);
-                
-                alert("SVG");
-            }
-            break;
-        }
+        // Do chekcs 
     },
     setSvgCanvasMeasurements : function() {
         var that = this;
@@ -100,9 +88,9 @@ Ember.ObjectController.extend({
     toggleWireframe : function() {
         this.set("wireframe", !this.get("wireframe"));
     },
-    deletePlan : function() {
+    clear : function() {
         var svgEditor = this.get("model.svgEditor");
-        svgEditor.canvas.pathActions.clear();
+        svgEditor.canvas.clear();
     },
     setMode : function(mode) {
         var that = this;

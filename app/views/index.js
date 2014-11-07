@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.View.extend({
+    classNames: ['full-height'],
 	didInsertElement: function(){
 		var height = $(window).innerHeight();
 		var $this = this.$();
