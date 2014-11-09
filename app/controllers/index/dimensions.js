@@ -21,15 +21,13 @@ export default Ember.Controller.extend({
             var that = this;
             //var svgEditor = this.get("controllers.editor.svgEditor");
             Ember.run.next(function(){
-                var editor = that.store.createRecord('editor', {
+                //that.transitionToRoute("index");
+                that.transitionToRoute('step-one.draw', {queryParams: {
                     width: that.get("width"), 
                     height: that.get("height"), 
                     measurement: that.get("measurement"),
                     method: that.get("method")
-                });
-                that.get("controllers.editor").set("model", editor);
-                //that.transitionToRoute("index");
-                that.transitionToRoute('step-one.draw');//+that.get("method"));
+                }});//+that.get("method"));
            });
         }
     },

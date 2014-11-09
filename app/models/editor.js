@@ -10,6 +10,7 @@ DS.Model.extend({
     svgEditor : DS.attr(),
     wireframe : DS.attr("boolean"),
     svgString : DS.attr("string"),
+    svgPlanString : DS.attr("string"),
     svg : DS.belongsTo('svg'),
     area : (function() {
         var multiplier = this.get("measurement") == "mm" ? 1000 : 100;

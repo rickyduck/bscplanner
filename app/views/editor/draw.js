@@ -15,7 +15,7 @@ export default Ember.View.extend({
             $elem = that.$(), 
             $path = $elem.find("path");
 
-            controller.send("nextStep");
+            
            
             if(svgEditor.canvas.getMode() === "path"){
                 //Tooltip holder? 
@@ -23,7 +23,7 @@ export default Ember.View.extend({
             }else{
                 if($path.length){
                     alert("SVG");
-                    console.log($path);
+                    controller.send("nextStep");
                 }else{
                    alert("No SVG");
                 }
