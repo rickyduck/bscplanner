@@ -901,7 +901,7 @@ TO-DOS
 				if (curr.length && curr[0].id !== 'tool_select') {
 					curr.removeClass('tool_button_current').addClass('tool_button');
 					$('#tool_select').addClass('tool_button_current').removeClass('tool_button');
-					$('#styleoverrides').text('#svgcanvas svg *{cursor:move;pointer-events:all} #svgcanvas svg{cursor:default}');
+					$('#styleoverrides').text(curConfig.svgElementSelector+' svg *{cursor:move;pointer-events:all} '+curConfig.svgElementSelector+' svg{cursor:default}');
 				}
 				svgCanvas.setMode('select');
 				workarea.css('cursor', 'auto');
@@ -1148,7 +1148,7 @@ TO-DOS
 			var clickSelect = editor.clickSelect = function() {
 				if (toolButtonClick('#tool_select')) {
 					svgCanvas.setMode('select');
-					$('#styleoverrides').text('#svgcanvas svg *{cursor:move;pointer-events:all}, #svgcanvas svg{cursor:default}');
+					$('#styleoverrides').text(curConfig.svgElementSelector+' svg *{cursor:move;pointer-events:all}, '+curConfig.svgElementSelector+' svg{cursor:default}');
 				}
 			};
 
@@ -1199,7 +1199,7 @@ TO-DOS
 
 			function updateRulers(scanvas, zoom) {
 				if (!zoom) {zoom = svgCanvas.getZoom();}
-				if (!scanvas) {scanvas = $('#svgcanvas');}
+				if (!scanvas) {scanvas = $(curConfig.svgElementSelector);}
 
 				var d, i;
 				var limit = 30000;
@@ -1355,7 +1355,7 @@ TO-DOS
 				var w_orig = w, h_orig = h;
 				var zoom = svgCanvas.getZoom();
 				var w_area = workarea;
-				var cnvs = $('#svgcanvas');
+				var cnvs = $(curConfig.svgElementSelector);
 				var old_ctr = {
 					x: w_area[0].scrollLeft + w_orig/2,
 					y: w_area[0].scrollTop + h_orig/2
@@ -1893,7 +1893,7 @@ TO-DOS
 				var scrbar = 15,
 					// res = svgCanvas.getResolution(), // Currently unused
 					w_area = workarea;
-				// var canvas_pos = $('#svgcanvas').position(); // Currently unused
+				// var canvas_pos = $(curConfig.svgElementSelector).position(); // Currently unused
 				var z_info = svgCanvas.setBBoxZoom(bbox, w_area.width()-scrbar, w_area.height()-scrbar);
 				if (!z_info) {return;}
 				var zoomlevel = z_info.zoom,
@@ -3059,7 +3059,7 @@ TO-DOS
 				var last_x = null, last_y = null, w_area = workarea[0],
 					panning = false, keypan = false;
 
-				$('#svgcanvas').bind('mousemove mouseup', function(evt) {
+				$(curConfig.svgElementSelector).bind('mousemove mouseup', function(evt) {
 					if (panning === false) {return;}
 
 					w_area.scrollLeft -= (evt.clientX - last_x);
@@ -4405,7 +4405,7 @@ TO-DOS
 		//	function setResolution(w, h, center) {
 		//		updateCanvas();
 		// //		w-=0; h-=0;
-		// //		$('#svgcanvas').css( { 'width': w, 'height': h } );
+		// //		$(curConfig.svgElementSelector).css( { 'width': w, 'height': h } );
 		// //		$('#canvas_width').val(w);
 		// //		$('#canvas_height').val(h);
 		// //

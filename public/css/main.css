@@ -362,14 +362,13 @@ main section.designer form fieldset .form-group > label > input {
 	margin-right:15px;
 }
 main section.designer form fieldset .form-group > label > input[type=radio]{
-	width:40px;
-	height:40px;
+	width:20px;
+	height:20px;
 }
-main section.designer form fieldset .form-group > label > input[type=text]{
+main section.designer form fieldset .form-group > label input[type=number]{
 	border: solid 1px #dedede;
-	padding: 0 2.5%;
-	height: 48px;
-	line-height: 48px;
+	padding: 10% 5%;
+	height: 24px;
 	width: 90%;
 	margin-right: 5%;
 }
@@ -435,11 +434,11 @@ main #wf #compass .needle.W{left:20px; top:75px;}
 main #wf .grid{position:absolute; display:inline-block; bottom:-30px; right:20px; height:20px; width:160px; cursor:pointer;}
 main #wf .grid > img {display:block; float:left; margin-right:10px;}
 main #wf .grid > a {display:block; float:left; height:auto; width:auto; padding:0 10px; line-height:20px; background:#000; border-radius:20px; color:#FFF; text-decoration:none;}
-main #wf .info {left: 50%; position:absolute; width:1080px; margin-left:-540px; height:20px; bottom:20px; }
+main #wf .info {left: 5%; text-align:left;  text-decoration:none; font-weight:bold;  font-size:14px; position:absolute; width:90%;  height:20px; bottom:20px; }
 main #wf .total_size{position:absolute; display:inline-block; bottom:-30px; left:0; height:20px;  width:200px; text-transform: none;}
 main #wf .showFloorPlan{position:absolute; display:inline-block; bottom:-30px; right:440px; height:20px; width:200px; color:#000; text-decoration:none;}
-main #wf .scale {position:absolute; display:inline-block; bottom:20px; left:0; height:20px; width:200px;}
-main #wf .nextStep {position: absolute; right: 20px; top: 20px; white-space:nowrap;}
+main #wf .scale {position:absolute; display:inline-block; bottom: 30px; left:0; height:20px; width:200px;}
+main #wf .nextStep {position: absolute; right: 20px; bottom: -30px;  white-space:nowrap;}
 main #wf .scale form {display:inline-block; margin-left:20px;background:#000; padding: 0  ; height:25px; line-height:25px; border-radius:20px;}
 main #wf .scale form a {display:inline-block; color:#FFF; padding:0 10px; font-size:18px; background:#000; height:25px; text-decoration:none; }
 main #wf .scale form a:first-of-type{border-right:solid 1px #fff; padding-right:7px; border-radius:20px 0 0 20px;}
@@ -448,9 +447,9 @@ main #wf .scale form a.disabled{background:#666;}
 
 main #wf .preview {
 	position:absolute;
-	top: -40px;
+	bottom: 0;
 	color: #000;
-	text-decoration: underline;
+	text-decoration: none;
 	right: 0px;
 	
 }
@@ -465,9 +464,9 @@ footer{
 }
 
 footer nav{
-	width:1080px;
+	width:90%;
 	margin:0 auto;
-	padding: 30px 0;
+	padding: 30px 5%;
 	text-align: center;
 	
 }
@@ -494,8 +493,8 @@ footer > nav > ul > li {
 	width: 60px;
 	color:#dedede;
 }
-footer > nav > ul > li:first{ margin-left:0; }
-footer > nav > ul > li:last{ margin-right:0; }
+footer > nav > ul > li:first-of-type{ margin-left:0; }
+footer > nav > ul > li:last-of-type{ margin-right:0; }
 footer > nav > ul.right > li {
 	font-size: 14px;
 	line-height: 40px;

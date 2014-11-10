@@ -59,7 +59,8 @@ export default Ember.Route.extend({
                 width: width, 
                 height: height, 
                 measurement: measurement,
-                method: method
+                method: method,
+                editing: true
             });
             //update controller
             editorController.set("model", editor);

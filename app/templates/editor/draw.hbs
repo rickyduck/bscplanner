@@ -1,25 +1,30 @@
 <div id="wf" {{bind-attr class="wireframe:wireframe"}}>
-	
+
 	<div class="info">
 		<div class="nextStep">
-			<a href="#" class="preview" {{action "nextStep" "path" target=view}}>Next Step</a>
+			<a href="#" class="preview" {{action "nextStep" "path" target=view}}>Start Designing Your Kitchen &raquo;</a>
 		</div>
 		<div class="scale">
-
+			SCALE &nbsp;&nbsp;<span class="zoomVal">1</span>:20
+			<!--<form>
+				<input type="hidden" value="100" name="zoom" autocomplete="off">
+				<a href="#" class="increaseZoom">+</a>
+				<a href="#" class="decreaseZoom disabled">-</a>
+			</form>-->
 		</div>
 		<div class="total_size">
 			AREA TOTAL: {{area}}&#178;
 		</div>
 
-		<div class="grid" {{action "toggleWireframe"}}><img src="img/grid.png">
-			<a class="switch" data-toggle="on"> 
-				{{#if wireframe}}
-					On
-				{{else}}
-					Off
-				{{/if}} 
-			</a>
-		</div>
+		<!--<div class="grid" {{action "toggleWireframe"}}><img src="img/grid.png">
+		<a class="switch" data-toggle="on">
+		{{#if wireframe}}
+		On
+		{{else}}
+		Off
+		{{/if}}
+		</a>
+		</div>-->
 	</div>
 	<div id="workarea">
 		<div id="svgcanvas"></div>

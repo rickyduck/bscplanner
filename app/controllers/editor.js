@@ -6,8 +6,11 @@ Ember.ObjectController.extend({
     //config for the editor
     modelError: null,
     svgPlanString: null,
+    svgElementSelector: null,
+    svgElement: null,
     config : {
         controller: null,
+        svgElementSelector: "#svgeditor",
         canvas_expansion : 1,
         dimensions : ["100%", "100%"],
         initFill : {
@@ -44,6 +47,9 @@ Ember.ObjectController.extend({
             
             this.checkModel();  
         },
+        nextStep: function(){
+            this.nextStep();  
+        },
         toggleWireframe : function() {
             this.toggleWireframe();
         },
@@ -59,6 +65,8 @@ Ember.ObjectController.extend({
         },
         
     },
+    
+
     checkModel: function(){
         var that = this;
         var model = that.get("model");
@@ -102,25 +110,52 @@ Ember.ObjectController.extend({
         svgEditor.canvas.setStrokeWidth(1);
         svgEditor.canvas.setMode(mode);
     },
-    saveSvgEditor : function() {
+    saveSvgEditorBind : function() {
         //set the config controller to this
-        var that = this, model = that.get("model"), svgObj,config = that.get("config"), svgPlanString = model.get("svgPlanString");
-        config.controller = that;
-        that.set("config", config);
-        if(model.get("step") === 2){
-            
-            if(!svgPlanString){
-                
-            }else{
-                svgObj.loadFromString(svgedit.utilities.decode64(svgPlanString));
-            }
+        
+        var that = this, model = that.get("model"), svgEditor = that.get("svgEditor"),config = that.get("config"), svgPlanString, svgElementSelector = that.get("svgElementSelector"), svgElement = that.get("svgElement");
+        if(!model){
+            //fallback
+            that.store.find("editor", {editing: true}).then(function(editor){
+                if(editor.content.length){
+                    that.set("content", editor.content[0]);
+                    that.saveSvgEditorBind();
+                }else{
+                    alert("Can't find active editor model");
+                }
+            });
+            return false;
+        }
+        svgPlanString = model.get("svgPlanString");
+        if(!svgElementSelector){
+            return false;
         }
         
-        svgObj = window.createEditor(config);
-        that.checkModel();
-        that.set('svgEditor', svgObj);
-        that.setSvgCanvasMeasurements(config);
-    },
+        if((!svgElement && !svgEditor) && svgElementSelector){
+            //If the target element exists, but element doesn't, setup '
+            config.controller = that;
+            config.svgElementSelector = svgElementSelector;
+            that.set("config", config);
+        
+        //This is quite archaic and an anti-pattern. Returning the javascript object is not efficient and breaks the ethos.
+            svgEditor = window.createEditor(config);
+            that.checkModel();
+            that.set('svgEditor', svgEditor);
+            that.setSvgCanvasMeasurements(config);
+            
+            that.set("svgElement", $(svgElementSelector));
+           // that.set("svgElem", that.$().find(svgElementSelector));
+        }else if(svgElementSelector && svgElement && svgEditor){
+            //Already initialized, replace targetElement
+            $(svgElementSelector).replaceWith(svgElement);
+        }
+        if(model.get("step") === 2){
+            if(!svgPlanString){  
+            }else{
+                svgEditor.loadFromString(svgedit.utilities.decode64(svgPlanString));
+            }
+        }
+    }.observes("svgElementSelector"),
     
     loadProductSVGFromURL : function(url) {
         var that = this;

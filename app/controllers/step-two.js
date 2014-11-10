@@ -8,15 +8,11 @@ export default Ember.Controller.extend({
         }
     },
     setupEditor: function(){
-        var that = this, editorController = that.get("controllers.editor"), model = editorController.get("model"), svgEditor = editorController.get("svgEditor");
-        model.set("step",2);
-        if(!model){
-            model = that.store.find("editor", "temp");
-            if(!model){
-                that.transitionToRoute("/");
-            }else{
-                editorController.set("model", model);
-            }
-        }
+        var that = this, editorController = that.get("controllers.editor"), editorModel = editorController.get("model") || that.get("model.editor"), svgEditor = editorController.get("svgEditor");
+       
+        // editorModel.set("step",2);
+        // editorModel.set("editing", true);
+        // editorController.set("model", editorModel);
+//         
     }
 });

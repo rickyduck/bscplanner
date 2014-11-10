@@ -8,7 +8,7 @@ Ember.Controller.extend({
     width : null,
     height : null,
     measurement : null,
-    wireframe: false,
+    wireframe: true,
     actions : {
         
         setupEditor: function(){
@@ -37,13 +37,17 @@ Ember.Controller.extend({
                 measurement: measurement,
                 method: method,
                 wireframe: wireframe,
-                step: 1
+                step: 1,
+                editing: true
             });
             //update controller
-            editorController.set("model", model);
+            model.save().then(function(model){
+                editorController.set("model", model);
+            });
             
-        }
+        }else{
         //Initiate the check 
-        editorController.send("checkModel");
+            editorController.send("checkModel");
+        }
     }
 });
