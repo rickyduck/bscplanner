@@ -36,6 +36,7 @@ Router.map(function() {
   this.resource('error', { path: 'error/:error_id' }, function() { 
       
   });
+  this.route('step-two/sidebar/category');
 });
 
 export default Router;

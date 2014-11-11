@@ -1,9 +1,9 @@
-<menu>
-            <ul>
-              {{#each category in categories}}
-              {{#if category.is_active}}
-					Category
-              {{/if}}
-              {{/each}}
-            </ul>
-          </menu>
+	<menu>
+		<ul class="top">
+			{{#each category in model}}
+			{{#if category.is_active}}
+			<li>{{render "step-two.sidebar.category" category}}</li>
+			{{/if}}
+			{{/each}}
+		</ul>
+	</menu>

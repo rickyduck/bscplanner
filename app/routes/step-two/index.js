@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default
 Ember.Route.extend({
-    needs : ['editor', 'step-two'],
+    needs : ['editor', 'step-two', 'step-two.sidebar'],
     categories : null,
     products : null,
     model : function(model) {
@@ -12,14 +12,13 @@ Ember.Route.extend({
         var editorController = that.controllerFor("editor");
         
 
-        return {
-            products : products,
-            categories : categories,
-            editor : that.store.getById("editor", "temp")
-        };
+        return categories;
     },
     setupController : function(controller, model) {
         var that = this;
+        that.store.find("category").then( function(categories) {
+           that.controllerFor("step-two.sidebar").set("content", categories); 
+        });
         that.store.find("editor", {
             editing : true
         }).then( function(editor) {
@@ -34,7 +33,11 @@ Ember.Route.extend({
         var editorController = that.controllerFor("editor");
         that._super(controller, model);
         //that.render('products', {into: 'step-one', outlet: 'products'});
-
+        that.render('step-two.sidebar', {
+            controller: 'step-two.sidebar',
+            into: 'step-two.index',
+            outlet: 'sidebar' 
+        });
         that.render('editor.step-two', {
             controller : 'editor',
             into : "step-two.index",

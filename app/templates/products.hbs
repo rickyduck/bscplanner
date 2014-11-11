@@ -1,7 +1,5 @@
-{{#each product in products}}
-                      <li>
-                        <img {{bind-attr src=product.svg.front}}/>
-                        <span>{{product.sku}}</span>
-                      </li>
-                  
-                  {{/each}}
+<ul {{bind-attr class="category.isOpen:active"}}>
+                	{{#each product in category.products itemController="product"}}
+                	{{view "product" product=product templateName="product"}}
+                	{{/each}}
+                </ul>

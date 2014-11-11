@@ -1,0 +1,6 @@
+{{#each product in model}}
+<li {{action "selectProduct" product}}>
+	<img {{bind-attr src=product.svg.front}}/>
+    <span>{{product.sku}}</span>
+</li>
+{{/each}}

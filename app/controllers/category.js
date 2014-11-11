@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
+    needs: ['step-two.sidebar'],
 	isVisible: false,
 	test:true,
 	actions: {

@@ -159,12 +159,12 @@ aside.left menu {
 	margin:0;
 	padding:0;
 }
-aside.left menu >  ul {
+aside.left menu  ul.top {
 	padding: 0;
 	margin: 0;
 	
 }
-aside.left menu  > ul > li {
+aside.left menu  ul.top > li {
 	display:block; 
 	width:275px; 
 	line-height:60px;
@@ -183,9 +183,9 @@ aside.left menu  > ul > li > ul {
 	margin: 0;
 	display:none;
 }
-aside.left menu  > ul > li.open > ul {
+aside.left menu   ul li > ul.open {
 	display:block;
-	overflow:scroll;
+	overflow-y:scroll;
 }
 aside.left menu  > ul > li > ul > li {
 	padding: 20px 40px;
