@@ -7,7 +7,6 @@ DS.Model.extend({
     step : DS.attr("number"),
     measurement : DS.attr("string"),
     method : DS.attr("string"),
-    svgEditor : DS.attr(),
     wireframe : DS.attr("boolean"),
     svgString : DS.attr("string"),
     svgPlanString : DS.attr("string"),

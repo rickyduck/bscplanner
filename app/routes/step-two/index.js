@@ -24,6 +24,7 @@ Ember.Route.extend({
         }).then( function(editor) {
             if (editor.content.length) {
                 that.controllerFor("editor").set("model", editor.content[0]);
+                
             }
         });
     },

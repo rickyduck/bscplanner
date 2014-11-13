@@ -5,14 +5,9 @@ export default Ember.View.extend({
     selectedCategory: Ember.computed.alias("controller.controllers.step-two/sidebar.selectedCategory"),
     tagName: "ul",
     classNames: ['products'],
-    classNameBindings: ['isVisible:open'],
+    
     templateName: "step-two/sidebar/products",
-    isVisible: function(){
-        //this is messy. render doesn't allow passing of extra parameters so 
-        var that = this;
-        var categoryId = that.get("controller.model.firstObject.categories.firstObject.id");
-        return (that.get("selectedCategory.id") === categoryId);
-    }.property("selectedCategory"),
+    
     didInsertElement: function(){
         this.updateHeight();
         

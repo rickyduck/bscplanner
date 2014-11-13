@@ -63,10 +63,12 @@ Ember.ObjectController.extend({
         getSvg : function(type) {
             this.getSvg(type);
         },
-        
+        loadSvgPlanString: function(){
+            this.loadSvgPlanString();
+        }
     },
     
-
+    
     checkModel: function(){
         var that = this;
         var model = that.get("model");
@@ -80,10 +82,13 @@ Ember.ObjectController.extend({
     },
     
     nextStep : function() {
-        var that = this, svgEditor = that.get("svgEditor"), svgString = svgEditor.canvas.getSvgString();
-        that.set("model.svgPlanString", svgString);
+        var that = this, svgEditor = that.get("svgEditor"), svgString = svgEditor.canvas.getSvgString(), model = that.get("model");
+        model.set("svgPlanString", svgedit.utilities.encode64(svgString));
+        model.set("step",2);
+        model.save();
         that.transitionToRoute("/step-two");
     },
+    
     setSvgCanvasMeasurements : function() {
         var that = this;
         var svgEditor = that.get("svgEditor");
@@ -152,7 +157,7 @@ Ember.ObjectController.extend({
         if(model.get("step") === 2){
             if(!svgPlanString){  
             }else{
-                svgEditor.loadFromString(svgedit.utilities.decode64(svgPlanString));
+                svgEditor.canvas.setSvgString(svgedit.utilities.decode64(svgPlanString));
             }
         }
     }.observes("svgElementSelector"),
@@ -180,6 +185,18 @@ Ember.ObjectController.extend({
         var that = this;
         var svgEditor = that.get("svgEditor");
         svgEditor.svgCanvas.importSvgString(svgedit.utilities.decode64(product));
+    },
+    loadSvgPlanString : function() {
+        //Load the svg plan from the model. Saved as base64.
+        var that = this;
+        var model = that.get("model");
+        var svgEditor = that.get("svgEditor");
+        var svgPlanString = model.get("svgPlanString");
+        if(!svgPlanString){
+            alert("Empty SVG Plan String");
+        }else{
+            svgEditor.canvas.setSvgString(svgedit.utilities.decode64(svgPlanString));
+        }
     },
     init : function() {
         //alert("Editor initialized");

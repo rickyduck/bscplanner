@@ -183,7 +183,7 @@ aside.left menu  > ul > li > ul {
 	margin: 0;
 	display:none;
 }
-aside.left menu   ul li > ul.open {
+aside.left menu   ul li.open > ul {
 	display:block;
 	overflow-y:scroll;
 }

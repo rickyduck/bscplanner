@@ -17,6 +17,7 @@ export default Ember.View.extend({
             height : height
         });
         controller.set("svgElementSelector", svgElementSelector);
+        
         //elementAction = controller.send("saveSvgEditor");
 
     }
