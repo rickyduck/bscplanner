@@ -1,0 +1,5 @@
+<ul {{bind-attr class="category.isOpen:active"}}>
+                	{{#each product in category.products itemController="product"}}
+                	{{view "product" product=product templateName="product"}}
+                	{{/each}}
+                </ul>

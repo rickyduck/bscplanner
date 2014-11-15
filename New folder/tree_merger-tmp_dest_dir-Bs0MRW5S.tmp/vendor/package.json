@@ -1,0 +1,53 @@
+{
+  "name": "ember-localstorage-adapter",
+  "version": "0.5.0",
+  "description": "Store your Ember application data in LocalStorage.",
+  "main": "localstorage_adapter.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "phantomjs test/runner.js test/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kurko/ember-localstorage-adapter"
+  },
+  "keywords": [
+    "ember-addon"
+  ],
+  "ember-addon": {
+    "main": "ember-addon-main.js",
+    "after": "ember-data"
+  },
+  "author": {
+    "name": "Ryan Florence",
+    "email": "rpflorence@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kurko/ember-localstorage-adapter/issues"
+  },
+  "homepage": "https://github.com/kurko/ember-localstorage-adapter",
+  "gitHead": "03ea2e04f6f6c475a830593478087f6b3eecc413",
+  "_id": "ember-localstorage-adapter@0.5.0",
+  "_shasum": "54e9f3ee8ed48a70e2efe2c70b471065707476bd",
+  "_from": "ember-localstorage-adapter@",
+  "_npmVersion": "1.4.28",
+  "_npmUser": {
+    "name": "kurko",
+    "email": "chavedomundo@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "kurko",
+      "email": "chavedomundo@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "54e9f3ee8ed48a70e2efe2c70b471065707476bd",
+    "tarball": "http://registry.npmjs.org/ember-localstorage-adapter/-/ember-localstorage-adapter-0.5.0.tgz"
+  },
+  "_resolved": "https://registry.npmjs.org/ember-localstorage-adapter/-/ember-localstorage-adapter-0.5.0.tgz",
+  "readme": "ERROR: No README data found!"
+}

@@ -1,0 +1,84 @@
+<!--[if lte IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+{{outlet "sidebar"}}
+<div class="planner">
+	<div id="wrap">
+		<aside class="toolbar">
+			<button class="display"></button>
+			<div >
+				<menu>
+					<ul>
+						<li>
+							<a href="#"><img src="img/settings_user.png" /></a>
+						</li>
+						<li>
+							<a href="#"><img src="img/settings_basket.png" /></a>
+							<div>
+								<header>
+									<h5>Basket</h5>
+								</header>
+								<main>
+									<ul class="noProds productList">
+										<li>
+											No products yet
+										</li>
+									</ul>
+								</main>
+								<footer class="bottom">
+									<span class="total">Total: &pound;7,899</span>
+									<a href="#">Order/Confirm</a>
+								</footer>
+							</div>
+						</li>
+					</ul>
+				</menu>
+			</div>
+		</aside>
+		<header>
+			<h1><a href="#">British Standard Cupboards by Plain English</a></h1>
+		</header>
+		<main style="overflow:visible;" >
+
+			{{outlet "editor"}}
+		</main>
+
+		<footer>
+			<nav>
+				<ul>
+					<li>
+						<a href="#">Dimensions
+						<br>
+						<span class="circle">1</span></a>
+					</li>
+					<li>
+						<a class="active" href="#">Design
+						<br>
+						<span class="circle">2</span></a>
+					</li>
+					<li>
+						<a href="#">Save
+						<br>
+						<span class="circle">3</span></a>
+					</li>
+					<li>
+						<a href="#">Order
+						<br>
+						<span class="circle">4</span></a>
+					</li>
+				</ul>
+				<ul class="right">
+					<li>
+						<a href="#">New</a>
+					</li>
+					<li>
+						<a href="#">Open</a>
+					</li>
+					<li>
+						<a href="#">Exit</a>
+					</li>
+				</ul>
+			</nav>
+		</footer>
+	</div>
+

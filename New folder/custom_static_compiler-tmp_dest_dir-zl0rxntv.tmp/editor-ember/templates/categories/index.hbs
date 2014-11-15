@@ -1,0 +1,8 @@
+test
+{{#if model.is_active}}
+
+              <li>
+              {{#link-to 'categories.category.products'}}<div>{{name}}</div>{{/link-to}}
+                {{outlet}}
+              </li>
+              {{/if}}

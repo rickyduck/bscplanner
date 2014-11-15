@@ -1,0 +1,717 @@
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+    font-family: "Raleway", "Georgia", sans-serif;
+}
+
+html {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+
+audio,
+canvas,
+img,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Browse Happy prompt
+   ========================================================================== */
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+html, body {height: 100%; overflow: hidden;}
+
+#wrap,.full-height {height: 100%; }
+
+
+
+#wrap > header{
+	padding:40px;
+	width:100%;
+	text-align:center;
+}
+
+header h1 a{
+	display: inline-block;
+	width: 240px;
+	height: 110px;
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+	background: url(../img/logo.png);
+}
+
+
+#wrap > main {
+	padding: 0 0 30px 0;
+	text-align: center;
+	margin:0 auto;
+	font-weight:600;
+	overflow:auto;
+	text-transform: uppercase;
+	position: relative;
+}
+.planner > #wrap > main {
+	margin-bottom: 120px;
+}
+aside.left { 
+	width: 275px;
+	background: #000;
+	height:100%; 
+	min-height:1000px;
+	float:left;
+}
+.step-one aside.left{
+	width: 100px;
+	background: #EEE;
+	padding: 20px;
+}
+.step-one aside.left ul,.step-one aside.left li{
+	margin:0; 
+	padding:0;
+}
+.step-one aside.left a {
+	width: 100px;
+	height: 100px;
+	display:block;
+	color: #000;
+	text-align: center;
+}
+aside.left menu {
+	margin:0;
+	padding:0;
+}
+aside.left menu  ul.top {
+	padding: 0;
+	margin: 0;
+	
+}
+aside.left menu  ul.top > li {
+	display:block; 
+	width:275px; 
+	line-height:60px;
+	text-indent:30px; 
+	padding:0; margin:0;
+	color: #fff;
+	text-transform: uppercase; 
+	border-bottom: solid 1px rgba(255,255,255,0.27);
+	cursor: pointer;
+}
+aside.left menu  > ul > li > ul {
+	width:215px; 
+	height: 100%;
+	background: #faf9f9;
+	padding:30px;
+	margin: 0;
+	display:none;
+}
+aside.left menu   ul li.open > ul {
+	display:block;
+	overflow-y:scroll;
+}
+aside.left menu  > ul > li > ul > li {
+	padding: 20px 40px;
+	background: #FFF;
+	min-height:100px;
+	font-size: 11px;
+	text-align:center;
+	color: #000;
+	list-style: none;
+	width:135px;
+	text-indent:0;
+	margin: 0 0 20px 0;
+}
+aside.left menu  > ul > li > ul > li > img {
+	display: inline-block;
+	margin: 0 ;
+	width:100%;
+}
+aside.left menu  > ul > li > ul > li > span {
+	text-align: center;
+	padding: 10px 0;
+	margin: 0;
+	height:auto;
+}
+.planner {margin-left:275px;}
+.step-one .planner {margin-left:150px;}
+main .wrapper {
+	width:1080px; 
+	margin:0 auto;
+}
+main .wrapper.right {
+	float:left;
+}
+aside.toolbar{
+	float:left;
+	right:-100px;
+	top:0;
+	width:100px; 
+	background: #292929;
+	height:100%;
+	position:absolute;
+	z-index:10000;
+}
+#wrap aside.toolbar .display{
+	background: url(../img/spanner_icon.png) no-repeat center center #292929;
+	border: none;
+	margin:0;
+	
+	width: 65px;
+	height: 70px;
+	position: absolute;
+	left: -65px;
+	top: 120px;
+	border-radius: 5px 0 0 5px;
+	
+}
+#wrap aside.toolbar menu {
+	position: absolute;
+	padding:0 0 0 20px;
+}
+#wrap aside.toolbar menu > ul{
+	display:block;
+	padding:0; 
+	margin:0 20px 0 0;
+	width:62px;
+}
+#wrap aside.toolbar menu ul > li {
+	display:block;
+	position:relative;
+	margin: 20px 0;
+}
+#wrap aside.toolbar menu > ul > li > div{
+	padding: 40px; background: #f9f9f9; 
+	box-shadow:         0px 2px 5px 0px rgba(50, 50, 50, 0.25);
+	position:absolute;
+	top:0;
+	right: 82px;
+	display:none;
+}
+
+#wrap aside.toolbar menu > ul > li.active > div{
+	display:block;
+	min-width:300px;
+	text-transform: uppercase;
+}
+#wrap aside.toolbar menu > ul > li.active > div:after{
+	content: "";
+	display:block;
+	position:absolute;
+	width: 0; 
+	height: 0; 
+	right:-15px; 
+	top:30px;
+	border-top: 15px solid transparent;
+	border-bottom: 15px solid transparent;
+	
+	border-left: 15px solid #F9F9F9;
+}
+#wrap aside.toolbar menu > ul > li > div header h5{
+	padding: 0 10px 0 0;
+	margin:0;
+	display:block;
+	font-size: 18px;
+	text-transform: uppercase;
+}
+#wrap aside.toolbar menu > ul > li > div ul {
+	margin:10px 0; padding: 0;
+}
+#wrap aside.toolbar menu > ul > li > div ul > li {
+	font-size:12px;
+	text-transform: uppercase;
+	padding: 10px 0;
+	margin: 0; 
+	border-bottom: solid 1px #CCC;
+}
+#wrap aside.toolbar menu > ul > li > div footer span{ 
+	display:inline-block; 
+	height:40px; 
+	line-height: 40px;
+	font-weight:bold;
+	font-size:14px;
+}
+#wrap aside.toolbar menu > ul > li > div footer a{
+	display:block; 
+	float:right; 
+	height:40px;
+	line-height:40px;
+	color:#FFF;
+	padding: 0 20px;
+	font-size:14px;
+	text-decoration:none;
+	border-radius: 20px;
+	background: #000;
+}
+main h2 {
+	font-size: 30px;
+	padding-bottom:30px;
+	
+	letter-spacing: 2px;
+}
+main p {
+	font-size:18px;
+}
+main section.designer{
+	padding: 50px;
+	text-transform: uppercase;
+	border:solid 1px #dedede;
+	background: transparent;
+	width: 100%;
+	margin-bottom:40px;
+}
+main section.designer h6 {
+	font-size: 16px;
+	font-weight: normal;
+	margin: 0 0 15px 0;
+	padding: 0;
+}
+main section.designer form fieldset{
+	text-align:left;
+	display: block;
+	height: 100%;
+	width: 50%;
+	float: left;
+}
+main section.designer form fieldset .form-group {
+	margin-bottom:20px;
+}
+main section.designer form fieldset .form-group > label {
+	display:inline-block; 
+	width: 30%;
+	margin-right: 20px;
+}
+main section.designer form fieldset .form-group > label > input {
+	margin-right:15px;
+}
+main section.designer form fieldset .form-group > label > input[type=radio]{
+	width:20px;
+	height:20px;
+}
+main section.designer form fieldset .form-group > label input[type=number]{
+	border: solid 1px #dedede;
+	padding: 10% 5%;
+	height: 24px;
+	width: 90%;
+	margin-right: 5%;
+}
+main menu.center button{
+	padding:20px 20px 10px 20px;
+	text-transform: uppercase;
+	border:solid 1px #dedede;
+	background: transparent;
+	line-height: 60px; 
+	text-align:center;
+	float:left;
+}
+main menu.center button:nth-child(2){
+	float:right;
+}
+main menu.center a{width:100%; height:100%;}
+main menu.center button p {
+	margin: 0;
+}
+main menu.center.home{
+	margin: 40px 0 0 100px;
+}
+main menu.home button {
+	line-height:110px;
+	width: 360px; 
+	height:110px;
+	padding: 0;
+	
+}
+main menu.center.home button:nth-child(2){
+	float:right;
+	margin: 0 100px 0 0;
+}
+
+
+
+ 
+
+/* SVG EDIT STYLES */
+main #workarea, main #svgcanvas , main #wf{
+      margin:0 auto; 
+      width: 100%;
+  }
+  main #wf {margin-right:250px;}
+main #wf.wireframe{
+	background:url(../editor/images/wireframe.png);
+}
+main #wf #compass{
+	background:url(../img/compass.png);
+	width:185px;
+	height:185px;
+	position:absolute;
+	right:70px;
+	bottom:50px;
+}
+main #wf #compass .needle {display:block; position:absolute;}
+main #wf #compass .needle.NS{width:30px; height:50px;}
+main #wf #compass .needle.EW{height:30px; width:50px;}
+main #wf #compass .needle.N{top:0; left:75px;}
+main #wf #compass .needle.S{bottom:20px; left:75px;}
+main #wf #compass .needle.E{right:0; top:75px;}
+main #wf #compass .needle.W{left:20px; top:75px;}
+main #wf .grid{position:absolute; display:inline-block; bottom:-30px; right:20px; height:20px; width:160px; cursor:pointer;}
+main #wf .grid > img {display:block; float:left; margin-right:10px;}
+main #wf .grid > a {display:block; float:left; height:auto; width:auto; padding:0 10px; line-height:20px; background:#000; border-radius:20px; color:#FFF; text-decoration:none;}
+main #wf .info {left: 5%; text-align:left;  text-decoration:none; font-weight:bold;  font-size:14px; position:absolute; width:90%;  height:20px; bottom:20px; }
+main #wf .total_size{position:absolute; display:inline-block; bottom:-30px; left:0; height:20px;  width:200px; text-transform: none;}
+main #wf .showFloorPlan{position:absolute; display:inline-block; bottom:-30px; right:440px; height:20px; width:200px; color:#000; text-decoration:none;}
+main #wf .scale {position:absolute; display:inline-block; bottom: 30px; left:0; height:20px; width:200px;}
+main #wf .nextStep {position: absolute; right: 20px; bottom: -30px;  white-space:nowrap;}
+main #wf .scale form {display:inline-block; margin-left:20px;background:#000; padding: 0  ; height:25px; line-height:25px; border-radius:20px;}
+main #wf .scale form a {display:inline-block; color:#FFF; padding:0 10px; font-size:18px; background:#000; height:25px; text-decoration:none; }
+main #wf .scale form a:first-of-type{border-right:solid 1px #fff; padding-right:7px; border-radius:20px 0 0 20px;}
+main #wf .scale form a:last-of-type{padding-left:7px; border-radius:0 20px 20px 0;}
+main #wf .scale form a.disabled{background:#666;}
+
+main #wf .preview {
+	position:absolute;
+	bottom: 0;
+	color: #000;
+	text-decoration: none;
+	right: 0px;
+	
+}
+
+#svgroot{ left:-150px; top:-150px;}
+footer{
+	height: 94px;
+	border-top: solid 1px #dedede;
+	width: 100%;
+	text-transform: uppercase;
+	margin-top: -95px;
+}
+
+footer nav{
+	width:90%;
+	margin:0 auto;
+	padding: 30px 5%;
+	text-align: center;
+	
+}
+footer > nav > ul {
+	display: inline-block;
+	height:34px;
+	padding:0;
+	margin: 0;
+	list-style: none;
+	float:left;
+}
+footer > nav > ul.right{
+	float: right;
+}
+footer > nav.wide > ul{
+	float: none;
+}
+
+footer > nav > ul > li {
+	display: inline-block;
+	text-align: center;
+	margin: 0 20px;
+	font-size:10px;
+	width: 60px;
+	color:#dedede;
+}
+footer > nav > ul > li:first-of-type{ margin-left:0; }
+footer > nav > ul > li:last-of-type{ margin-right:0; }
+footer > nav > ul.right > li {
+	font-size: 14px;
+	line-height: 40px;
+	font-weight: bold;
+}
+footer > nav > ul.right > li > a {
+	color: #000;
+}
+footer > nav > ul > li > a, footer > nav > ul > li > a:hover {
+	text-decoration: none;
+	color: #DEDEDE;
+}
+ 
+footer > nav > ul > li > a.active, footer > nav > ul > li > a.active:hover{
+	color:#000;
+}
+footer > nav > ul > li > a > span.circle{
+	background: #dedede;
+	width:22px;
+	height:22px;
+	color:#FFF;
+	display:inline-block;
+	text-align: center;
+	line-height: 22px;
+	border-radius: 100%;
+	margin-top: 4px;
+}
+footer > nav > ul > li > a.active > span.circle{
+	background:#000;
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Image replacement
+ */
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-o-min-device-pixel-ratio: 5/4),
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

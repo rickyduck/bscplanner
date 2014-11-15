@@ -1,0 +1,15 @@
+import Ember from 'ember';
+export default Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+
+
+  data.buffer.push("<!--[if lte IE 7]>\r\n<p class=\"browsehappy\">You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/\">upgrade your browser</a> to improve your experience.</p>\r\n<![endif]-->\r\n");
+  data.buffer.push(escapeExpression((helper = helpers.partial || (depth0 && depth0.partial),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "step-one/sidebar/draw", options) : helperMissing.call(depth0, "partial", "step-one/sidebar/draw", options))));
+  data.buffer.push("\r\n<div class=\"planner\">\r\n	<div id=\"wrap\">\r\n		<aside class=\"toolbar\">\r\n			<button class=\"display\"></button>\r\n			<div >\r\n				<menu>\r\n					<ul>\r\n						<li>\r\n							<a href=\"#\"><img src=\"img/settings_user.png\" /></a>\r\n						</li>\r\n						<li>\r\n							<a href=\"#\"><img src=\"img/settings_basket.png\" /></a>\r\n							<div>\r\n								<header>\r\n									<h5>Basket</h5>\r\n								</header>\r\n								<main>\r\n									<ul class=\"noProds productList\">\r\n										<li>\r\n											No products yet\r\n										</li>\r\n									</ul>\r\n								</main>\r\n								<footer class=\"bottom\">\r\n									<span class=\"total\">Total: &pound;7,899</span>\r\n									<a href=\"#\">Order/Confirm</a>\r\n								</footer>\r\n							</div>\r\n						</li>\r\n					</ul>\r\n				</menu>\r\n			</div>\r\n		</aside>\r\n		<header>\r\n			<h1><a href=\"#\">British Standard Cupboards by Plain English</a></h1>\r\n		</header>\r\n		<main style=\"overflow:visible;\" >\r\n\r\n			");
+  data.buffer.push(escapeExpression((helper = helpers.outlet || (depth0 && depth0.outlet),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "editor", options) : helperMissing.call(depth0, "outlet", "editor", options))));
+  data.buffer.push("\r\n		</main>\r\n\r\n		<footer>\r\n			<nav>\r\n				<ul>\r\n					<li>\r\n						<a href=\"#\">Dimensions\r\n						<br>\r\n						<span class=\"circle\">1</span></a>\r\n					</li>\r\n					<li>\r\n						<a class=\"active\" href=\"#\">Design\r\n						<br>\r\n						<span class=\"circle\">2</span></a>\r\n					</li>\r\n					<li>\r\n						<a href=\"#\">Save\r\n						<br>\r\n						<span class=\"circle\">3</span></a>\r\n					</li>\r\n					<li>\r\n						<a href=\"#\">Order\r\n						<br>\r\n						<span class=\"circle\">4</span></a>\r\n					</li>\r\n				</ul>\r\n				<ul class=\"right\">\r\n					<li>\r\n						<a href=\"#\">New</a>\r\n					</li>\r\n					<li>\r\n						<a href=\"#\">Open</a>\r\n					</li>\r\n					<li>\r\n						<a href=\"#\">Exit</a>\r\n					</li>\r\n				</ul>\r\n			</nav>\r\n		</footer>\r\n	</div>\r\n\r\n");
+  return buffer;
+  
+});

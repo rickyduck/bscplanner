@@ -1,0 +1,247 @@
+import Ember from 'ember';
+
+export default
+Ember.ObjectController.extend({
+    needs : ['index', 'step-one', 'baskets'],
+    //config for the editor
+    modelError: null,
+    svgPlanString: null,
+    svgElementSelector: null,
+    svgElement: null,
+    config : {
+        controller: null,
+        svgElementSelector: "#svgeditor",
+        canvas_expansion : 1,
+        dimensions : ["100%", "100%"],
+        initFill : {
+            color : 'fff',
+            opacity : 0
+        },
+        initStroke : {
+            width : 3,
+            color : '000',
+            opacity : 1
+        },
+        initOpacity : 1,
+        imgPath : 'editor/images/',
+        extPath : 'editor/extensions/',
+        jGraduatePath : 'editor/jgraduate/images/',
+        extensions : ["grid"],
+        initTool : 'select',
+        wireframe : true,
+        colorPickerCSS : false,
+        gridSnapping : true,
+        gridColor : "#000",
+        baseUnit : 'px',
+        snappingStep : 10,
+        showRulers : false,
+        show_outside_canvas : false,
+        no_save_warning : true,
+        initFont : 'Helvetica, Arial, sans-serif'
+    },
+    actions : {
+        saveSvgEditor: function(){
+            this.saveSvgEditor();
+        },
+        checkModel: function(){
+            
+            this.checkModel();  
+        },
+        nextStep: function(){
+            this.nextStep();  
+        },
+        toggleWireframe : function() {
+            this.toggleWireframe();
+        },
+        setMode : function(mode) {
+            this.setMode(mode);
+            //alert("Editor");
+        },
+        clear : function() {
+            this.clear();
+        },
+        getSvg : function(type) {
+            this.getSvg(type);
+        },
+        
+        //Basket functions
+        addBasket: function(editor){
+            
+        },
+        
+        addBasketProduct: function(product) {
+            this.addBasketProduct(product);  
+        },
+        loadSvgPlanString: function(){
+            this.loadSvgPlanString();
+        }
+    },
+    
+    
+    checkModel: function(){
+        var that = this;
+        var model = that.get("model");
+        if(!(model.get("width") && model.get("height") && model.get("method") && model.get("measurement"))){
+            that.set("modelError", true);
+            that.send("handleError", {id:"missingData", controller: that, model: model});
+        }else{
+            that.set("modelError",false);
+        }
+        
+    },
+    //should probably rename the function to "stepTwo()".
+    nextStep : function() {
+        var that = this, svgEditor = that.get("svgEditor"), svgString = svgEditor.canvas.getSvgString(), model = that.get("model");
+        model.set("svgPlanString", svgedit.utilities.encode64(svgString));
+        model.set("step",2);
+        //At the moment we're saving to localStorage. This should be changed to the REST API for logged in users (?)'
+        model.save();
+        that.transitionToRoute("/step-two");
+    },
+    
+    setSvgCanvasMeasurements : function() {
+        var that = this;
+        var svgEditor = that.get("svgEditor");
+        if (svgEditor) {
+            //On the next step we need to get the pixel dimensions.
+            svgEditor.measurements = {
+                width : that.get("width"),
+                height : that.get("height"),
+                method : that.get("method"),
+                measurement : that.get("measurement")
+            };
+        }
+    }.observes('width', 'height', 'measurement'),
+    toggleWireframe : function() {
+        this.set("wireframe", !this.get("wireframe"));
+    },
+    clear : function() {
+        var svgEditor = this.get("svgEditor");
+        svgEditor.canvas.clear();
+    },
+    setMode : function(mode) {
+        var that = this;
+        var svgEditor = that.get('svgEditor');
+        svgEditor.canvas.setStrokePaint('000000');
+        svgEditor.canvas.setStrokeWidth(1);
+        svgEditor.canvas.setMode(mode);
+    },
+    saveSvgEditorBind : function() {
+        //set the config controller to this
+        
+        var that = this, model = that.get("model"), svgEditor = that.get("svgEditor"),config = that.get("config"), svgPlanString, svgElementSelector = that.get("svgElementSelector"), svgElement = that.get("svgElement");
+        if(!model){
+            //fallback
+            that.store.find("editor", {editing: true}).then(function(editor){
+                if(editor.content.length){
+                    that.set("content", editor.content[0]);
+                    that.saveSvgEditorBind();
+                }else{
+                    alert("Can't find active editor model");
+                }
+            });
+            return false;
+        }
+        svgPlanString = model.get("svgPlanString");
+        if(!svgElementSelector){
+            return false;
+        }
+        
+        if((!svgElement && !svgEditor) && svgElementSelector){
+            //If the target element exists, but element doesn't, setup '
+            config.controller = that;
+            config.svgElementSelector = svgElementSelector;
+            that.set("config", config);
+        
+        //This is quite archaic and an anti-pattern. Returning the javascript object is not efficient and breaks the ethos.
+            svgEditor = window.createEditor(config);
+            that.checkModel();
+            that.set('svgEditor', svgEditor);
+            that.setSvgCanvasMeasurements(config);
+            
+            that.set("svgElement", $(svgElementSelector));
+           // that.set("svgElem", that.$().find(svgElementSelector));
+        }else if(svgElementSelector && svgElement && svgEditor){
+            //Already initialized, replace targetElement
+            $(svgElementSelector).replaceWith(svgElement);
+        }
+        if(model.get("step") === 2){
+            if(!svgPlanString){  
+            }else{
+                svgEditor.canvas.setSvgString(svgedit.utilities.decode64(svgPlanString));
+            }
+        }
+    }.observes("svgElementSelector"),
+    
+    loadProductSVGFromURL : function(url) {
+        var that = this;
+        var svgEditor = that.get("svgEditor");
+        $.ajax({
+            'url' : url,
+            'dataType' : 'text',
+            cache : false,
+            success : function(str) {
+                svgEditor.canvas.importSvgString(str);
+            },
+            error : function(xhr, stat, err) {
+                if (xhr.status != 404 && xhr.responseText) {
+                    svgEditor.setSvgString(xhr.responseText);
+                } else {
+                    $.alert(uiStrings.notification.URLloadFail + ": \n" + err + '', cb);
+                }
+            }
+        });
+    },
+    addProduct : function(product){
+        var that = this, editorModel = that.get("model"), existingItem = false;
+        // check whether product already exists within items. This could probably be done better than a forEach.
+        model.get("basket").then(function(basketModel){
+            basketModel.get("basketItems").then(function(basketItems){
+                if(basketItems.length){
+                    basketItems.forEach(function(basketItem){
+                        if(basketItem.get("product.id") === product.get("id")){
+                            basketItem.set("quantiy", basketItem.get("quantity")+1);
+                            basketItem.save();
+                            existingItem = true;
+                        }
+                        
+                    });
+                }
+                //If we need to create a model, do it below. 
+                if(!existingItem){
+                    basketItem = that.store.createRecord("basket-item",{
+                        product: product,
+                        quantity: 1
+                    });
+                    basketItem.save().then(function(basketItemModel){
+                        basketItems.pushObject(basketItemModel);
+                        basketModel.set("basketItems", basketItems).save();
+                    });
+                    //add to the collection
+                    
+                }
+            });
+        });
+    },
+    //the product SVG is passed from add Product or ...
+    loadProductSVG : function(productSVG) {
+        var that = this;
+        var svgEditor = that.get("svgEditor");
+        svgEditor.svgCanvas.importSvgString(svgedit.utilities.decode64(productSVG));
+    },
+    loadSvgPlanString : function() {
+        //Load the svg plan from the model. Saved as base64.
+        var that = this;
+        var model = that.get("model");
+        var svgEditor = that.get("svgEditor");
+        var svgPlanString = model.get("svgPlanString");
+        if(!svgPlanString){
+            alert("Empty SVG Plan String");
+        }else{
+            svgEditor.canvas.setSvgString(svgedit.utilities.decode64(svgPlanString));
+        }
+    },
+    init : function() {
+        //alert("Editor initialized");
+    }
+});

@@ -4,37 +4,7 @@
 {{outlet "sidebar"}}
 <div class="planner">
 	<div id="wrap">
-		<aside class="toolbar">
-			<button class="display"></button>
-			<div >
-				<menu>
-					<ul>
-						<li>
-							<a href="#"><img src="img/settings_user.png" /></a>
-						</li>
-						<li>
-							<a href="#"><img src="img/settings_basket.png" /></a>
-							<div>
-								<header>
-									<h5>Basket</h5>
-								</header>
-								<main>
-									<ul class="noProds productList">
-										<li>
-											No products yet
-										</li>
-									</ul>
-								</main>
-								<footer class="bottom">
-									<span class="total">Total: &pound;7,899</span>
-									<a href="#">Order/Confirm</a>
-								</footer>
-							</div>
-						</li>
-					</ul>
-				</menu>
-			</div>
-		</aside>
+		{{view "step-two/rightbar"}}
 		<header>
 			<h1><a href="#">British Standard Cupboards by Plain English</a></h1>
 		</header>

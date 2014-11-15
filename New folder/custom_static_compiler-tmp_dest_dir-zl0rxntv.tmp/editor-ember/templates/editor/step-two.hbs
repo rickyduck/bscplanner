@@ -1,0 +1,35 @@
+<div id="wf" {{bind-attr class="wireframe:wireframe"}}>
+	
+	<div class="info">
+				<div class="scale">
+
+		</div>
+		<div class="total_size">
+			AREA TOTAL: {{area}}&#178;
+		</div>
+
+		<div class="grid" {{action "toggleWireframe"}}><img src="img/grid.png">
+			<a class="switch" data-toggle="on"> 
+				{{#if wireframe}}
+					On
+				{{else}}
+					Off
+				{{/if}} 
+			</a>
+		</div>
+	</div>
+	<div id="workarea">
+		<div id="svgcanvas"></div>
+
+	</div>
+	<!-- <div id="compass">
+	<a class="needle NS N" href="#"></a>
+	<a class="needle NS S" href="#"></a>
+	<a class="needle EW E" href="#"></a>
+	<a class="needle EW W" href="#"></a>
+	</div> -->
+
+</div>
+</div>
+
+{{partial "editor/toolbars"}}

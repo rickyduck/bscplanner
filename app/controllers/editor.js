@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default
 Ember.ObjectController.extend({
-    needs : ['index', 'step-one'],
+    needs : ['index', 'step-one', 'baskets'],
     //config for the editor
     modelError: null,
     svgPlanString: null,
@@ -57,11 +57,23 @@ Ember.ObjectController.extend({
             this.setMode(mode);
             //alert("Editor");
         },
+        undoPath: function(){
+            this.undoPath();
+        },
         clear : function() {
             this.clear();
         },
         getSvg : function(type) {
             this.getSvg(type);
+        },
+        
+        //Basket functions
+        addBasket: function(editor){
+            
+        },
+        
+        addBasketProduct: function(product) {
+            this.addBasketProduct(product);  
         },
         loadSvgPlanString: function(){
             this.loadSvgPlanString();
@@ -80,11 +92,12 @@ Ember.ObjectController.extend({
         }
         
     },
-    
+    //should probably rename the function to "stepTwo()".
     nextStep : function() {
         var that = this, svgEditor = that.get("svgEditor"), svgString = svgEditor.canvas.getSvgString(), model = that.get("model");
         model.set("svgPlanString", svgedit.utilities.encode64(svgString));
         model.set("step",2);
+        //At the moment we're saving to localStorage. This should be changed to the REST API for logged in users (?)'
         model.save();
         that.transitionToRoute("/step-two");
     },
@@ -93,6 +106,7 @@ Ember.ObjectController.extend({
         var that = this;
         var svgEditor = that.get("svgEditor");
         if (svgEditor) {
+            //On the next step we need to get the pixel dimensions.
             svgEditor.measurements = {
                 width : that.get("width"),
                 height : that.get("height"),
@@ -107,6 +121,9 @@ Ember.ObjectController.extend({
     clear : function() {
         var svgEditor = this.get("svgEditor");
         svgEditor.canvas.clear();
+    },
+    undoPath: function(){
+        this.get("svgEditor").canvas.pathActions.undoPath();  
     },
     setMode : function(mode) {
         var that = this;
@@ -181,10 +198,41 @@ Ember.ObjectController.extend({
             }
         });
     },
-    loadProductSVG : function(product) {
+    addBasketProduct : function(product){
+        var that = this, editorModel = that.get("model"), existingItem = false;
+        // check whether product already exists within items. This could probably be done better than a forEach.
+        editorModel.get("basket").then(function(basketModel){
+            basketModel.get("basketItems").then(function(basketItems){
+                if(basketItems.length){
+                    basketItems.forEach(function(basketItem){
+                        if(basketItem.get("product.id") === product.get("id")){
+                            basketItem.set("quantiy", basketItem.get("quantity")+1);
+                            basketItem.save();
+                            existingItem = true;
+                        }
+                        
+                    });
+                }
+                //If we need to create a model, do it below. 
+                if(!existingItem){
+                    that.store.createRecord("basket-item",{
+                        product: product,
+                        quantity: 1
+                    }).save().then(function(basketItemModel){
+                        basketItems.addObject(basketItemModel);
+                        that.loadProductSVGFromURL(product.get("svg.plan"));
+                    });
+                    //add to the collection
+                    
+                }
+            });
+        });
+    },
+    //the product SVG is passed from add Product or ...
+    loadProductSVG : function(productSVG) {
         var that = this;
         var svgEditor = that.get("svgEditor");
-        svgEditor.svgCanvas.importSvgString(svgedit.utilities.decode64(product));
+        svgEditor.svgCanvas.importSvgString(svgedit.utilities.decode64(productSVG));
     },
     loadSvgPlanString : function() {
         //Load the svg plan from the model. Saved as base64.

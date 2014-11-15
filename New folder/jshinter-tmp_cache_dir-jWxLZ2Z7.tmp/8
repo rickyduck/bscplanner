@@ -1,0 +1,4 @@
+module('JSHint - controllers');
+test('controllers/baskets.js should pass jshint', function() { 
+  ok(false, 'controllers/baskets.js should pass jshint.\ncontrollers/baskets.js: line 10, col 28, \'find\' is defined but never used.\n\n1 error'); 
+});

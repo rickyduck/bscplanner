@@ -1,0 +1,37 @@
+			<button class="display" {{action "toggleRightBar" target=view}}></button>
+			<div >
+				<menu>
+					<ul>
+						<li>
+							<a href="#"><img src="img/settings_user.png" /></a>
+						</li>
+						<li {{bind-attr class="view.basket:active"}}>
+							<a href="#" {{action "toggleBasket" target=view}}><img src="img/settings_basket.png" /></a>
+							<div>
+								<header>
+									<h5>Basket</h5>
+								</header>
+								<main> 	
+									<ul class="noProds productList">
+										{{#if editor.basket.basketItems}}
+										{{#each editor.basketItem in basket.basketItems}}
+										<li>
+											{{basketItem.product.sku}} - {{basketItem.quantity}} - &pound;{{basketItem.total}}
+										</li>
+										{{/each}}
+										{{else}}
+										<li>
+											No products yet
+										</li>
+										{{/if}}
+									</ul>
+								</main>
+								<footer class="bottom">
+									<span class="total">Total: &pound;{{basket.total}}</span>
+									<a href="#">Order/Confirm</a>
+								</footer>
+							</div>
+						</li>
+					</ul>
+				</menu>
+			</div>

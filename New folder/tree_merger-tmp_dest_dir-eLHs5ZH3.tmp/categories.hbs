@@ -1,0 +1,10 @@
+<menu>
+            <ul>
+              {{#each category in model}}
+              {{#if category.is_active}}
+
+              {{view 'category' category=category}}
+              {{/if}}
+              {{/each}}
+            </ul>
+          </menu>

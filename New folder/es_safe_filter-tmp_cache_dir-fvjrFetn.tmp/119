@@ -1,0 +1,59 @@
+import Ember from 'ember';
+
+export default
+Ember.Route.extend({
+    needs : ['editor', 'step-two', 'step-two.sidebar', 'basket'],
+    categories : null,
+    products : null,
+    model : function(model) {
+        var that = this;
+        var products = this.store.find("product");
+        var categories = this.store.find("category");
+        var editorController = that.controllerFor("editor");
+        
+
+        return categories;
+    },
+    setupController : function(controller, model) {
+        var that = this;
+        that.store.find("category").then( function(categories) {
+           that.controllerFor("step-two.sidebar").set("content", categories); 
+        });
+        that.store.find("editor", {
+            editing : true
+        }).then( function(editor) {
+            //get all basket 
+            if (editor.content) {
+                
+                
+                
+                that.controllerFor("editor").set("model", editor.content[0]);
+                that.controllerFor("basket").set("model", editor.content[0].get("basket"));
+            }
+        });
+    },
+    renderTemplate : function(controller, model) {
+        var that = this;
+        var stepTwoController = that.controllerFor("step-two");
+        var editorController = that.controllerFor("editor");
+        that._super(controller, model);
+        //that.render('products', {into: 'step-one', outlet: 'products'});
+        that.render('step-two.sidebar', {
+            controller: 'step-two.sidebar',
+            into: 'step-two.index',
+            outlet: 'sidebar' 
+        });
+        that.render('editor.step-two', {
+            controller : 'editor',
+            into : "step-two.index",
+            outlet : 'editor'
+        });
+        // that.render('step-one.sidebar.draw', {
+        // into : 'step-one.draw',
+        // outlet : 'sidebar'
+        // });
+        //   this.transitionTo('/categories');
+        // stepOne.send("setupEditor");
+        //    this.render('editor', {into: 'index', outlet: 'editor'});
+    }
+});

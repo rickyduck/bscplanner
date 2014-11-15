@@ -1,0 +1,43 @@
+<div id="wf" {{bind-attr class="wireframe:wireframe"}}>
+  <a href="#" class="preview">Preview</a>
+
+<div id="workarea">
+<div id="svgcanvas"></div>
+</div>
+<!-- <div id="compass">
+  <a class="needle NS N" href="#"></a>
+  <a class="needle NS S" href="#"></a>
+  <a class="needle EW E" href="#"></a>
+  <a class="needle EW W" href="#"></a>
+</div> -->
+<div class="scale">
+  SCALE <span class="zoomVal">1</span>:10
+  <form>
+    <input type="hidden" value="100" name="zoom" />
+    <a href="#" class="increaseZoom">+</a>
+    <a href="#" class="decreaseZoom disabled">-</a>
+  </form>
+</div>
+<div class="total_size">AREA TOTAL: 17.64m&#178;</div>
+<a href="#" class="showFloorPlan">Floor Plan</a>
+<div class="grid" {{action "toggleWireframe"}}><img src="img/grid.png"> <a class="switch" data-toggle="on">
+{{#if wireframe}}
+On
+{{else}}
+Off
+{{/if}}
+</a></div>
+</div>
+</div>
+
+
+
+{{partial "editor/toolbars"}}
+
+
+
+
+
+
+
+
