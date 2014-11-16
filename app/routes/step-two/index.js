@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default
 Ember.Route.extend({
     needs : ['editor', 'step-two', 'step-two.sidebar'],
+    controllerName: 'step-two',
     categories : null,
     products : null,
     model : function(model) {

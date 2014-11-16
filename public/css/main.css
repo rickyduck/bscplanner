@@ -455,7 +455,7 @@ main #wf .preview {
 }
 
 #svgroot{ left:-150px; top:-150px;}
-footer{
+#footer footer{
 	height: 94px;
 	border-top: solid 1px #dedede;
 	width: 100%;
@@ -463,14 +463,14 @@ footer{
 	margin-top: -95px;
 }
 
-footer nav{
+#footer footer nav{
 	width:90%;
 	margin:0 auto;
 	padding: 30px 5%;
 	text-align: center;
 	
 }
-footer > nav > ul {
+#footer footer > nav > ul {
 	display: inline-block;
 	height:34px;
 	padding:0;
@@ -478,14 +478,14 @@ footer > nav > ul {
 	list-style: none;
 	float:left;
 }
-footer > nav > ul.right{
+#footer footer > nav > ul.right{
 	float: right;
 }
-footer > nav.wide > ul{
+#footer footer > nav.wide > ul{
 	float: none;
 }
 
-footer > nav > ul > li {
+#footer footer > nav > ul > li {
 	display: inline-block;
 	text-align: center;
 	margin: 0 20px;
@@ -493,25 +493,25 @@ footer > nav > ul > li {
 	width: 60px;
 	color:#dedede;
 }
-footer > nav > ul > li:first-of-type{ margin-left:0; }
-footer > nav > ul > li:last-of-type{ margin-right:0; }
-footer > nav > ul.right > li {
+#footer footer > nav > ul > li:first-of-type{ margin-left:0; }
+#footer footer > nav > ul > li:last-of-type{ margin-right:0; }
+#footer footer > nav > ul.right > li {
 	font-size: 14px;
 	line-height: 40px;
 	font-weight: bold;
 }
-footer > nav > ul.right > li > a {
+#footer footer > nav > ul.right > li > a {
 	color: #000;
 }
-footer > nav > ul > li > a, footer > nav > ul > li > a:hover {
+#footer footer > nav > ul > li > a, #footer footer > nav > ul > li > a:hover {
 	text-decoration: none;
 	color: #DEDEDE;
 }
  
-footer > nav > ul > li > a.active, footer > nav > ul > li > a.active:hover{
+#footer footer > nav > ul > li > a.active, #footer footer > nav > ul > li > a.active:hover{
 	color:#000;
 }
-footer > nav > ul > li > a > span.circle{
+#footer footer > nav > ul > li > a > span.circle{
 	background: #dedede;
 	width:22px;
 	height:22px;
@@ -522,7 +522,7 @@ footer > nav > ul > li > a > span.circle{
 	border-radius: 100%;
 	margin-top: 4px;
 }
-footer > nav > ul > li > a.active > span.circle{
+#footer footer > nav > ul > li > a.active > span.circle{
 	background:#000;
 }
 

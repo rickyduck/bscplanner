@@ -6,7 +6,7 @@ export default DS.Model.extend({
     total: function(){
         var that = this, basketItems = that.get("basketItems"), total = 0, product;
         //loop through basket items, get the total property from model
-        basketItems.forEach(function(basket){
+        basketItems.forEach(function(item){
             product = item.get("product");
             total += item.get("total");
         });

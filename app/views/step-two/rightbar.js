@@ -22,7 +22,23 @@ export default Ember.View.extend({
             this.set("basket",!this.get("basket"));
         }
     },
+    didInsertElement: function(){
+        this.$().find(".basketHolder").on("click", function(e){
+            e.stopPropagation();
+        });
+    },
     refreshBasket: function(){
         this.rerender();
-    }.observes("controller.editor.basket.basketItems")
+    }.observes("controller.controllers.editor.basket.basketItems"),
+    basketHider: function(){
+        var that = this;
+        var hide = function(){
+            that.set("basket",false);
+        };
+        if(this.get("basket")){
+            $("body").on("click",hide);
+        }else{
+            $("body").off("click",hide);
+        }
+    }.observes("basket")
 });
