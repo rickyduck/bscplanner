@@ -36,9 +36,7 @@ Ember.View.extend({
             width : width,
             height : height
         });
-        controller.setProperties({
-            svgElementSelector: svgElementSelector,
-        });
+        controller.set("svgElementSelector",svgElementSelector);
         //elementAction = controller.send("saveSvgEditor");
 
     }
