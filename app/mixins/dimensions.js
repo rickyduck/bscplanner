@@ -25,8 +25,8 @@ export default Ember.Mixin.create({
       //check that all dimensions are set
       if(cssWidth > 0 && cssHeight > 0 && physicalWidth > 0 && physicalHeight > 0){
         //work out the difference between the editor width in pixels and the defined with in MM / CM
-        multiplierWidth = ((cssWidth - physicalWidth) / cssWidth) * 100);
-        multiplierHeight = ((cssHeight - physicalHeight) / cssHeight) * 100);
+        multiplierWidth = ((cssWidth - physicalWidth) / cssWidth) * 100;
+        multiplierHeight = ((cssHeight - physicalHeight) / cssHeight) * 100;
         multiplier.setProperties({
           width: multiplierWidth,
           height: multiplierHeight
