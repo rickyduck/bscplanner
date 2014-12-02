@@ -5,10 +5,11 @@ import DimensionsMixin from "editor-ember/mixins/dimensions";
 export default
 Ember.View.extend(DimensionsMixin, {
     controller : "editor",
+    editorController : Em.computed.alias("controller.controllers.editor"),
     classNames : ["step-one"],
     didInsertElement : function() {
-        var $el = this.$(), height = $("body").height() - ($el.find("header").outerHeight() + $el.find("footer").outerHeight()) - 300, width = $el.width() - 550,
-        editorModel = that.get("controller.model"),
+        var that = this, $el = this.$(), height = $("body").height() - ($el.find("header").outerHeight() + $el.find("footer").outerHeight()) - 300, width = $el.width() - 550,
+        editorModel = that.get("editorController.model"),
         physicalDimensions = {
           width : editorModel.get("width"),
           height : editorModel.get("height"),
@@ -23,9 +24,10 @@ Ember.View.extend(DimensionsMixin, {
         $el.find("#svgcanvas").css(cssDimensions);
         $el.find("#canvasBackground rect").hide();
         //Below is defined in editor-ember/mixins/dimensions
-        this.applyCssDimensions(cssDimensions);
-        this.setPhysicalDimensions(physicalDimensions);
-
+        that.applyCssDimensions(cssDimensions);
+        that.applyPhysicalDimensions(physicalDimensions);
+        that.translateDimensions();
+        that.get("editorController").send("applyMultiplier", that.multiplier);
     },
 
     actions : {

@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-    editor: DS.belongsTo("editor"),
+    editor: DS.belongsTo("editor", {async: false}),
     basketItems: DS.hasMany("basket-items", {async: true, embedded: 'always' }),
     total: function(){
         var that = this, basketItems = that.get("basketItems"), total = 0, product;
@@ -15,7 +15,7 @@ export default DS.Model.extend({
     quantity: function(){
         var that = this, basketItems = that.get("basketItems"), quantity = 0;
         basketItems.forEach(function(basket){
-            
+
             quantity += item.get("quantity");
         });
         return quantity;

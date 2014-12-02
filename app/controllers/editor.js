@@ -13,6 +13,7 @@ Ember.ObjectController.extend({
         svgElementSelector: "#svgeditor",
         canvas_expansion : 1,
         dimensions : ["100%", "100%"],
+        physicalDimensions: [0, 0],
         initFill : {
             color : 'fff',
             opacity : 0
@@ -44,11 +45,11 @@ Ember.ObjectController.extend({
             this.saveSvgEditor();
         },
         checkModel: function(){
-            
-            this.checkModel();  
+
+            this.checkModel();
         },
         nextStep: function(){
-            this.nextStep();  
+            this.nextStep();
         },
         toggleWireframe : function() {
             this.toggleWireframe();
@@ -66,21 +67,21 @@ Ember.ObjectController.extend({
         getSvg : function(type) {
             this.getSvg(type);
         },
-        
+
         //Basket functions
         addBasket: function(editor){
-            
+
         },
-        
+
         addBasketProduct: function(product) {
-            this.addBasketProduct(product);  
+            this.addBasketProduct(product);
         },
         loadSvgPlanString: function(){
             this.loadSvgPlanString();
         }
     },
-    
-    
+
+
     checkModel: function(){
         var that = this;
         var model = that.get("model");
@@ -90,7 +91,7 @@ Ember.ObjectController.extend({
         }else{
             that.set("modelError",false);
         }
-        
+
     },
     //should probably rename the function to "stepTwo()".
     nextStep : function() {
@@ -101,7 +102,7 @@ Ember.ObjectController.extend({
         model.save();
         that.transitionToRoute("/step-two");
     },
-    
+
     setSvgCanvasMeasurements : function() {
         var that = this;
         var svgEditor = that.get("svgEditor");
@@ -123,7 +124,7 @@ Ember.ObjectController.extend({
         svgEditor.canvas.clear();
     },
     undoPath: function(){
-        this.get("svgEditor").canvas.pathActions.undoPath();  
+        this.get("svgEditor").canvas.pathActions.undoPath();
     },
     setMode : function(mode) {
         var that = this;
@@ -134,7 +135,7 @@ Ember.ObjectController.extend({
     },
     saveSvgEditorBind : function() {
         //set the config controller to this
-        
+
         var that = this, model = that.get("model"), svgEditor = that.get("svgEditor"),config = that.get("config"), svgPlanString, svgElementSelector = that.get("svgElementSelector"), svgElement = that.get("svgElement");
         if(!model){
             //fallback
@@ -152,19 +153,19 @@ Ember.ObjectController.extend({
         if(!svgElementSelector){
             return false;
         }
-        
+
         if((!svgElement && !svgEditor) && svgElementSelector){
             //If the target element exists, but element doesn't, setup '
             config.controller = that;
             config.svgElementSelector = svgElementSelector;
             that.set("config", config);
-        
+
         //This is quite archaic and an anti-pattern. Returning the javascript object is not efficient and breaks the ethos.
             svgEditor = window.createEditor(config);
             that.checkModel();
             that.set('svgEditor', svgEditor);
             that.setSvgCanvasMeasurements(config);
-            
+
             that.set("svgElement", $(svgElementSelector));
            // that.set("svgElem", that.$().find(svgElementSelector));
         }else if(svgElementSelector && svgElement && svgEditor){
@@ -172,13 +173,13 @@ Ember.ObjectController.extend({
             $(svgElementSelector).replaceWith(svgElement);
         }
         if(model.get("step") === 2){
-            if(!svgPlanString){  
+            if(!svgPlanString){
             }else{
                 svgEditor.canvas.setSvgString(svgedit.utilities.decode64(svgPlanString));
             }
         }
     }.observes("svgElementSelector"),
-    
+
     loadProductSVGFromURL : function(url) {
         var that = this;
         var svgEditor = that.get("svgEditor");
@@ -210,10 +211,10 @@ Ember.ObjectController.extend({
                             basketItem.save();
                             existingItem = true;
                         }
-                        
+
                     });
                 }
-                //If we need to create a model, do it below. 
+                //If we need to create a model, do it below.
                 if(!existingItem){
                     that.store.createRecord("basket-item",{
                         product: product,
@@ -223,7 +224,7 @@ Ember.ObjectController.extend({
                         that.loadProductSVGFromURL(product.get("svg.plan"));
                     });
                     //add to the collection
-                    
+
                 }
             });
         });

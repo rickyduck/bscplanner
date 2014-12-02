@@ -58,15 +58,26 @@ Ember.Controller.extend({
 
         //no model then
         if (!editorModel) {
+          //For some reason the record isn't loaded. so we can't do .find(), we do .findAll then loop through the results.
+          that.store.findAll('basket').then(function(baskets){
+            baskets.content.forEach(function(basket){
+            //  if(basket.get("editor.id") == "tmp"){
+                basket.deleteRecord();
+                basket.save();
+              //}
+            });
+
             that.store.findAll('editor').then(function(editors) {
                 editors.content.forEach(function(editor){
                     // find the existing tmp entry and delete
                     if(editor.id === "tmp"){
                         foundCreated = true;
+                        //Why does it come through as empty sometimes?
                         editor.deleteRecord();
                         editor.save().then(function() {
                             doRecordCreate();
                         });
+
                     }
                 });
                 if(!foundCreated){
@@ -74,7 +85,7 @@ Ember.Controller.extend({
                 }
 
             });
-
+          });
 
         } else {
             basketsController.send("deleteBaskets", {
