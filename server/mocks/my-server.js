@@ -200,8 +200,8 @@ module.exports = function(app) {
                             delete product.category_ids;
                             delete product.product_id;
                             product.dimensions = {
-                                width : product.dimensions_width,
-                                height : product.dimensions_height,
+                                width : product.dimensions_width || 42,
+                                height : product.dimensions_height || 35,
                                 depth : product.dimensions_depth,
                             };
                             product.svg = {
@@ -218,7 +218,7 @@ module.exports = function(app) {
                                 // i++;
                                 // if (i === productsLength) {
                                     // app.emit("product_info_loaded", topProds);
-// 
+//
                                 // }
                             // });
 
@@ -275,7 +275,7 @@ module.exports = function(app) {
             });
         });
     });
-    
+
     //Get SVG
     myServerRouter.get('/svgs/:id', function(req, res) {
         magento.login(function(err, sessId) {
@@ -389,9 +389,9 @@ module.exports = function(app) {
                 "gift_message_available" : "0",
                 "id" : "64",
                 "dimensions" : {
-                    "width" : null,
-                    "height" : null,
-                    "depth" : null
+                  "width" : 420,
+                  "height" : 620,
+                  "depth" : 200
                 },
                 "svg" : {
                     "plan" : "svg/alt_F350SL-plan.svg",
@@ -453,9 +453,9 @@ module.exports = function(app) {
                 "gift_message_available" : "0",
                 "id" : "6",
                 "dimensions" : {
-                    "width" : null,
-                    "height" : null,
-                    "depth" : null
+                    "width" : 420,
+                    "height" : 620,
+                    "depth" : 200
                 },
                 "svg" : {
                     "plan" : "svg/alt_F350SL-plan.svg",
@@ -517,9 +517,9 @@ module.exports = function(app) {
                 "gift_message_available" : "0",
                 "id" : "65",
                 "dimensions" : {
-                    "width" : null,
-                    "height" : null,
-                    "depth" : null
+                  "width" : 420,
+                  "height" : 620,
+                  "depth" : 200
                 },
                 "svg" : {
                     "plan" : "svg/alt_F350SL-plan.svg",

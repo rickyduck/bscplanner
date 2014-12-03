@@ -1,5 +1,5 @@
 <div id="wf" {{bind-attr class="wireframe:wireframe"}}>
-	
+
 	<div class="info">
 				<div class="scale">
 
@@ -9,13 +9,25 @@
 		</div>
 
 		<div class="grid" {{action "toggleWireframe"}}><img src="img/grid.png">
-			<a class="switch" data-toggle="on"> 
+			<a class="switch" data-toggle="on">
 				{{#if wireframe}}
 					On
 				{{else}}
 					Off
-				{{/if}} 
+				{{/if}}
 			</a>
+		</div>
+		<div class="scale">
+			SCALE <span class="zoomVal">{{zoomLevel}}</span>:10
+			<form>
+				<input type="hidden" value="100" name="zoom" autocomplete="off">
+				{{#if increaseDisabled}}
+				 increase disabled
+				{{/if}}
+
+				<a href="#" {{action "changeZoom" "increase"}} {{bind-attr class="increaseDisabled"}}>+</a>
+				<a href="#" {{action "changeZoom" "decrease"}} {{bind-attr class="decreaseDisabled"}}>-</a>
+			</form>
 		</div>
 	</div>
 	<div id="workarea">

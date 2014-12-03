@@ -4,6 +4,13 @@ import DimensionsMixin from "editor-ember/mixins/dimensions";
 export default Ember.View.extend(DimensionsMixin, {
     svgEditor: null,
     controller: "editor",
+    increaseDisabled: function(){
+      return this.get("controller.zoomLevel") === 10;
+    },
+    decreaseDisabled: function(){
+
+      return this.get("controller.zoomLevel") === 1;
+    },
     svgElementSelector: "#svgEditor",
     dimensions: null,
     didInsertElement : function() {
@@ -22,5 +29,6 @@ export default Ember.View.extend(DimensionsMixin, {
         this.testMixin();
         //elementAction = controller.send("saveSvgEditor");
 
-    }
+    },
+
 });

@@ -39,7 +39,7 @@
 				</ul>
 				<ul class="right">
 					<li>
-						<a href="#">New</a>
+						<a href="#" {{action "saveEditor" view}}>Save</a>
 					</li>
 					<li>
 						<a href="#">Open</a>
@@ -53,3 +53,9 @@
 		</div>
 	</div>
 
+<div class="lightboxOverlay">
+	<div class="container">
+		{{input type="text" value=editorName}}
+
+	<div>
+</div>

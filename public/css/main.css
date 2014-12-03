@@ -132,10 +132,10 @@ header h1 a{
 .planner > #wrap > main {
 	margin-bottom: 120px;
 }
-aside.left { 
+aside.left {
 	width: 275px;
 	background: #000;
-	height:100%; 
+	height:100%;
 	min-height:1000px;
 	float:left;
 }
@@ -145,7 +145,7 @@ aside.left {
 	padding: 20px;
 }
 .step-one aside.left ul,.step-one aside.left li{
-	margin:0; 
+	margin:0;
 	padding:0;
 }
 .step-one aside.left a {
@@ -162,21 +162,21 @@ aside.left menu {
 aside.left menu  ul.top {
 	padding: 0;
 	margin: 0;
-	
+
 }
 aside.left menu  ul.top > li {
-	display:block; 
-	width:275px; 
+	display:block;
+	width:275px;
 	line-height:60px;
-	text-indent:30px; 
+	text-indent:30px;
 	padding:0; margin:0;
 	color: #fff;
-	text-transform: uppercase; 
+	text-transform: uppercase;
 	border-bottom: solid 1px rgba(255,255,255,0.27);
 	cursor: pointer;
 }
 aside.left menu  > ul > li > ul {
-	width:215px; 
+	width:215px;
 	height: 100%;
 	background: #faf9f9;
 	padding:30px;
@@ -213,7 +213,7 @@ aside.left menu  > ul > li > ul > li > span {
 .planner {margin-left:275px;}
 .step-one .planner {margin-left:150px;}
 main .wrapper {
-	width:1080px; 
+	width:1080px;
 	margin:0 auto;
 }
 main .wrapper.right {
@@ -223,7 +223,7 @@ aside.toolbar{
 	float:left;
 	right:-100px;
 	top:0;
-	width:100px; 
+	width:100px;
 	background: #292929;
 	height:100%;
 	position:absolute;
@@ -233,14 +233,14 @@ aside.toolbar{
 	background: url(../img/spanner_icon.png) no-repeat center center #292929;
 	border: none;
 	margin:0;
-	
+
 	width: 65px;
 	height: 70px;
 	position: absolute;
 	left: -65px;
 	top: 120px;
 	border-radius: 5px 0 0 5px;
-	
+
 }
 #wrap aside.toolbar menu {
 	position: absolute;
@@ -248,7 +248,7 @@ aside.toolbar{
 }
 #wrap aside.toolbar menu > ul{
 	display:block;
-	padding:0; 
+	padding:0;
 	margin:0 20px 0 0;
 	width:62px;
 }
@@ -258,7 +258,7 @@ aside.toolbar{
 	margin: 20px 0;
 }
 #wrap aside.toolbar menu > ul > li > div{
-	padding: 40px; background: #f9f9f9; 
+	padding: 40px; background: #f9f9f9;
 	box-shadow:         0px 2px 5px 0px rgba(50, 50, 50, 0.25);
 	position:absolute;
 	top:0;
@@ -275,13 +275,13 @@ aside.toolbar{
 	content: "";
 	display:block;
 	position:absolute;
-	width: 0; 
-	height: 0; 
-	right:-15px; 
+	width: 0;
+	height: 0;
+	right:-15px;
 	top:30px;
 	border-top: 15px solid transparent;
 	border-bottom: 15px solid transparent;
-	
+
 	border-left: 15px solid #F9F9F9;
 }
 #wrap aside.toolbar menu > ul > li > div header h5{
@@ -298,19 +298,19 @@ aside.toolbar{
 	font-size:12px;
 	text-transform: uppercase;
 	padding: 10px 0;
-	margin: 0; 
+	margin: 0;
 	border-bottom: solid 1px #CCC;
 }
-#wrap aside.toolbar menu > ul > li > div footer span{ 
-	display:inline-block; 
-	height:40px; 
+#wrap aside.toolbar menu > ul > li > div footer span{
+	display:inline-block;
+	height:40px;
 	line-height: 40px;
 	font-weight:bold;
 	font-size:14px;
 }
 #wrap aside.toolbar menu > ul > li > div footer a{
-	display:block; 
-	float:right; 
+	display:block;
+	float:right;
 	height:40px;
 	line-height:40px;
 	color:#FFF;
@@ -323,7 +323,7 @@ aside.toolbar{
 main h2 {
 	font-size: 30px;
 	padding-bottom:30px;
-	
+
 	letter-spacing: 2px;
 }
 main p {
@@ -354,7 +354,7 @@ main section.designer form fieldset .form-group {
 	margin-bottom:20px;
 }
 main section.designer form fieldset .form-group > label {
-	display:inline-block; 
+	display:inline-block;
 	width: 30%;
 	margin-right: 20px;
 }
@@ -377,7 +377,7 @@ main menu.center button{
 	text-transform: uppercase;
 	border:solid 1px #dedede;
 	background: transparent;
-	line-height: 60px; 
+	line-height: 60px;
 	text-align:center;
 	float:left;
 }
@@ -393,10 +393,10 @@ main menu.center.home{
 }
 main menu.home button {
 	line-height:110px;
-	width: 360px; 
+	width: 360px;
 	height:110px;
 	padding: 0;
-	
+
 }
 main menu.center.home button:nth-child(2){
 	float:right;
@@ -405,11 +405,11 @@ main menu.center.home button:nth-child(2){
 
 
 
- 
+
 
 /* SVG EDIT STYLES */
 main #workarea, main #svgcanvas , main #wf{
-      margin:0 auto; 
+      margin:0 auto;
       width: 100%;
   }
   main #wf {margin-right:250px;}
@@ -451,7 +451,7 @@ main #wf .preview {
 	color: #000;
 	text-decoration: none;
 	right: 0px;
-	
+
 }
 
 #svgroot{ left:-150px; top:-150px;}
@@ -468,7 +468,7 @@ main #wf .preview {
 	margin:0 auto;
 	padding: 30px 5%;
 	text-align: center;
-	
+
 }
 #footer footer > nav > ul {
 	display: inline-block;
@@ -507,7 +507,7 @@ main #wf .preview {
 	text-decoration: none;
 	color: #DEDEDE;
 }
- 
+
 #footer footer > nav > ul > li > a.active, #footer footer > nav > ul > li > a.active:hover{
 	color:#000;
 }
@@ -526,6 +526,12 @@ main #wf .preview {
 	background:#000;
 }
 
+/*
+Overlay stuff
+*/
+.lightboxOverlay{display:none; width:100%; height:100%; position:absolute; top:0; background: rgba(0,0,0,0.3);}
+.lightboxOverlay.open{display: block;}
+.lightboxOverlay > .container{width: 200px; padding:50px; border: solid 1px #333; background:#FFF; position:absolute; top:50%; right:50%; margin: -150px 0 0 -150px; }
 /* ==========================================================================
    Helper classes
    ========================================================================== */

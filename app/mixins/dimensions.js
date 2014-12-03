@@ -48,6 +48,6 @@ export default Ember.Mixin.create({
       this.set("cssDimensions", cssDimensionsObj);
     },
     testMixin: function(){
-        alert("This is the mixin");
+        //alert("This is the mixin");
     }
 });

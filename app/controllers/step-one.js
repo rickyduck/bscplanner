@@ -48,6 +48,9 @@ Ember.Controller.extend({
                     //update controller
                     editorModel.save().then(function(model) {
                         editorController.set("model", model);
+                        if(method === "rectangle"){
+                          editorController.send("nextStep");
+                        }
                     });
                 });
             });

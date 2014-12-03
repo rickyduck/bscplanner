@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
     needs: ['index', 'editor'],
-    
+
     width: Ember.computed.alias("controllers.index.width"),
     height: Ember.computed.alias("controllers.index.height"),
     method: Ember.computed.alias("controllers.index.method"),
@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
             alert("Choose product");
         },
         chooseMethod: function(method){
-            //select rectangle / shape. 
+            //select rectangle / shape.
             this.get("controllers.index").send("setMethod", method);
             //Move to dimensions page
             this.transitionToRoute('index.dimensions');
@@ -22,9 +22,10 @@ export default Ember.Controller.extend({
             //var svgEditor = this.get("controllers.editor.svgEditor");
             Ember.run.next(function(){
                 //that.transitionToRoute("index");
-                that.transitionToRoute('step-one.draw', {queryParams: {
-                    width: that.get("width"), 
-                    height: that.get("height"), 
+
+                that.transitionToRoute('step-one.'+that.get("method"), {queryParams: {
+                    width: that.get("width"),
+                    height: that.get("height"),
                     measurement: that.get("measurement"),
                     method: that.get("method")
                 }});//+that.get("method"));

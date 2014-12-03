@@ -15,6 +15,6 @@ DS.Model.extend({
     svg : DS.belongsTo('svg'),
     area : (function() {
         var multiplier = this.get("measurement") == "mm" ? 1000 : 100;
-        return (this.get("width") * this.get("width") / multiplier);
+        return (this.get("width") * this.get("width")) / multiplier;
     }).property("width", "height", "measurement"),
 });

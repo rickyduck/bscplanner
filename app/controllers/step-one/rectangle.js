@@ -1,16 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    queryParams: ['method','width','height','measurement'],
-    needs: ['editor'],
-    method: Ember.computed.alias("controllers.editor.method"),
-    width: Ember.computed.alias("controllers.editor.width"),
-    height: Ember.computed.alias("controllers.editor.height"),
-    measurement: Ember.computed.alias("controllers.editor.measurement"),
+    needs: ['editor', 'step-one'],
+
     editorController: Ember.computed.alias('controllers.editor'),
     init: function(){
         var editorController = this.get("editorController");
-        editorController.send('setSvgCanvasMeasurements');  
+        var stepOneController = this.get("controllers.step-one");
+        stepOneController.send("setupEditor");
     },
     actions: {
         setMode: function(mode){
