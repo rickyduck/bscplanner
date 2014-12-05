@@ -27,8 +27,17 @@ Ember.Controller.extend({
         wireframe = that.get("wireframe"), method = that.get("method") ? that.get("method") : index.get("method"), width = that.get("width") ? that.get("width") : index.get("width"), height = that.get("height") ? that.get("height") : index.get("height"), measurement = that.get("measurement") ? that.get("measurement") : index.get("measurement"), doRecordCreate, foundCreated = false, recordCreated = false;
         //delete temp basket to start again
         doRecordCreate = function() {
+          that.store.find("editor", {editing: true}).then(function(editingModels){
+            editingModels.forEach(function(editor){
+              if(editor.get("id")!=="tmp" && editor.get("editing")){
+                editor.set("editing", false);
+                editor.save();
+              }
+            });
+          })
             that.store.createRecord('editor', {
-                id : "tmp",
+                id : moment().format("x"),
+                name: moment().format("H:mma, Do MMM YYYY"),
                 basket : null,
                 width : width,
                 height : height,
@@ -63,12 +72,7 @@ Ember.Controller.extend({
         if (!editorModel) {
           //For some reason the record isn't loaded. so we can't do .find(), we do .findAll then loop through the results.
           that.store.findAll('basket').then(function(baskets){
-            baskets.content.forEach(function(basket){
-            //  if(basket.get("editor.id") == "tmp"){
-                basket.deleteRecord();
-                basket.save();
-              //}
-            });
+
 
             that.store.findAll('editor').then(function(editors) {
                 editors.content.forEach(function(editor){

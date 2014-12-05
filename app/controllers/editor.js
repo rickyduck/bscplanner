@@ -5,7 +5,7 @@ Ember.ObjectController.extend({
     needs : ['index', 'step-one', 'baskets'],
     //config for the editor
     modelError: null,
-    editorName: "Test!",
+    editorName: moment().format("H:mma, Do MMM YYYY"),
     svgPlanString: null,
     svgElementSelector: null,
     svgElement: null,
@@ -46,6 +46,7 @@ Ember.ObjectController.extend({
         saveSvgEditor: function(){
             this.saveSvgEditor();
         },
+
         checkModel: function(){
 
             this.checkModel();
@@ -83,6 +84,11 @@ Ember.ObjectController.extend({
         },
         loadSvgPlanString: function(){
             this.loadSvgPlanString();
+        },
+
+        //model control
+        saveEditor: function(){
+          this.saveEditor();
         }
     },
 
@@ -166,7 +172,10 @@ Ember.ObjectController.extend({
         max, rectWidth,rectHeight, rectPercentage, rectXBuffer, rectYBuffer ;
         if(!model){
             //fallback
+            that.store.find("editor", {editing: true}).get("basket");
             that.store.find("editor", {editing: true}).then(function(editor){
+                editor.get("basket").get("basketItems");
+
                 if(editor.content.length){
                     that.set("content", editor.content[0]);
                     that.saveSvgEditorBind();
@@ -199,7 +208,10 @@ Ember.ObjectController.extend({
             //Already initialized, replace targetElement
             $(svgElementSelector).replaceWith(svgElement);
         }
+        // We should only do below if existing SVG is not found
+
         if(model.get("step") === 2){
+
             if(model.get("method") === "rectangle"){
               //here we have to translate the pixel dimensions into the physical dimensions. How can  we do this?
               // First of all, get the width and height of the canvas area.
@@ -234,6 +246,7 @@ Ember.ObjectController.extend({
               };
               that.set("config.physicalDimensions", containerPhysicalDimensions);
               //As this is the
+              svgEditor.canvas.createLayer("rectLayer");
               svgEditor.canvas.addSvgElementFromJson({
                 "element": "rect",
                 "curStyles": true,
@@ -246,9 +259,15 @@ Ember.ObjectController.extend({
                   "opacity": 1
                 }
               });
+              svgEditor.canvas.createLayer("editableLayer");
             }else if(model.get("method") === "draw"){
                 svgEditor.canvas.setSvgString(svgedit.utilities.decode64(svgPlanString));
             }
+            model.get("basket").then(function(basket){
+              basket.get("basketItems").forEach(function(basketItem){
+                that.loadProductSVGFromURL(basketItem.get("product"));
+              });
+            });
         }
     }.observes("svgElementSelector"),
 
@@ -277,8 +296,8 @@ Ember.ObjectController.extend({
                 var cssHeight = cssDimensions[1] * heightPercentage;
                 $svg.attr("width", cssWidth);
                 $svg.attr("height", cssHeight);
-                svgEditor.canvas.importSvgString($('<div>').append($svg.clone()).html());
-
+                var elem = svgEditor.canvas.importSvgString($('<div>').append($svg.clone()).html());
+                console.log(elem);
             },
             error : function(xhr, stat, err) {
                 if (xhr.status != 404 && xhr.responseText) {
@@ -290,33 +309,35 @@ Ember.ObjectController.extend({
         });
     },
     addBasketProduct : function(product){
-        var that = this, editorModel = that.get("model"), existingItem = false;
+        var that = this, editorModel = that.get("model"), existingItem = false, basketItems;
         // check whether product already exists within items. This could probably be done better than a forEach.
         editorModel.get("basket").then(function(basketModel){
-            basketModel.get("basketItems").then(function(basketItems){
-                if(basketItems.length){
-                    basketItems.forEach(function(basketItem){
-                        if(basketItem.get("product.id") === product.get("id")){
-                            basketItem.set("quantiy", basketItem.get("quantity")+1);
-                            basketItem.save();
-                            existingItem = true;
-                        }
+            basketItems = basketModel.get("basketItems");
+            if(basketItems.length){
+                basketItems.forEach(function(basketItem){
+                    if(basketItem.get("product.id") === product.get("id")){
+                        basketItem.set("quantiy", basketItem.get("quantity")+1);
+                        basketItem.save();
+                        existingItem = true;
+                    }
 
-                    });
-                }
-                //If we need to create a model, do it below.
-                if(!existingItem){
-                    that.store.createRecord("basket-item",{
-                        product: product,
-                        quantity: 1
-                    }).save().then(function(basketItemModel){
-                        basketItems.addObject(basketItemModel);
-                        that.loadProductSVGFromURL(product);
-                    });
-                    //add to the collection
+                });
+            }
+            //If we need to create a model, do it below.
+            if(!existingItem){
+                that.store.createRecord("basket-item",{
+                    product: product,
+                    basket: basketModel,
+                    quantity: 1
+                }).save().then(function(basketItemModel){
+                    basketItems.addObject(basketItemModel);
+                    basketModel.save();
+                    that.loadProductSVGFromURL(product);
+                });
+                //add to the collection
 
-                }
-            });
+            }
+            basketModel.save();
         });
     },
     //the product SVG is passed from add Product or ...
@@ -336,6 +357,24 @@ Ember.ObjectController.extend({
         }else{
             svgEditor.canvas.setSvgString(svgedit.utilities.decode64(svgPlanString));
         }
+    },
+    saveEditor: function() {
+      var that = this, model = that.get("model"),
+      svgEditor = that.get("svgEditor"), svgString = svgEditor.canvas.getSvgString() ;
+
+      model.set("svgString", svgedit.utilities.encode64(svgString));
+      model.save();
+      if(model.get("id") === "tmp"){
+
+        model.set("id", moment().format("x"));
+        //model.set("basket.editor", model);
+        model.save();
+        that.store.find("editor").then(function(editors){
+          editors.forEach(function(editor){
+            console.log(editor.get("id"));
+          })
+        })
+      }
     },
     init : function() {
         //alert("Editor initialized");

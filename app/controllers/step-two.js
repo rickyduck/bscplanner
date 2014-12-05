@@ -2,11 +2,17 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
     needs: ['editor'],
+    editorModel: Ember.computed.alias("controllers.editor.model"),
+    editorController: Ember.computed.alias("controllers.editor"),
     selectedCategory: null,
-    editorName: "Test!",
+    editorName: moment().format("H:mma, Do MMM YYYY"),
     actions: {
         setupEditor: function(){
             this.setupEditor();
+        },
+        saveEditor: function(){
+          var editorModel = this.get("editorModel");
+          console.log(editorModel.get("name"));
         }
     },
     setupEditor: function(){

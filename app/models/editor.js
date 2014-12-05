@@ -2,6 +2,7 @@ import DS from 'ember-data';
 
 export default
 DS.Model.extend({
+    name: DS.attr("string"),
     basket: DS.belongsTo("basket", {async:true, embedded: "always"}),
     width : DS.attr("number"),
     height : DS.attr("number"),

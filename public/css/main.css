@@ -531,7 +531,7 @@ Overlay stuff
 */
 .lightboxOverlay{display:none; width:100%; height:100%; position:absolute; top:0; background: rgba(0,0,0,0.3);}
 .lightboxOverlay.open{display: block;}
-.lightboxOverlay > .container{width: 200px; padding:50px; border: solid 1px #333; background:#FFF; position:absolute; top:50%; right:50%; margin: -150px 0 0 -150px; }
+.lightboxOverlay > .container{width: 400px; padding:50px; border: solid 1px #dedede; background:#FFF; position:absolute; top:50%; left:50%; margin: -150px 0 0 -200px; text-transform: uppercase; text-align:center;}
 /* ==========================================================================
    Helper classes
    ========================================================================== */

@@ -39,7 +39,7 @@
 				</ul>
 				<ul class="right">
 					<li>
-						<a href="#" {{action "saveEditor" view}}>Save</a>
+						<a href="#" {{action "showSaveOverlay" target=view}}>Save</a>
 					</li>
 					<li>
 						<a href="#">Open</a>
@@ -53,9 +53,12 @@
 		</div>
 	</div>
 
-<div class="lightboxOverlay">
+<div class="lightboxOverlay saveOverlay">
 	<div class="container">
-		{{input type="text" value=editorName}}
+		Please enter the name for your search:
+		{{input type="text" value=editorModel.name}}
+		<button {{action "saveEditor" target="view"}}>Save</button>
+		<button {{action "cancelSave" target="view"}}>Cancel</button>
 
 	<div>
 </div>
