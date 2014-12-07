@@ -151,6 +151,15 @@ module.exports = function(app) {
                 });
             }
         });
+        app.on("products_loaded", function(topProds) {
+          console.log('emit');
+          if (!emmitted) {
+            emmitted = 1;
+            res.send({
+              "products" : topProds
+            });
+          }
+        });
         console.log("getting login");
         magento.login(function(err, sessId) {
             if (err) {
@@ -163,6 +172,7 @@ module.exports = function(app) {
 
             console.log("gextting product");
             magento.catalogProduct.list(function(err, products) {
+              console.log("FOUND");
                 if (err) {
                     // deal with error
                     console.log("error");
@@ -170,12 +180,12 @@ module.exports = function(app) {
                     res.send({"error":err});
                     return false;
                 }
-                console.log("products");
-                console.log(products);
+
                 if ( typeof product == undefined) {
-                    return false;
+                    return true;
                 }
                 if ( typeof products == 'undefined') {
+                  console.log("Products undefined");
                     return false;
                 }
                 if ( typeof products.product_id !== "undefined") {
@@ -183,44 +193,85 @@ module.exports = function(app) {
                     arr.push(products);
                     products = arr;
                 }
-                res.send(products);
-                return false;
+                //res.send(products);
+              //  return false;
                 var productsLength = products.length;
-                products.forEach(function(product) {
-                    if ( typeof product !== "undefined" && typeof product.product_id !== "undefined" && product.set === "9") {
+                var prodLoop = 0;
+                //get the amount of products in set 9. This is stupid and should be done server side.
+
+                products.forEach(function(product){
+
+                    if ( typeof product !== "undefined" && typeof product.product_id !== "undefined") {
                         magento.catalogProduct.info({
                             id : product.product_id
                         }, function(err, response) {
                             if (err) {
-                                console.log(err);
+                              console.log("Can't connect");
+                                //console.log(err);
                             }
+                            console.log("Response:"+response.sku);
                             product = response;
-                            product.id = product.product_id;
-                            product.categories = product.category_ids;
-                            delete product.category_ids;
-                            delete product.product_id;
-                            product.dimensions = {
-                                width : product.dimensions_width || 42,
-                                height : product.dimensions_height || 35,
-                                depth : product.dimensions_depth,
-                            };
-                            product.svg = {
-                                plan : "svg/alt_F350SL-plan.svg",
-                                front : "svg/alt_F350SL-frontele.svg"
-                            };
-                            // magento.catalogProductAttributeMedia.list({
-                                // product : product.id
-                            // }, function(err, response) {
-                                // product.media = response;
-                                // products[i] = product;
-                                // console.log(i);
-                                // topProds.push(product);
-                                // i++;
-                                // if (i === productsLength) {
-                                    // app.emit("product_info_loaded", topProds);
-//
-                                // }
-                            // });
+                            if(product.kitchen_planner === "1"){
+
+
+                              product.id = product.product_id;
+                              product.categories = product.category_ids;
+
+                              product.left_right = product.kitchen_planner_lr === "1"?true:false,
+                              product.front = product.kitchen_planner_front === "1"?true:false,
+                              product.side = product.kitchen_planner_side === "1"?true:false,
+                              product.center = product.kitchen_planner_center === "1"?true:false,
+                              delete product.kitchen_planner_lr;
+                              delete product.category_ids;
+                              delete product.product_id;
+                              product.dimensions = {
+                                  width : product.dimensions_width || 42,
+                                  height : product.dimensions_height || 35,
+                                  depth : product.dimensions_depth,
+                              };
+                              var svgSku = product.sku.replace(/BS-/g, '');
+                              svgSku = svgSku.replace(/\//g, '-');
+                                product.svg = {
+                                  plan : {
+                                    center: "svg/"+svgSku+"/"+svgSku+"-plan.svg",
+                                    left: "svg/"+svgSku+"/"+svgSku+"-planL.svg",
+                                    right: "svg/"+svgSku+"/"+svgSku+"-planR.svg"
+                                  },
+                                  front : {
+                                    center: "svg/"+svgSku+"/"+svgSku+"-frontele.svg",
+                                    left: "svg/"+svgSku+"/"+svgSku+"-fronteleL.svg",
+                                    right: "svg/"+svgSku+"/"+svgSku+"-fronteleR.svg"
+                                  },
+                                  side: {
+                                    center: "svg/"+svgSku+"/"+svgSku+"-side.ele.svg",
+                                    left: "svg/"+svgSku+"/"+svgSku+"-side.eleL.svg",
+                                    right: "svg/"+svgSku+"/"+svgSku+"-side.eleR.svg"
+                                  }
+                                };
+
+
+                              console.log(product.svg);
+                              // magento.catalogProductAttributeMedia.list({
+                                  // product : product.id
+                              // }, function(err, response) {
+                                  // product.media = response;
+                                  // products[i] = product;
+                                  // console.log(i);
+                                  // topProds.push(product);
+                                  // i++;
+                                  // if (i === productsLength) {
+                                      //
+  //
+                                  // }
+                              // });
+                              console.log("Loop: "+prodLoop+"  -  Length: "+productsLength);
+                              topProds.push(product);
+                            }
+                            prodLoop++;
+                            if(prodLoop === productsLength){
+                              console.log("products Loaded");
+                              app.emit("products_loaded", topProds);
+                            }
 
                         });
                     } else {

@@ -2,7 +2,9 @@
 		<ul class="top">
 			{{#each category in model}}
 			{{#if category.is_active}}
+			{{#if category.products}}
 			<li>{{render "step-two.sidebar.category" category}}</li>
+			{{/if}}
 			{{/if}}
 			{{/each}}
 		</ul>

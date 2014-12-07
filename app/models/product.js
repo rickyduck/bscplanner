@@ -11,6 +11,32 @@ var Product =  DS.Model.extend({
   short_description: DS.attr("string"),
   url_key: DS.attr("string"),
   meta_title: DS.attr("string"),
+  front: DS.attr(),
+  side: DS.attr(),
+  left_right: DS.attr(),
+  center: DS.attr(),
+  sidebar_image: function(){
+    var that = this;
+    var sidebar_image = "svg/not_available.svg";
+    var svg = that.get("svg");
+    if(that.get("front")){
+      if(that.get("center")){
+        sidebar_image = svg.front.center;
+      }
+      if(that.get("left_right")){
+        sidebar_image = svg.front.left;
+      }
+    }
+    if(that.get("side")){
+      if(that.get("center")){
+        sidebar_image = svg.side.center;
+      }
+      if(that.get("left_right")){
+        sidebar_image = svg.side.left;
+      }
+    }
+    return sidebar_image;
+  }.property("center","front","left_right","svg"),
   svg: DS.attr(),
   categories: DS.hasMany("category", {async:false, embedded:'always'})
 });
@@ -38,7 +64,7 @@ Product.reopenClass({
       short_description: "A test short",
       url_key: "url",
       meta_title: "Test product",
-      
+
       categories: ["1"]
     },
     {
@@ -61,7 +87,7 @@ Product.reopenClass({
       short_description: "A test short 2",
       url_key: "url",
       meta_title: "Test product",
-      
+
       categories: ["1", "2", "3", "4"]
     },
     {
@@ -84,7 +110,7 @@ Product.reopenClass({
       short_description: "A test short 3",
       url_key: "url",
       meta_title: "Test product",
-      
+
       categories: ["3"]
     },
     {
@@ -107,7 +133,7 @@ Product.reopenClass({
       short_description: "A test short 4",
       url_key: "url",
       meta_title: "Test product",
-      
+
       categories: ["1", "4"]
     }
   ]

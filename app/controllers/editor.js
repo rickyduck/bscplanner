@@ -211,40 +211,41 @@ Ember.ObjectController.extend({
         // We should only do below if existing SVG is not found
 
         if(model.get("step") === 2){
+            console.log(config.dimensions);
+            console.log({width:model.get("width"), height: model.get("height")});
+            //var tidyuo
+            var widthAspect = config.dimensions[0] / model.get("width");
+            var heightAspect = config.dimensions[1] / model.get("height");
+            //not too sure if this is right. If
+            // if width of the css is
+            //apply buffers for visual
+            rectXBuffer = config.dimensions[0]*0.2;
+            rectYBuffer = config.dimensions[1]*0.2;
+            if(widthAspect < heightAspect){
+              rectWidth = config.dimensions[0] - rectXBuffer;
+              rectPercentage = model.get("width") / model.get("height");
+              //Allow a gap so we can place the rectangle in the middle of the planner
 
+              rectHeight =  (rectWidth * rectPercentage);
+
+            }else{
+              rectHeight = config.dimensions[1] - rectYBuffer;
+              //get the percentage difference of the measurement height / width
+              rectPercentage = model.get("height") / model.get("width");
+
+              rectWidth = (rectHeight * rectPercentage);
+
+            }
+            var containerPhysicalDimensions = {
+              width: (config.dimensions[0] / rectWidth) * model.get("width"),
+              height: (config.dimensions[1] / rectHeight) * model.get("height")
+            };
+            that.set("config.physicalDimensions", containerPhysicalDimensions);
+            //if rectangle then add a rectangle otherwise
             if(model.get("method") === "rectangle"){
               //here we have to translate the pixel dimensions into the physical dimensions. How can  we do this?
               // First of all, get the width and height of the canvas area.
-              console.log(config.dimensions);
-              console.log({width:model.get("width"), height: model.get("height")});
-              //var tidyuo
-              var widthAspect = config.dimensions[0] / model.get("width");
-              var heightAspect = config.dimensions[1] / model.get("height");
-              //not too sure if this is right. If
-              // if width of the css is
-              //apply buffers for visual
-              rectXBuffer = config.dimensions[0]*0.2;
-              rectYBuffer = config.dimensions[1]*0.2;
-              if(widthAspect < heightAspect){
-                rectWidth = config.dimensions[0] - rectXBuffer;
-                rectPercentage = model.get("width") / model.get("height");
-                //Allow a gap so we can place the rectangle in the middle of the planner
 
-                rectHeight =  (rectWidth * rectPercentage);
-
-              }else{
-                rectHeight = config.dimensions[1] - rectYBuffer;
-                //get the percentage difference of the measurement height / width
-                rectPercentage = model.get("height") / model.get("width");
-
-                rectWidth = (rectHeight * rectPercentage);
-
-              }
-              var containerPhysicalDimensions = {
-                width: (config.dimensions[0] / rectWidth) * model.get("width"),
-                height: (config.dimensions[1] / rectHeight) * model.get("height")
-              };
-              that.set("config.physicalDimensions", containerPhysicalDimensions);
               //As this is the
               svgEditor.canvas.createLayer("rectLayer");
               svgEditor.canvas.addSvgElementFromJson({
@@ -261,7 +262,9 @@ Ember.ObjectController.extend({
               });
               svgEditor.canvas.createLayer("editableLayer");
             }else if(model.get("method") === "draw"){
+              svgEditor.canvas.createLayer("rectLayer");
                 svgEditor.canvas.setSvgString(svgedit.utilities.decode64(svgPlanString));
+                svgEditor.canvas.createLayer("editableLayer");
             }
             model.get("basket").then(function(basket){
               basket.get("basketItems").forEach(function(basketItem){
@@ -274,8 +277,15 @@ Ember.ObjectController.extend({
     loadProductSVGFromURL : function(product) {
         var that = this, model = that.get("model");
         var svgEditor = that.get("svgEditor");
+        var url = "not_available.svg";
+        if(product.get("center")){
+          url = product.get("svg.plan.center")
+        }else if(product.get("side")){
+          url = product.get("svg.plan.left");
+        }
+        //var url = product.get("center")?product.get("svg.plan.center"):(product.get("left_right")?product.get("svg.plan.left"):"");
         $.ajax({
-            'url' : product.get("svg.plan"),
+            'url' : url,
             'dataType' : 'text',
             cache : false,
             success : function(str) {
@@ -291,9 +301,10 @@ Ember.ObjectController.extend({
                   measurementMultiplier = 10;
                 }
                 var widthPercentage = (productDimensions.width/measurementMultiplier) / physicalDimensions.width;
-                var heightPercentage = (productDimensions.height/measurementMultiplier) / physicalDimensions.height;
+                var heightPercentage = (productDimensions.depth/measurementMultiplier) / physicalDimensions.height;
                 var cssWidth = cssDimensions[0] * widthPercentage;
-                var cssHeight = cssDimensions[1] * heightPercentage;
+                var ratio = $svg.attr("width")/cssWidth;
+                var cssHeight = $svg.attr("height")*ratio;
                 $svg.attr("width", cssWidth);
                 $svg.attr("height", cssHeight);
                 var elem = svgEditor.canvas.importSvgString($('<div>').append($svg.clone()).html());

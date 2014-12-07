@@ -202,6 +202,7 @@ aside.left menu  > ul > li > ul > li {
 aside.left menu  > ul > li > ul > li > img {
 	display: inline-block;
 	margin: 0 ;
+  max-height:250px;
 	width:100%;
 }
 aside.left menu  > ul > li > ul > li > span {

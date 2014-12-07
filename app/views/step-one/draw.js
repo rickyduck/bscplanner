@@ -27,7 +27,7 @@ Ember.View.extend(DimensionsMixin, {
         that.applyCssDimensions(cssDimensions);
         that.applyPhysicalDimensions(physicalDimensions);
         that.translateDimensions();
-        that.get("editorController").send("applyMultiplier", that.multiplier);
+    //    that.get("editorController").send("applyMultiplier", that.multiplier);
     },
 
     actions : {

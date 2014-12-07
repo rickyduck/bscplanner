@@ -1,7 +1,7 @@
 {{#if model}}
 {{#each product in model}}
 <li {{action "selectProduct" product}}>
-	<img {{bind-attr src=product.svg.front}}/>
+	<img {{bind-attr src=product.sidebar_image}}/>
     <span>{{product.sku}}</span>
 </li>
 {{/each}}
