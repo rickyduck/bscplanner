@@ -10,6 +10,7 @@ DS.Model.extend({
     measurement : DS.attr("string"),
     method : DS.attr("string"),
     wireframe : DS.attr("boolean"),
+    imageString: DS.attr("string"),
     svgString : DS.attr("string"),
     svgPlanString : DS.attr("string"),
     editing: DS.attr("boolean"),
@@ -17,5 +18,5 @@ DS.Model.extend({
     area : (function() {
         var multiplier = this.get("measurement") == "mm" ? 1000 : 100;
         return (this.get("width") * this.get("width")) / multiplier;
-    }).property("width", "height", "measurement"),
+    }).property("width", "height", "measurement")
 });

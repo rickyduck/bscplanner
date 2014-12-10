@@ -9,6 +9,7 @@ Ember.ObjectController.extend({
     svgPlanString: null,
     svgElementSelector: null,
     svgElement: null,
+    savingState: "unsaved",
     zoomLevel: 1,
     config : {
         controller: null,
@@ -271,6 +272,9 @@ Ember.ObjectController.extend({
                 that.loadProductSVGFromURL(basketItem.get("product"));
               });
             });
+            $.getScript('editor/canvg/rgbcolor.js', function() {
+              $.getScript('editor/canvg/canvg.js');
+            });
         }
     }.observes("svgElementSelector"),
 
@@ -300,13 +304,9 @@ Ember.ObjectController.extend({
                   //this should be upgraded to a  more efficient measurement matrix.
                   measurementMultiplier = 10;
                 }
-                var widthPercentage = (productDimensions.width/measurementMultiplier) / physicalDimensions.width;
-                var heightPercentage = (productDimensions.depth/measurementMultiplier) / physicalDimensions.height;
-                var cssWidth = cssDimensions[0] * widthPercentage;
-                var ratio = $svg.attr("width")/cssWidth;
-                var cssHeight = $svg.attr("height")*ratio;
-                $svg.attr("width", cssWidth);
-                $svg.attr("height", cssHeight);
+
+                $svg.attr("width", productDimensions.width/10);
+                $svg.attr("height", productDimensions.depth/10);
                 var elem = svgEditor.canvas.importSvgString($('<div>').append($svg.clone()).html());
                 console.log(elem);
             },
@@ -328,7 +328,7 @@ Ember.ObjectController.extend({
                 basketItems.forEach(function(basketItem){
                     if(basketItem.get("product.id") === product.get("id")){
                         basketItem.set("quantiy", basketItem.get("quantity")+1);
-                        basketItem.save();
+                      //  basketItem.save();
                         existingItem = true;
                     }
 
@@ -336,19 +336,20 @@ Ember.ObjectController.extend({
             }
             //If we need to create a model, do it below.
             if(!existingItem){
-                that.store.createRecord("basket-item",{
+                var basketItemModel = that.store.createRecord("basket-item",{
                     product: product,
                     basket: basketModel,
                     quantity: 1
-                }).save().then(function(basketItemModel){
-                    basketItems.addObject(basketItemModel);
-                    basketModel.save();
-                    that.loadProductSVGFromURL(product);
                 });
+
+                    basketItems.addObject(basketItemModel);
+                  //  basketModel.save();
+                    that.loadProductSVGFromURL(product);
+
                 //add to the collection
 
             }
-            basketModel.save();
+          //  basketModel.save();
         });
     },
     //the product SVG is passed from add Product or ...
@@ -370,22 +371,42 @@ Ember.ObjectController.extend({
         }
     },
     saveEditor: function() {
+      this.set("savingState", "saving");
       var that = this, model = that.get("model"),
       svgEditor = that.get("svgEditor"), svgString = svgEditor.canvas.getSvgString() ;
 
       model.set("svgString", svgedit.utilities.encode64(svgString));
+      if (!$('#export_canvas').length) {
+        $('<canvas>', {id: 'export_canvas'}).hide().appendTo('body');
+      }
+      var c = $('#export_canvas')[0];
+
+      c.width = svgCanvas.contentW;
+      c.height = svgCanvas.contentH;
+      canvg(c, svgString, {renderCallback: function() {
+        var datauri =  c.toDataURL('image/png');
+
+        model.set("imageString",datauri);
+        model.save();
+
+      }});
+
+      //model.set("imageString", svgEditor.canvas.svgCanvasToString());
       model.save();
       if(model.get("id") === "tmp"){
 
         model.set("id", moment().format("x"));
         //model.set("basket.editor", model);
-        model.save();
-        that.store.find("editor").then(function(editors){
-          editors.forEach(function(editor){
-            console.log(editor.get("id"));
-          })
-        })
+
       }
+      model.save().then(function(savedModel){
+        that.set("savingState", "saved");
+      });
+      that.store.find("editor").then(function(editors){
+        editors.forEach(function(editor){
+          console.log(editor.get("id"));
+        });
+      });
     },
     init : function() {
         //alert("Editor initialized");

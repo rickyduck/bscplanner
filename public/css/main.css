@@ -392,6 +392,16 @@ main menu.center button p {
 main menu.center.home{
 	margin: 40px 0 0 100px;
 }
+main menu.editors ul{
+  display:block;
+  list-style:none;
+  padding:0; margin:0;
+
+}
+main menu.editors ul > li {display:inline-block; width:210px; margin: 10px; padding:10px; border: solid 1px #000; height:160px;}
+main menu.editors ul > li figure img {width:100%; height: 75%;}
+main menu.editors ul > li figure figcaption {width:100%; height: 25%;}
+
 main menu.home button {
 	line-height:110px;
 	width: 360px;
@@ -530,7 +540,9 @@ main #wf .preview {
 /*
 Overlay stuff
 */
+.saveSuccessful{display:none;}
 .lightboxOverlay{display:none; width:100%; height:100%; position:absolute; top:0; background: rgba(0,0,0,0.3);}
+
 .lightboxOverlay.open{display: block;}
 .lightboxOverlay > .container{width: 400px; padding:50px; border: solid 1px #dedede; background:#FFF; position:absolute; top:50%; left:50%; margin: -150px 0 0 -200px; text-transform: uppercase; text-align:center;}
 /* ==========================================================================

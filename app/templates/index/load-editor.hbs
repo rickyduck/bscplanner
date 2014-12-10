@@ -1,0 +1,43 @@
+<div id="wrap">
+  <aside class="toolbar">
+    <button class="display"></button>
+  </aside>
+  <header>
+    <h1><a href="#">British Standard Cupboards by Plain English</a></h1>
+  </header>
+  <main>
+
+    <section class="wrapper">
+      <h2>Load a previous design</h2>
+      <menu class="editors">
+        <ul>
+          {{#each}}
+            <li>
+              <figure class="load-editor">
+                <img {{bind-attr src="imageString"}} />
+                <figcaption>{{name}}</figcaption>
+              </figure>
+            </li>
+          {{/each}}
+        </ul>
+      </menu>
+    </section>
+  </main>
+</div>
+<div id="footer">
+  <footer>
+    <nav>
+      <ul>
+        <li><a class="active" href="#">Dimensions <br> <span class="circle">1</span></a></li>
+        <li><a href="#">Design <br> <span class="circle">2</span></a></li>
+        <li><a href="#">Save <br> <span class="circle">3</span></a></li>
+        <li><a href="#">Order <br> <span class="circle">4</span></a></li>
+      </ul>
+      <ul class="right">
+        <li>{{#link-to 'index.shape'}}New{{/link-to}}</li>
+        <li><a href="#">Open</a></li>
+        <li><a href="#">Exit</a></li>
+      </ul>
+    </nav>
+  </footer>
+</div>

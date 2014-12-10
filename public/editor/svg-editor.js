@@ -111,7 +111,7 @@ TO-DOS
 				// initStroke: {
 					// opacity: 0
 				// },
-// 				
+//
 				// initOpacity: 1,
 				// colorPickerCSS: null,
 				// initTool: 'select',
@@ -205,7 +205,7 @@ TO-DOS
 		/**
 		* EXPORTS
 		*/
-		
+
 		/**
 		* Store and retrieve preferences
 		* @param {string} key The preference name to be retrieved or set
@@ -226,7 +226,7 @@ TO-DOS
 			}
 			return (key in curPrefs) ? curPrefs[key] : defaultPrefs[key];
 		};
-		
+
 		/**
 		* EDITOR PUBLIC METHODS
 		* locale.js also adds "putLang" and "readLang" as editor methods
@@ -261,7 +261,7 @@ TO-DOS
 					editor.loadFromString(cached);
 				}
 			}
-			
+
 			// LOAD PREFS
 			var key;
 			for (key in defaultPrefs) {
@@ -439,7 +439,7 @@ TO-DOS
 			}
 			function setupCurConfig () {
 				curConfig = $.extend(true, {}, defaultConfig, curConfig); // Now safe to merge with priority for curConfig in the event any are already set
-				
+
 				// Now deal with extensions and other array config
 				if (!curConfig.noDefaultExtensions) {
 					curConfig.extensions = curConfig.extensions.concat(defaultExtensions);
@@ -465,7 +465,7 @@ TO-DOS
 					if (urldata.bkgd_color) {
 						urldata.bkgd_color = '#' + urldata.bkgd_color;
 					}
-			
+
 					if (urldata.extensions) {
 						// For security reasons, disallow cross-domain or cross-folder extensions via URL
 						urldata.extensions = urldata.extensions.match(/[:\/\\]/) ? '' : urldata.extensions.split(',');
@@ -488,7 +488,7 @@ TO-DOS
 					);
 
 					editor.setConfig(urldata, {overwrite: false}); // Note: source, url, and paramurl (as with storagePrompt later) are not set on config but are used below
-					
+
 					setupCurConfig();
 
 					if (!curConfig.preventURLContentLoading) {
@@ -545,7 +545,7 @@ TO-DOS
 					catch(e) {}
 				}
 			}());
-			
+
 			var setIcon = editor.setIcon = function(elem, icon_id, forcedSize) {
 				var icon = (typeof icon_id === 'string') ? $.getSvgIcon(icon_id, true) : icon_id.clone();
 				if (!icon) {
@@ -749,7 +749,7 @@ TO-DOS
 					if (tleft.length !== 0) {
 						min_height = tleft.offset().top + tleft.outerHeight();
 					}
-					
+
 					var size = $.pref('iconsize');
 					editor.setIconSize(size || ($(window).height() < min_height ? 's': 'm'));
 
@@ -804,7 +804,7 @@ TO-DOS
 				ui_context = 'toolbars',
 				origSource = '',
 				paintBox = {fill: null, stroke:null};
-			
+
 			// This sets up alternative dialog boxes. They mostly work the same way as
 			// their UI counterparts, expect instead of returning the result, a callback
 			// needs to be included that returns the result as its first parameter.
@@ -1235,7 +1235,7 @@ TO-DOS
 
 					// Remove any existing canvasses
 					$hcanv.siblings().remove();
-					
+
 					// Create multiple canvases when necessary (due to browser limits)
 					if (ruler_len >= limit) {
 						ctx_arr_num = parseInt(ruler_len / limit, 10) + 1;
@@ -2450,7 +2450,7 @@ TO-DOS
 				var cb_called = false;
 				var resize_done = false;
 				var cb_ready = true; // Set to false to delay callback (e.g. wait for $.svgIcons)
-				
+
 				if (ext.langReady) {
 					if (editor.langChanged) { // We check for this since the "lang" pref could have been set by storage
 						var lang = $.pref('lang');
@@ -2896,7 +2896,7 @@ TO-DOS
 				svgCanvas.setRotationAngle(ctl.value);
 				$('#tool_reorient').toggleClass('disabled', parseInt(ctl.value, 10) === 0);
 			};
-			
+
 			var changeOpacity = function(ctl, val) {
 				if (val == null) {val = ctl.value;}
 				$('#group_opacity').val(val);

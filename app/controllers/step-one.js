@@ -80,6 +80,16 @@ Ember.Controller.extend({
                     if(editor.id === "tmp"){
                         foundCreated = true;
                         //Why does it come through as empty sometimes?
+                        editor.get("basket").then(function(basketModel){
+                          basketModel.get("basketItems").then(function(basketItems){
+                            basketItems.forEach(function(basketItem){
+                              basketItem.deleteRecord();
+                              basketModel.save();
+                            })
+                          });
+                          basketModel.deleteRecord();
+                          basketModel.save();
+                        });
                         editor.deleteRecord();
                         editor.save().then(function() {
                             doRecordCreate();
