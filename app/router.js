@@ -43,6 +43,8 @@ Router.map(function() {
   this.route('step-two/sidebar/category');
   this.resource('BasketItem', { path: 'BasketItems/:BasketItem_id' }, function() { });
   this.route('index/load-editor');
+  this.route('step-one/loading');
+  this.route('loading');
 });
 
 export default Router;

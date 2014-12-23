@@ -10,6 +10,7 @@
     <section class="wrapper">
       <h2>Load a previous design</h2>
       <menu class="editors">
+        {{#if model}}
         <ul>
           {{#each}}
             <li>
@@ -17,9 +18,15 @@
                 <img {{bind-attr src="imageString"}} />
                 <figcaption>{{name}}</figcaption>
               </figure>
+              <menu>
+                <a {{action "loadEditor" this}} href="#">Load</a>
+                <a {{action "deleteEditor" this}} href="#">Delete</a>
             </li>
           {{/each}}
         </ul>
+        {{else}}
+        <div>You don't have any saved floor plans. {{#link-to "index.shape"}}Click here to create one{{/link-to}}</div>
+        {{/if}}
       </menu>
     </section>
   </main>
@@ -35,7 +42,6 @@
       </ul>
       <ul class="right">
         <li>{{#link-to 'index.shape'}}New{{/link-to}}</li>
-        <li><a href="#">Open</a></li>
         <li><a href="#">Exit</a></li>
       </ul>
     </nav>

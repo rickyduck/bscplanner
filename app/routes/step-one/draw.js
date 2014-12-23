@@ -3,6 +3,12 @@ import Ember from 'ember';
 export default
 Ember.Route.extend({
     needs : ['editor', 'step-one'],
+    actions : {
+      loading: function(){
+        alert("TEST");
+        $("body").append("<div>Loading</div>");
+      }
+    },
     setupController: function(controller, model) {
         var that = this;
         var stepOneController = that.controllerFor('step-one');

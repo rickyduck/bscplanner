@@ -2,21 +2,22 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
     needs: ["editor", "baskets"],
-	model: function(){ 
+
+	model: function(){
 		var store = this.store;
 		return Ember.RSVP.hash({
 			products: store.find('product'),
 			categories: store.find('category'),
             svgs: store.find('svg'),
             baskets: store.find('basket'),
-            editors: store.find('editor'),      
+            editors: store.find('editor'),
 		});
 	},
-	
+
   	setupController: function(controller, model) {
      	this._super(controller, model);
         var svg = model.svg, that = this;
-        
+
       //model.editor = editor;
      	model.categories.forEach(function(category){
   			var products = category.get("products");
@@ -25,14 +26,14 @@ export default Ember.Route.extend({
   			}
   		});
       //this.controllerFor('svgs').set('model', model.svgs);
-       
+
         this.set("model", model);
         this.set("controller", controller);
-        
+
         this.controllerFor('baskets').set('model', model.baskets);
    		this.controllerFor('categories').set('model', model.categories);
    		this.controllerFor('products').set('model', model.products);
-   		
+
   	},
     actions: {
       chooseProduct: function(){

@@ -6,28 +6,29 @@ Ember.Route.extend({
     controllerName: 'step-two',
     categories : null,
     products : null,
+  
     model : function(model) {
         var that = this;
         var products = this.store.find("product");
         var categories = this.store.find("category");
         var editorController = that.controllerFor("editor");
-        
+
 
         return categories;
     },
     setupController : function(controller, model) {
         var that = this;
         that.store.find("category").then( function(categories) {
-           that.controllerFor("step-two.sidebar").set("content", categories); 
+           that.controllerFor("step-two.sidebar").set("content", categories);
         });
         that.store.find("editor", {
             editing : true
         }).then( function(editor) {
-            //get all basket 
+            //get all basket
             if (editor.content) {
-                
-                
-                
+
+
+
                 that.controllerFor("editor").set("model", editor.content[0]);
             }
         });
@@ -41,7 +42,7 @@ Ember.Route.extend({
         that.render('step-two.sidebar', {
             controller: 'step-two.sidebar',
             into: 'step-two.index',
-            outlet: 'sidebar' 
+            outlet: 'sidebar'
         });
         that.render('editor.step-two', {
             controller : 'editor',

@@ -36,7 +36,7 @@ Ember.ObjectController.extend({
         colorPickerCSS : false,
         gridSnapping : true,
         gridColor : "#000",
-        baseUnit : 'px',
+        baseUnit : 'cm',
         snappingStep : 1,
         showRulers : false,
         show_outside_canvas : false,
@@ -90,6 +90,12 @@ Ember.ObjectController.extend({
         //model control
         saveEditor: function(){
           this.saveEditor();
+        },
+        loadEditor: function(editor){
+          this.loadEditor(editor);
+        },
+        deleteEditor: function(editor){
+          this.deleteEditor(editor);
         }
     },
 
@@ -305,8 +311,8 @@ Ember.ObjectController.extend({
                   measurementMultiplier = 10;
                 }
 
-                $svg.attr("width", productDimensions.width/10);
-                $svg.attr("height", productDimensions.depth/10);
+              //  $svg.attr("width", productDimensions.width/10);
+              //  $svg.attr("height", productDimensions.depth/10);
                 var elem = svgEditor.canvas.importSvgString($('<div>').append($svg.clone()).html());
                 console.log(elem);
             },
@@ -408,6 +414,31 @@ Ember.ObjectController.extend({
         });
       });
     },
+    loadEditor: function(editor){
+      //pass through object or number
+      var that = this;
+      var doLoad = function(editorLoad){
+        that.store.find("editor", {editing: true}).then(function(editors){
+          editors.forEach(function(editor){
+            editor.set("editing",false);
+            editor.save();
+          });
+          editorLoad.set("editing", true);
+          editorLoad.save();
+          that.set("model", editorLoad);
+          that.transitionToRoute("step-two");
+          alert("Loaded");
+        });
+      }
+      if(typeof editor === "number"){
+        that.store.findOne('editor', editor).then(function(editor){
+          doLoad(editor);
+        });
+      }else if(typeof editor === "object"){
+        doLoad(editor);
+      }
+    },
+
     init : function() {
         //alert("Editor initialized");
     }

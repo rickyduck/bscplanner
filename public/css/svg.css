@@ -20,10 +20,10 @@ body > main {min-height:700px;}
  #menu_bar.active .menu.open .menu_list {
   display: block;
 }
- .tool_button, 
+ .tool_button,
  .push_button,
  .tool_button_current,
- .push_button_pressed 
+ .push_button_pressed
 {
 	height: 27px;
 	width: 27px;
@@ -62,7 +62,7 @@ body > main {min-height:700px;}
   vertical-align: top;
 }
 
-.touch   .menu_title { 
+.touch   .menu_title {
 	padding: 7px 17px;
 	height: 26px;
 	line-height: 26px;
@@ -140,7 +140,7 @@ body > main {min-height:700px;}
 
  .menu_list .menu_item.push_button_pressed {
  background: transparent;
- border: none; 
+ border: none;
  width: auto;
  height: auto;
  margin: 0;
@@ -240,7 +240,7 @@ body > main {min-height:700px;}
 	margin-top: -16px;
 }
 
-#ruler_x > div, 
+#ruler_x > div,
 #ruler_y > div {
 	overflow: hidden;
 }
@@ -365,14 +365,14 @@ body > main {min-height:700px;}
 
 .touch  #tool_switch {
 	display: none;
-} 
+}
 
 #use_panel .tool_button, #path_node_panel .tool_button {
 	color: #999;
 	border: solid #3F3F3C 1px;
 	border-radius: 3px;
 	padding: 3px 10px 3px 40px;
-	background: 
+	background:
 	transparent;
 	position: relative;
 	margin-top: 10px;
@@ -447,7 +447,7 @@ body > main {min-height:700px;}
    position: absolute;
    top: 10px;
    width: 14px;
-	 
+
 }
 
  #color_tools #tool_switch {
@@ -511,7 +511,6 @@ body > main {min-height:700px;}
 	position:absolute;
 	/*top: 30px;
 	left: 50px;*/
-	right: 250px;
 	overflow: auto;
 	text-align: center;
 	-webkit-transition: -webkit-transform 500ms cubic-bezier(0.13,0.66,0.24,0.92);
@@ -530,13 +529,13 @@ body > main {min-height:700px;}
   position: absolute;
 }
 
-.tool_button, 
+.tool_button,
 .tool_button_current,
 .tool_button_pressed {
   cursor: pointer;
 }
 
- .tool_button:hover, 
+ .tool_button:hover,
  .push_button:hover,
  .buttonup:hover,
  .buttondown,
