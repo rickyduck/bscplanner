@@ -132,12 +132,29 @@ header h1 a{
 .planner > #wrap > main {
 	margin-bottom: 120px;
 }
+
 aside.left {
+  position: absolute;
+  left: -275px;
+  top: 0;
 	width: 275px;
 	background: #000;
 	height:100%;
 	min-height:1000px;
-	float:left;
+  overflow: visible;
+  z-index:10;
+}
+aside.left .peek{
+  position:absolute;
+  left: 100%;
+  top: 120px;
+  width: 70px;
+  height: 70px;
+  border-radius: 0 5px 5px 0;
+  background: #292929;
+  display:block;
+  border: none;
+  padding:0 ;
 }
 .step-one aside.left{
 	width: 100px;
@@ -151,6 +168,9 @@ aside.left {
 .step-one aside.left a {
 	width: 100px;
 	height: 100px;
+  position: static;
+  float:left;
+  left: 0;
 	display:block;
 	color: #000;
 	text-align: center;
@@ -212,7 +232,6 @@ aside.left menu  > ul > li > ul > li > span {
 	margin: 0;
 	height:auto;
 }
-.planner {margin-left:275px;}
 .step-one .planner {margin-left:150px;}
 main .wrapper {
 	width:1080px;

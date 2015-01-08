@@ -15,7 +15,7 @@ Ember.ObjectController.extend({
         controller: null,
         svgElementSelector: "#svgeditor",
         canvas_expansion : 1,
-        dimensions : ["100%", "100%"],
+        dimensions : ["100", "100"],
         physicalDimensions: [0, 0],
         initFill : {
             color : 'fff',
@@ -37,9 +37,9 @@ Ember.ObjectController.extend({
         gridSnapping : true,
         gridColor : "#000",
         baseUnit : 'cm',
-        snappingStep : 1,
+        snappingStep : 5,
         showRulers : false,
-        show_outside_canvas : false,
+        show_outside_canvas : true,
         no_save_warning : true,
         initFont : 'Helvetica, Arial, sans-serif'
     },
@@ -204,6 +204,7 @@ Ember.ObjectController.extend({
             that.set("config", config);
 
         //This is quite archaic and an anti-pattern. Returning the javascript object is not efficient and breaks the ethos.
+
             svgEditor = window.createEditor(config);
             that.checkModel();
             that.set('svgEditor', svgEditor);
