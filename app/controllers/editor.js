@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default
 Ember.ObjectController.extend({
+
     needs : ['index', 'step-one', 'baskets'],
     //config for the editor
     modelError: null,
@@ -73,6 +74,9 @@ Ember.ObjectController.extend({
         },
         getSvg : function(type) {
             this.getSvg(type);
+        },
+        getCurrentDrawing : function() {
+            return this.getCurrentDrawing();
         },
 
         //Basket functions
@@ -222,8 +226,8 @@ Ember.ObjectController.extend({
             console.log(config.dimensions);
             console.log({width:model.get("width"), height: model.get("height")});
             //var tidyuo
-            var widthAspect = config.dimensions[0] / model.get("width");
-            var heightAspect = config.dimensions[1] / model.get("height");
+            var widthAspect = config.dimensions[1] / model.get("width");
+            var heightAspect = config.dimensions[0] / model.get("height");
             //not too sure if this is right. If
             // if width of the css is
             //apply buffers for visual
@@ -377,6 +381,11 @@ Ember.ObjectController.extend({
             svgEditor.canvas.setSvgString(svgedit.utilities.decode64(svgPlanString));
         }
     },
+    currentDrawing : function () {
+        var svgEditor = this.get("svgEditor");
+
+        return svgEditor.canvas.getCurrentDrawing();
+    }.property("svgEditor"),
     saveEditor: function() {
       this.set("savingState", "saving");
       var that = this, model = that.get("model"),
@@ -439,7 +448,6 @@ Ember.ObjectController.extend({
         doLoad(editor);
       }
     },
-
     init : function() {
         //alert("Editor initialized");
     }

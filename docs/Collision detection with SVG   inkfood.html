@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://www.inkfood.com/collision-detection-with-svg/ -->
+<html lang="en-US" data-ember-extension="1"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Collision detection with SVG | inkfood</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="http://www.inkfood.com/wordprez/xmlrpc.php">
+    <meta name="description" content="Collision detection with SVG Check if an object collides with an another one. With fast collision detection or with precise collision detection.">
+    
+<link rel="shortcut icon" href="http://www.inkfood.com/wordprez/wp-content/themes/Reboot_1.4.1/layouts/img/logo_favicon.png">
+
+<link rel="alternate" type="application/rss+xml" title="inkfood » Feed" href="http://www.inkfood.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="inkfood » Comments Feed" href="http://www.inkfood.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="inkfood » Collision detection with SVG Comments Feed" href="http://www.inkfood.com/collision-detection-with-svg/feed/">
+<link rel="stylesheet" id="crayon-css" href="./Collision detection with SVG   inkfood_files/crayon.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-theme-github-rounded-css" href="./Collision detection with SVG   inkfood_files/github-rounded.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-font-monaco-css" href="./Collision detection with SVG   inkfood_files/monaco.css" type="text/css" media="all">
+<link rel="stylesheet" id="inkfood_2014-style-css" href="./Collision detection with SVG   inkfood_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="bootstrap-css" href="./Collision detection with SVG   inkfood_files/bootstrap.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="glyphicons-css" href="./Collision detection with SVG   inkfood_files/bootstrap-glyphicons.css" type="text/css" media="all">
+<link rel="stylesheet" id="fancyBox_style-css" href="./Collision detection with SVG   inkfood_files/jquery.fancybox.css" type="text/css" media="all">
+<link rel="stylesheet" id="prefix-font-awesome-css" href="./Collision detection with SVG   inkfood_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="prefix-font-inkfood-css" href="./Collision detection with SVG   inkfood_files/inkfoodFont.css" type="text/css" media="all">
+<script async="" src="./Collision detection with SVG   inkfood_files/saved_resource"></script><script async="" src="./Collision detection with SVG   inkfood_files/analytics.js"></script><script type="text/javascript" src="./Collision detection with SVG   inkfood_files/jquery.js"></script><style type="text/css"></style>
+<script type="text/javascript" src="./Collision detection with SVG   inkfood_files/jquery-migrate.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"2.6.7","is_admin":"0","ajaxurl":"http:\/\/www.inkfood.com\/wordprez\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Collision detection with SVG   inkfood_files/crayon.min.js"></script>
+<script type="text/javascript" src="./Collision detection with SVG   inkfood_files/bootstrap.min.js"></script>
+<script type="text/javascript" src="./Collision detection with SVG   inkfood_files/bootstrap-wp.js"></script><style>body{display:none;}</style>
+<script type="text/javascript" src="./Collision detection with SVG   inkfood_files/main.js"></script>
+<script type="text/javascript" src="./Collision detection with SVG   inkfood_files/jquery.mobile.custom.min.js"></script>
+<script type="text/javascript" src="./Collision detection with SVG   inkfood_files/jquery.fancybox.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.inkfood.com/wordprez/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.inkfood.com/wordprez/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Animate with SVG" href="http://www.inkfood.com/animate-with-svg/">
+<link rel="next" title="SVG to Canvas" href="http://www.inkfood.com/svg-to-canvas/">
+<meta name="generator" content="WordPress 4.0.1">
+<link rel="canonical" href="./Collision detection with SVG   inkfood_files/Collision detection with SVG   inkfood.html">
+<link rel="shortlink" href="http://www.inkfood.com/?p=491">
+
+<!-- BEGIN GADWP v4.3.4 Universal Tracking - https://deconf.com/google-analytics-dashboard-wordpress/ -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		
+  ga('create', 'UA-42467129-1', 'auto');
+  ga('send', 'pageview');
+  
+</script>
+<!-- END GADWP Universal Tracking -->
+
+        <link rel="stylesheet" type="text/css" href="./Collision detection with SVG   inkfood_files/css">
+         <style type="text/css">
+             body,html
+             { 
+                 font-family: "Open Sans";
+                 font-size: 15px !important ;
+                 color: #333333;
+                 font-weight: 400;
+                 background-color: #ffffff;
+                 
+             }
+             .site-header
+             {
+                 background-color: none;
+                 color: #ffffff;
+             }
+             
+             .site-main
+             {
+                  background-color: #ffffff;
+             }
+             
+             header .navbar-nav>li>a
+             {
+                  color: #ffffff;
+             }
+             
+             .site-header a
+             {
+                 color: #ffffff;
+             }
+             
+             .site-footer
+             {
+                 background-color: #e2e2e2;
+             }
+             
+             .post a
+             { 
+                 color: #1e73be;            
+             }
+             
+             h1
+             {
+                 font-size: 29px !important ;
+             }
+             
+             h2
+             {
+                 font-size: 27px !important ;
+             }
+             
+             h3
+             {
+                 font-size: 25px !important ;
+             } 
+             
+             h4
+             {
+                 font-size: 23px !important ;
+             }
+             
+             h5
+             {
+                 font-size: 21px !important ;
+             }  
+             
+             h6
+             {
+                 font-size: 19px !important ;
+             }
+         </style>
+    <script type="text/javascript" async="" src="http://inkfood.disqus.com/embed.js?pname=wordpress&pver=2.77"></script></head>
+
+<body class="single single-post postid-491 single-format-standard" style="display: block;">
+<div id="page" class="hfeed site">
+		<header id="masthead" class="site-header" role="banner">                
+        <div class="container-fluid">
+                    
+                    <nav class="site-navigation">                
+                        <div class="site-navigation-inner">
+                                <div class="navbar nocolor navbar-default">
+                                    <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                                      <span class="icon-bar"></span>
+                                      <span class="icon-bar"></span>
+                                      <span class="icon-bar"></span>
+                                    </button>
+                                
+                                    <!-- Your site title as branding in the menu -->
+                                    
+                                                                        <a class="navbar-brand" href="http://www.inkfood.com/" rel="home"><p style="font-family:inkfoodFont; font-size: 40px; height:40px; line-height:1; padding:4px; float:left;">A</p><h1 class="pull-right">inkfood</h1></a>
+                                                                    
+                                    
+                                    
+                                    <!-- The WordPress Menu goes here -->
+                               
+                                       <div class="nav-collapse collapse navbar-responsive-collapse pull-right"><ul id="main-menu" class="nav navbar-nav nav-menu"><li class="menu-item-search">
+<div class="form">
+<span class="toggle"><i class="fa fa-lg fa-search" style="text-shadow: 0 1px 2px rgba(0,0,0,0.6);"></i></span>
+<form role="search" method="get" id="searchform" action="http://www.inkfood.com/">
+<input type="text" placeholder="Search" id="s" name="s" value="">
+<input type="submit" value="" id="searchsubmit">
+</form>
+</div>
+
+
+</li></ul></div>                                </div><!-- .navbar -->
+                        </div>
+                        </nav><!-- .site-navigation -->
+        </div><!-- .container -->
+	</header><!-- #masthead -->
+    <div class="modal fade" id="securityQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Are you human</h4>
+      </div>
+      <div class="modal-body">
+        <p>3+6 = <input id="sq"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="securitySubmit" class="btn btn-default" data-dismiss="modal">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</div>
+	<div id="content" class="site-content">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+            
+					
+
+<article id="post-491" class="post-491 post type-post status-publish format-standard has-post-thumbnail hentry category-gamedev tag-svg">
+	<header class="entry-header container-fluid">
+	
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12"><h1 class="entry-title text-center">Collision detection with SVG</h1></div>
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12"><div class="entry-cat pull-left"><i class="fa fa-lg fa-tags"> </i> gameDev</div><div class="entry-meta pull-right">
+			<i class="fa fa-lg fa-clock-o">  </i>  April 4, 2014		</div></div>
+    
+    </header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<div class="container-fluid">
+<p><iframe width="100%" height="300" class="background-img" frameborder="0" src="./Collision detection with SVG   inkfood_files/saved_resource(3).html"></iframe></p>
+</div>
+<div class="container">
+<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+<p></p><p>&nbsp;</p><p>&nbsp;</p><p></p>
+<h2><span style="text-decoration: underline;">introduction</span></h2>
+<p>Collision detection in SVG are really powerful. There are already SVG built in functions called&nbsp;getIntersectionList() and&nbsp;checkIntersection(). These function are not fully supported in all Browser, and they just check for bounding box collisions anyway. So we try to avoid these problems and build a simple collision detection by our own. Since SVG objects are Vector based, its really easy to to check for a collision of two objects with simple math.</p>
+<div class="alert alert-info"><i class="fa fa-lg fa-lightbulb-o"></i>&nbsp;&nbsp;There are many different algorithms that may be used to perform collision detection, with different performance or accuracy outcomes.</div>
+<p>&nbsp;</p>
+<h2><span style="text-decoration: underline;">simple collision detection</span></h2>
+<p>Basic bounding box collision detection, the fast way to detect collision. Each object on the screen have bounding boxes, which is the smallest rectangle in which the object fits exactly. With a simple math function is it possible to check if two of these rectangles overlap.</p>
+<p><iframe width="100%" height="450" frameborder="0" src="./Collision detection with SVG   inkfood_files/saved_resource(2).html"></iframe></p>
+</div>
+<div class="col-lg-3 col-md-3 col-xs-3 ol-sm-3"><a href="./Collision detection with SVG   inkfood_files/SVG_collisionAppears.png"><img src="./Collision detection with SVG   inkfood_files/SVG_collisionAppears.png" alt="SVG_collisionAppears" width="263" height="264" class="alignleft size-full wp-image-494"></a></div>
+<p>&nbsp;</p>
+<div class="col-lg-9 col-md-9 col-xs-9 ol-sm-9">
+<p>As you can see, the collision detection is really&nbsp;inaccurately. Since we are just checking for the intersection of the Bounding boxes, this is an expected behavior. In some cases this might be enough for a collision detection.</p><!-- Crayon Syntax Highlighter v2.6.7 -->
+
+		<div id="crayon-54aeb7d61561d351281982" class="crayon-syntax crayon-theme-github-rounded crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">Check for intersection</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 0; opacity: 0; overflow: hidden;">
+function intersectRect(r1, r2) {
+    var r1 = r1.getBoundingClientRect();    //BOUNDING BOX OF THE FIRST OBJECT
+    var r2 = r2.getBoundingClientRect();    //BOUNDING BOX OF THE SECOND OBJECT
+
+    //CHECK IF THE TWO BOUNDING BOXES OVERLAP
+  return !(r2.left &gt; r1.right || 
+           r2.right &lt; r1.left || 
+           r2.top &gt; r1.bottom ||
+           r2.bottom &lt; r1.top);
+}
+</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-54aeb7d61561d351281982-1">1</div><div class="crayon-num" data-line="crayon-54aeb7d61561d351281982-2">2</div><div class="crayon-num" data-line="crayon-54aeb7d61561d351281982-3">3</div><div class="crayon-num" data-line="crayon-54aeb7d61561d351281982-4">4</div><div class="crayon-num" data-line="crayon-54aeb7d61561d351281982-5">5</div><div class="crayon-num" data-line="crayon-54aeb7d61561d351281982-6">6</div><div class="crayon-num" data-line="crayon-54aeb7d61561d351281982-7">7</div><div class="crayon-num" data-line="crayon-54aeb7d61561d351281982-8">8</div><div class="crayon-num" data-line="crayon-54aeb7d61561d351281982-9">9</div><div class="crayon-num" data-line="crayon-54aeb7d61561d351281982-10">10</div><div class="crayon-num" data-line="crayon-54aeb7d61561d351281982-11">11</div><div class="crayon-num" data-line="crayon-54aeb7d61561d351281982-12">12</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-54aeb7d61561d351281982-1">&nbsp;</div><div class="crayon-line" id="crayon-54aeb7d61561d351281982-2"><span class="crayon-t">function</span><span class="crayon-h"> </span><span class="crayon-e">intersectRect</span><span class="crayon-sy">(</span><span class="crayon-v">r1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">r2</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-54aeb7d61561d351281982-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-v">r1</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">r1</span><span class="crayon-sy">.</span><span class="crayon-e">getBoundingClientRect</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">//BOUNDING BOX OF THE FIRST OBJECT</span></div><div class="crayon-line" id="crayon-54aeb7d61561d351281982-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-v">r2</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">r2</span><span class="crayon-sy">.</span><span class="crayon-e">getBoundingClientRect</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">//BOUNDING BOX OF THE SECOND OBJECT</span></div><div class="crayon-line" id="crayon-54aeb7d61561d351281982-5">&nbsp;</div><div class="crayon-line" id="crayon-54aeb7d61561d351281982-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">//CHECK IF THE TWO BOUNDING BOXES OVERLAP</span></div><div class="crayon-line" id="crayon-54aeb7d61561d351281982-7"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-o">!</span><span class="crayon-sy">(</span><span class="crayon-v">r2</span><span class="crayon-sy">.</span><span class="crayon-v">left</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">r1</span><span class="crayon-sy">.</span><span class="crayon-v">right</span><span class="crayon-h"> </span><span class="crayon-o">||</span><span class="crayon-h"> </span></div><div class="crayon-line" id="crayon-54aeb7d61561d351281982-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">r2</span><span class="crayon-sy">.</span><span class="crayon-v">right</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-v">r1</span><span class="crayon-sy">.</span><span class="crayon-v">left</span><span class="crayon-h"> </span><span class="crayon-o">||</span><span class="crayon-h"> </span></div><div class="crayon-line" id="crayon-54aeb7d61561d351281982-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">r2</span><span class="crayon-sy">.</span><span class="crayon-v">top</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">r1</span><span class="crayon-sy">.</span><span class="crayon-v">bottom</span><span class="crayon-h"> </span><span class="crayon-o">||</span></div><div class="crayon-line" id="crayon-54aeb7d61561d351281982-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">r2</span><span class="crayon-sy">.</span><span class="crayon-v">bottom</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-v">r1</span><span class="crayon-sy">.</span><span class="crayon-v">top</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-54aeb7d61561d351281982-11"><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-54aeb7d61561d351281982-12">&nbsp;</div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0033 seconds] -->
+<p>
+</p></div>
+<div class="col-lg-12 col-md-12 col-xs-12 ol-sm-12">
+<p>&nbsp;</p>
+<h2><span style="text-decoration: underline;">advanced collision detection</span></h2>
+<p>Based of the simple bounding box collision, we create a more precise collision detection. We start to compute the precise collision detection only if a bounding box collision is detected. Once the basic collision detection appears, we define some points on the contour of the colliding objects, based on the precision value. To get these points we use the&nbsp;getPointAtLength() function. In this case, where we just have circles, we calculate the these points with some math.<br>
+A precision of 10 means, 10 points on the whole path to calculate if they are colliding with something. We test which of these points is inside the closed path of the colliding object, to check if a collision appears. More precision equals more points to compute.</p>
+<p><iframe width="100%" height="450" frameborder="0" src="./Collision detection with SVG   inkfood_files/saved_resource(1).html"></iframe></p>
+<p>&nbsp;</p>
+<p>Most of the code is used to display the debug lines, and it is not a very clean code either. The relevant part of the code is the isPointInPoly() function. We have to provide two variables to the function. The <strong>poly</strong> variable is an array of points with x and y positions which build a closed path. The <strong>pt</strong> variable is the position of the point which we want to check if it is inside the closed path or not. If so, a collision is detected.</p><!-- Crayon Syntax Highlighter v2.6.7 -->
+
+		<div id="crayon-54aeb7d615634676556346" class="crayon-syntax crayon-theme-github-rounded crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style="margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important; height: auto;">
+		
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><span class="crayon-title">isPointInPoly</span>
+			<div class="crayon-tools" style="font-size: 12px !important;height: 18px !important; line-height: 18px !important;"><div class="crayon-button crayon-nums-button crayon-pressed" title="Toggle Line Numbers"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button crayon-pressed" title="Toggle Plain Code"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="Toggle Line Wrap"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="Expand Code" style="display: none;"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="Copy"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="Open Code In New Window"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 16.8px !important; line-height: 16.8px !important; margin-top: -17px; display: none;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 12px !important; line-height: 15px !important; z-index: 1; opacity: 1; overflow: hidden; height: 188px;">
+//+ Jonas Raoni Soares Silva
+//@ http://jsfromhell.com/math/is-point-in-poly [rev. #0]
+
+function isPointInPoly(poly, pt){
+    for(var c = false, i = -1, l = poly.length, j = l - 1; ++i &lt; l; j = i)
+        ((poly[i].y &lt;= pt.y &amp;&amp; pt.y &lt; poly[j].y) || (poly[j].y &lt;= pt.y &amp;&amp; pt.y &lt; poly[i].y))
+        &amp;&amp; (pt.x &lt; (poly[j].x - poly[i].x) * (pt.y - poly[i].y) / (poly[j].y - poly[i].y) + poly[i].x)
+        &amp;&amp; (c = !c);
+    return c;
+}
+</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 0; overflow: hidden; opacity: 0;">
+				<table class="crayon-table">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-54aeb7d615634676556346-1">1</div><div class="crayon-num" data-line="crayon-54aeb7d615634676556346-2">2</div><div class="crayon-num" data-line="crayon-54aeb7d615634676556346-3">3</div><div class="crayon-num" data-line="crayon-54aeb7d615634676556346-4">4</div><div class="crayon-num" data-line="crayon-54aeb7d615634676556346-5">5</div><div class="crayon-num" data-line="crayon-54aeb7d615634676556346-6">6</div><div class="crayon-num" data-line="crayon-54aeb7d615634676556346-7">7</div><div class="crayon-num" data-line="crayon-54aeb7d615634676556346-8">8</div><div class="crayon-num" data-line="crayon-54aeb7d615634676556346-9">9</div><div class="crayon-num" data-line="crayon-54aeb7d615634676556346-10">10</div><div class="crayon-num" data-line="crayon-54aeb7d615634676556346-11">11</div><div class="crayon-num" data-line="crayon-54aeb7d615634676556346-12">12</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-54aeb7d615634676556346-1">&nbsp;</div><div class="crayon-line" id="crayon-54aeb7d615634676556346-2"><span class="crayon-c">//+ Jonas Raoni Soares Silva</span></div><div class="crayon-line" id="crayon-54aeb7d615634676556346-3"><span class="crayon-c">//@ http://jsfromhell.com/math/is-point-in-poly [rev. #0]</span></div><div class="crayon-line" id="crayon-54aeb7d615634676556346-4">&nbsp;</div><div class="crayon-line" id="crayon-54aeb7d615634676556346-5"><span class="crayon-t">function</span><span class="crayon-h"> </span><span class="crayon-e">isPointInPoly</span><span class="crayon-sy">(</span><span class="crayon-v">poly</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">pt</span><span class="crayon-sy">)</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-54aeb7d615634676556346-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-t">false</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">l</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">poly</span><span class="crayon-sy">.</span><span class="crayon-v">length</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">j</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">l</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-o">++</span><span class="crayon-v">i</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-v">l</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">j</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-54aeb7d615634676556346-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">(</span><span class="crayon-sy">(</span><span class="crayon-v">poly</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-v">y</span><span class="crayon-h"> </span><span class="crayon-o">&lt;=</span><span class="crayon-h"> </span><span class="crayon-v">pt</span><span class="crayon-sy">.</span><span class="crayon-v">y</span><span class="crayon-h"> </span><span class="crayon-o">&amp;&amp;</span><span class="crayon-h"> </span><span class="crayon-v">pt</span><span class="crayon-sy">.</span><span class="crayon-v">y</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-v">poly</span><span class="crayon-sy">[</span><span class="crayon-v">j</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-v">y</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">||</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">poly</span><span class="crayon-sy">[</span><span class="crayon-v">j</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-v">y</span><span class="crayon-h"> </span><span class="crayon-o">&lt;=</span><span class="crayon-h"> </span><span class="crayon-v">pt</span><span class="crayon-sy">.</span><span class="crayon-v">y</span><span class="crayon-h"> </span><span class="crayon-o">&amp;&amp;</span><span class="crayon-h"> </span><span class="crayon-v">pt</span><span class="crayon-sy">.</span><span class="crayon-v">y</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-v">poly</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-v">y</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-54aeb7d615634676556346-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&amp;&amp;</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">pt</span><span class="crayon-sy">.</span><span class="crayon-v">x</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">poly</span><span class="crayon-sy">[</span><span class="crayon-v">j</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-v">x</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-v">poly</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-v">x</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">pt</span><span class="crayon-sy">.</span><span class="crayon-v">y</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-v">poly</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-v">y</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">/</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">poly</span><span class="crayon-sy">[</span><span class="crayon-v">j</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-v">y</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-v">poly</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-v">y</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-v">poly</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-v">x</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-54aeb7d615634676556346-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&amp;&amp;</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-o">!</span><span class="crayon-v">c</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-54aeb7d615634676556346-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">c</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-54aeb7d615634676556346-11"><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-54aeb7d615634676556346-12">&nbsp;</div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0068 seconds] -->
+<p></p><p>&nbsp;</p><p></p>
+<h2><span style="text-decoration: underline;">conclusion</span></h2>
+<p>Basic vector collision detection made easy, decide by your own how precise and how fast collision detection appears. This is just the a basic example&nbsp;and let plenty of room for optimization. It highly depends on the precision value how much optimization is to implement.</p>
+<p>&nbsp;</p>
+</div>
+</div>
+			</div><!-- .entry-content -->
+
+</article><!-- #post-## -->
+
+            
+            <div class="container">
+            <div class="row">
+            <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1"></div>
+            <div class="socialLinks container col-lg-10 col-md-10 col-xs-10 col-sm-10" style="padding-left:0;padding-right:0;">
+                <h2 class="pull-left socialTitle">be social and share this content</h2>
+    			<ul>
+        			<li class="tw"><a href="https://twitter.com/intent/tweet?source=webclient&text=Collision%20detection%20with%20SVG%20http%3A%2F%2Fwww.inkfood.com%2Fcollision-detection-with-svg%2F" target="_blank" title="Share on Twitter"><span>Twitter</span></a></li>
+        			<li class="fb"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.inkfood.com%2Fcollision-detection-with-svg%2F&t=Collision%20detection%20with%20SVG" target="_blank" title="Share on Facebook"><span>Facebook</span></a></li>
+        			<li class="gp"><a href="https://plusone.google.com/_/+1/confirm?hl=de&url=http%3A%2F%2Fwww.inkfood.com%2Fcollision-detection-with-svg%2F&title=Collision%20detection%20with%20SVG" target="_blank" title="Share on Google+"><span>Google+</span></a></li>
+    				<li class="mail"><a href="mailto:info@inkfood.ch" title="Mail to Inkfood"></a></li>
+    			</ul>
+			</div>
+            <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1"></div></div></div>
+            
+			                    <div class="container" id="disqusWrapper">
+                        <div class="row">
+                            <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1"></div>
+                            <div class="col-lg-10 col-md-10 col-xs-10 col-sm-10">
+                    
+<div id="disqus_thread"><iframe id="dsq-2" data-disqus-uid="2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Collision detection with SVG   inkfood_files/saved_resource.html" style="width: 100% !important; border: none !important; overflow: hidden !important; height: 476px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    var disqus_url = 'http://www.inkfood.com/collision-detection-with-svg/';
+    var disqus_identifier = '491 http://www.inkfood.com/?p=491';
+    var disqus_container_id = 'disqus_thread';
+    var disqus_domain = 'disqus.com';
+    var disqus_shortname = 'inkfood';
+    var disqus_title = "Collision detection with SVG";
+    var disqus_config = function () {
+        var config = this; // Access to the config object
+        config.language = '';
+
+        /* Add the ability to add javascript callbacks */
+        
+        /*
+           All currently supported events:
+            * preData — fires just before we request for initial data
+            * preInit - fires after we get initial data but before we load any dependencies
+            * onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+            * afterRender - fires when template is rendered but before we show it
+            * onReady - everything is done
+         */
+
+        config.callbacks.preData.push(function() {
+            // clear out the container (its filled for SEO/legacy purposes)
+            document.getElementById(disqus_container_id).innerHTML = '';
+        });
+                config.callbacks.onReady.push(function() {
+            // sync comments in the background so we don't block the page
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = '?cf_action=sync_comments&post_id=491';
+
+            var firstScript = document.getElementsByTagName( "script" )[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        });
+                    };
+/* ]]> */
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    var DsqLocal = {
+        'trackbacks': [
+        ],
+        'trackback_url': "http:\/\/www.inkfood.com\/collision-detection-with-svg\/trackback\/"    };
+/* ]]> */
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.' + 'disqus.com' + '/' + 'embed' + '.js' + '?pname=wordpress&pver=2.77';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+/* ]]> */
+</script>
+                    </div><div class="col-lg-1 col-md-1 col-xs-1 col-sm-1"></div></div>
+                </div>
+                        
+<!--            DISPLAY RELATED POSTS-->
+             <div class="container" id="relatedPosts">
+                        <div class="row">
+                             <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+               <h4>Related Posts</h4>                                  
+                <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 nopadding">
+                    <a href="http://www.inkfood.com/svg-pivvot-clone/" rel="bookmark" title="Permanent Link to SVG Pivvot clone" style="background:url( http://www.inkfood.com/wordprez/wp-content/uploads/SVG_pivvotC_icn.png); background-position: center; background-size: cover;">
+                    <p>SVG Pivvot clone</p>
+                    </a>
+                    
+                </div>
+                                                 
+                <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 nopadding">
+                    <a href="http://www.inkfood.com/svg-platformer-up/" rel="bookmark" title="Permanent Link to SVG Platformer “UP”" style="background:url( http://www.inkfood.com/wordprez/wp-content/uploads/icn_SVGPlatformer_UP.png); background-position: center; background-size: cover;">
+                    <p>SVG Platformer “UP”</p>
+                    </a>
+                    
+                </div>
+                                                 
+                <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 nopadding">
+                    <a href="http://www.inkfood.com/svg-texturing/" rel="bookmark" title="Permanent Link to SVG texturing" style="background:url( http://www.inkfood.com/wordprez/wp-content/uploads/icn_SVGtextureing.png); background-position: center; background-size: cover;">
+                    <p>SVG texturing</p>
+                    </a>
+                    
+                </div>
+                                                 
+                <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 nopadding">
+                    <a href="http://www.inkfood.com/svg-to-canvas/" rel="bookmark" title="Permanent Link to SVG to Canvas" style="background:url( http://www.inkfood.com/wordprez/wp-content/uploads/icn_SVGtoCanvas.png); background-position: center; background-size: cover;">
+                    <p>SVG to Canvas</p>
+                    </a>
+                    
+                </div>
+                    
+            </div></div></div>
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+	</div><!-- #content -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+        	<div id="first" class="widget-area container" role="complementary">
+		<div class="container">
+            <div id="footerIcons" class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+            <a id="scrollUp" href="http://www.inkfood.com/collision-detection-with-svg/#"> <i class="fa fa-2x fa-arrow-circle-o-up pull-right"></i></a>
+            <a href="mailto:info@inkfood.com"><i class="fa fa-2x fa-envelope pull-right"></i></a>
+            <a href="https://github.com/inkfood" target="_blank"><i class="fa fa-2x fa-github pull-right"></i></a>
+            <a href="https://twitter.com/markusT_inkfood" target="_blank"><i class="fa fa-2x fa-twitter pull-right"></i></a>
+            
+            <a id="goHome" href="http://www.inkfood.com/">A</a>
+            </div>
+            <hr style="margin-bottom:20px;">
+    </div>		<aside id="pu_tweet_widget-2" class="col-lg-6 col-md-6 col-xs-6 col-sm-6 widget container pu_tweet_widget">		<div class="twitter_box">
+            			
+            <div class="twitter_update_list"><div class="twitter-item row"> <br><span class="twitter-timestamp col-lg-2 col-md-2 col-xs-2 col-sm-2&gt;&lt;abbr title=" 2014="" dec="" 03="" 07:26:13"=""><span class="month">Dec</span><span class="day">03</span><span class="year">2014</span></span><div class="tweetWrapper col-lg-9 col-md-9 col-xs-9 col-sm-9">Say hello to Marvin. He is born yesterday, and may help me along the way to create better sprites and animations. <a href="http://t.co/Y77JWZyxT2" class="twitter-link">http://t.co/Y77JWZyxT2</a></div><div class="tw-icon col-lg-1 col-md-1 col-xs-1 col-sm-1"><a href="https://twitter.com/markusT_inkfood" target="_blank"><i class="fa fa-lg fa-twitter"></i></a> </div></div><div class="twitter-item row"> <br><span class="twitter-timestamp col-lg-2 col-md-2 col-xs-2 col-sm-2&gt;&lt;abbr title=" 2014="" dec="" 02="" 06:50:15"=""><span class="month">Dec</span><span class="day">02</span><span class="year">2014</span></span><div class="tweetWrapper col-lg-9 col-md-9 col-xs-9 col-sm-9">RT <a href="http://twitter.com/McFunkypants" class="twitter-user">@McFunkypants</a>: Indie advent calendar!
+Spread the word! =D
+<a href="http://t.co/cLjdT1kE0K" class="twitter-link">http://t.co/cLjdT1kE0K</a></div><div class="tw-icon col-lg-1 col-md-1 col-xs-1 col-sm-1"><a href="https://twitter.com/markusT_inkfood" target="_blank"><i class="fa fa-lg fa-twitter"></i></a> </div></div><div class="twitter-item row"> <br><span class="twitter-timestamp col-lg-2 col-md-2 col-xs-2 col-sm-2&gt;&lt;abbr title=" 2014="" nov="" 29="" 18:59:05"=""><span class="month">Nov</span><span class="day">29</span><span class="year">2014</span></span><div class="tweetWrapper col-lg-9 col-md-9 col-xs-9 col-sm-9"><a href="http://twitter.com/johnpolacek" class="twitter-user">@johnpolacek</a> Wow, i really like the project. Can't wait to see the final game, if and when it's finished. Good luck for both of you..</div><div class="tw-icon col-lg-1 col-md-1 col-xs-1 col-sm-1"><a href="https://twitter.com/markusT_inkfood" target="_blank"><i class="fa fa-lg fa-twitter"></i></a> </div></div></div>       		</div>
+		</aside><aside id="newsletterwidget-3" class="col-lg-6 col-md-6 col-xs-6 col-sm-6 widget container widget_newsletterwidget"><h1 class="widget-title">Newsletter</h1>
+
+<script type="text/javascript">
+//<![CDATA[
+if (typeof newsletter_check !== "function") {
+window.newsletter_check = function (f) {
+    var re = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-]{1,})+\.)+([a-zA-Z0-9]{2,})+$/;
+    if (!re.test(f.elements["ne"].value)) {
+        alert("The email is not correct");
+        return false;
+    }
+    if (f.elements["ny"] && !f.elements["ny"].checked) {
+        alert("You must accept the privacy statement");
+        return false;
+    }
+    return true;
+}
+}
+//]]>
+</script>
+
+<div class="newsletter newsletter-widget">
+
+<script type="text/javascript">
+//<![CDATA[
+if (typeof newsletter_check !== "function") {
+window.newsletter_check = function (f) {
+    var re = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-]{1,})+\.)+([a-zA-Z0-9]{2,})+$/;
+    if (!re.test(f.elements["ne"].value)) {
+        alert("The email is not correct");
+        return false;
+    }
+    if (f.elements["ny"] && !f.elements["ny"].checked) {
+        alert("You must accept the privacy statement");
+        return false;
+    }
+    return true;
+}
+}
+//]]>
+</script>
+
+<form action="http://www.inkfood.com/wordprez/wp-content/plugins/newsletter/do/subscribe.php" onsubmit="return newsletter_check(this)" method="post"><input type="hidden" name="nr" value="widget"><p><input class="newsletter-email" type="email" required="" name="ne" value="Email" onclick="if (this.defaultValue==this.value) this.value=&#39;&#39;" onblur="if (this.value==&#39;&#39;) this.value=this.defaultValue"></p><p><input class="newsletter-submit" type="submit" value="Subscribe"></p></form></div></aside>        <hr>	</div><!-- #secondary -->
+		<small class="site-info">
+		<small>	© 2015 inkfood. All rights reserved.
+            1.4.1</small>
+		</small><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<script type="text/javascript" src="./Collision detection with SVG   inkfood_files/navigation.js"></script>
+<script type="text/javascript" src="./Collision detection with SVG   inkfood_files/skip-link-focus-fix.js"></script>
+
+
+</body></html>
