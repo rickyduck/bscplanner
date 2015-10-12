@@ -4,14 +4,15 @@ export default
 Ember.ObjectController.extend({
 
     needs : ['index', 'step-one', 'baskets'],
-    //config for the editor
     modelError: null,
     editorName: moment().format("H:mma, Do MMM YYYY"),
     svgPlanString: null,
+    svgPlanElement: null,
     svgElementSelector: null,
     svgElement: null,
     savingState: "unsaved",
     zoomLevel: 1,
+    //config for the editor
     config : {
         controller: null,
         svgElementSelector: "#svgeditor",
@@ -152,7 +153,7 @@ Ember.ObjectController.extend({
         svgEditor.canvas.setZoom(zoom);
         that.set("zoomLevel", Math.floor((zoom-1)*10)) ;
     },
-    //here we check for
+    //here we check for whether the zoom level has hit the max (10)
     increaseDisabled: function(){
       return this.get("zoomLevel") === 10;
     }.property("zoomLevel"),
@@ -179,7 +180,7 @@ Ember.ObjectController.extend({
     saveSvgEditorBind : function() {
         //set the config controller to this
 
-        var that = this, model = that.get("model"), svgEditor = that.get("svgEditor"),config = that.get("config"), svgPlanString, svgElementSelector = that.get("svgElementSelector"), svgElement = that.get("svgElement"),
+        var that = this, model = that.get("model"), svgEditor = that.get("svgEditor"),config = that.get("config"), svgPlanString, svgPlanElement, svgElementSelector = that.get("svgElementSelector"), svgElement = that.get("svgElement"),
         max, rectWidth,rectHeight, rectPercentage, rectXBuffer, rectYBuffer ;
         if(!model){
             //fallback
@@ -260,7 +261,7 @@ Ember.ObjectController.extend({
 
               //As this is the
               svgEditor.canvas.createLayer("rectLayer");
-              svgEditor.canvas.addSvgElementFromJson({
+              svgPlanElement = svgEditor.canvas.addSvgElementFromJson({
                 "element": "rect",
                 "curStyles": true,
                 "attr": {
@@ -272,6 +273,7 @@ Ember.ObjectController.extend({
                   "opacity": 1
                 }
               });
+              that.set("svgPlanElement", svgPlanElement)
               svgEditor.canvas.createLayer("editableLayer");
             }else if(model.get("method") === "draw"){
               svgEditor.canvas.createLayer("rectLayer");
@@ -353,9 +355,9 @@ Ember.ObjectController.extend({
                     quantity: 1
                 });
 
-                    basketItems.addObject(basketItemModel);
-                  //  basketModel.save();
-                    that.loadProductSVGFromURL(product);
+                basketItems.addObject(basketItemModel);
+                //  basketModel.save();
+                that.loadProductSVGFromURL(product);
 
                 //add to the collection
 
@@ -408,6 +410,7 @@ Ember.ObjectController.extend({
       }});
 
       //model.set("imageString", svgEditor.canvas.svgCanvasToString());
+      // 2 saves?
       model.save();
       if(model.get("id") === "tmp"){
 
@@ -428,6 +431,7 @@ Ember.ObjectController.extend({
       //pass through object or number
       var that = this;
       var doLoad = function(editorLoad){
+        //find the currently editing (session) record then reset, set the passed object "editing" value to true
         that.store.find("editor", {editing: true}).then(function(editors){
           editors.forEach(function(editor){
             editor.set("editing",false);
@@ -437,7 +441,7 @@ Ember.ObjectController.extend({
           editorLoad.save();
           that.set("model", editorLoad);
           that.transitionToRoute("step-two");
-          alert("Loaded");
+      //    alert("Loaded");
         });
       }
       if(typeof editor === "number"){

@@ -1,5 +1,16 @@
 import DS from 'ember-data';
 
+/*
+Product model - fetched from the magento instance.
+
+Still to be done:
+1.  Add mechanism for left/right/center selection by end user. This will then show the appropriate image on the right hand side, as well as adding the appropriate to the editor on click.
+    We need to find out whether or not these different variations of the same product will be the same dimensions, or, in fact, different dimensions. This may also be true for only certain products
+2.  Add mechanism for windows / doors. This is chargable as an extra, so we will have to work out the cost. The end user will have the option to select what type of door / window they want to add
+    to the floor plan. They then enter their own custom dimensions, and the door / window is created to their specification. This could lead to problems, however.
+3.  Switching between wall view / floor view. No doubt this will have an effect on the product model. 
+*/
+
 var Product =  DS.Model.extend({
   sku: DS.attr("string"),
   name: DS.attr("string"),
