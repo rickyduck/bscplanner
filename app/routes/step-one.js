@@ -8,7 +8,7 @@ export default Ember.Route.extend({
 		return Ember.RSVP.hash({
 			products: store.find('product'),
 			categories: store.find('category'),
-            svgs: store.find('svg'),
+           // svgs: store.find('svg'),
             baskets: store.find('basket'),
             editors: store.find('editor'),
 		});
