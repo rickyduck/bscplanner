@@ -1,13 +1,13 @@
 module.exports = function(app) {
-    var express = require('express'), _ = require('underscore'), message = require('events'), myServerRouter = express.Router(), wait = require('wait.for'), Fiber = require('fibers/future');
+    var express = require('express'), _ = require('underscore'), message = require('events'), myServerRouter = express.Router();
     var MagentoAPI = require('magento');
-    var magento = new MagentoAPI({
-        host : 'britishstandard.strategiqmarketing.co.uk',
-        port : 80,
-        path : '/api/xmlrpc/',
-        login : 'ember',
-        pass : '3mb3r123'
-    });
+    // var magento = new MagentoAPI({
+    //     host : 'britishstandard.strategiqmarketing.co.uk',
+    //     port : 80,
+    //     path : '/api/xmlrpc/',
+    //     login : 'ember',
+    //     pass : '3mb3r123'
+    // });
     myServerRouter.get('/categories', function(req, res) {
 
         magento.login(function(err, sessId) {
